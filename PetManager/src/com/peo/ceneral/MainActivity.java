@@ -4,27 +4,30 @@
 package com.peo.ceneral;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.Toast;
 
 import com.peo.location.CELLLocation;
 import com.peo.location.GPSLocation;
 import com.peo.man.PersonalCentral;
 import com.peo.stor.StorCentral;
 import com.peo.straypet.StrayPetList;
+import com.peo.view.MyImageView;
+import com.peo.view.MyImageView.OnViewClickListener;
 import com.ui.mypet.R;
 
 public class MainActivity extends Activity
 {
 
-	private Button personal_center;
-	private Button pet_shop;
-	private Button lost_pet;
-	private Button find_pet;
+	private MyImageView personal_center;
+	private MyImageView pet_shop;
+	private MyImageView lost_pet;
+	private MyImageView find_pet;
+	private Context mContext;
+
 	GPSLocation getlocation;
 	Thread t;
 
@@ -34,51 +37,61 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_new);
 
-		personal_center = (Button) findViewById(R.id.personal_center);// 个人中心
-		pet_shop = (Button) findViewById(R.id.pet_shop);
-		lost_pet = (Button) findViewById(R.id.lost_pet);
-		find_pet = (Button) findViewById(R.id.find_pet);
+		mContext = this;
+
+		personal_center = (MyImageView) findViewById(R.id.personal_center);// 个人中心
+		pet_shop = (MyImageView) findViewById(R.id.pet_shop);
+		lost_pet = (MyImageView) findViewById(R.id.lost_pet);
+		find_pet = (MyImageView) findViewById(R.id.find_pet);
 
 		CELLLocation.getLocationByCell(this);
 		GPSLocation.getLocal(this);
 
-		personal_center.setOnClickListener(new OnClickListener()
+		personal_center.setOnClickIntent(new OnViewClickListener()
 		{
 
 			@Override
-			public void onClick(View v)
+			public void onViewClick(MyImageView view)
 			{
 				// TODO Auto-generated method stub
 				Intent it = new Intent(MainActivity.this, PersonalCentral.class);
 				startActivity(it);
 			}
-
 		});
 
-		pet_shop.setOnClickListener(new OnClickListener()
+		pet_shop.setOnClickIntent(new OnViewClickListener()
 		{
 
 			@Override
-			public void onClick(View v)
+			public void onViewClick(MyImageView view)
 			{
 				// TODO Auto-generated method stub
 				Intent it = new Intent(MainActivity.this, StorCentral.class);
 				startActivity(it);
 			}
-
 		});
 
-		lost_pet.setOnClickListener(new OnClickListener()
+		lost_pet.setOnClickIntent(new OnViewClickListener()
 		{
 
 			@Override
-			public void onClick(View v)
+			public void onViewClick(MyImageView view)
 			{
 				// TODO Auto-generated method stub
 				Intent it = new Intent(MainActivity.this, StrayPetList.class);
 				startActivity(it);
 			}
+		});
 
+		find_pet.setOnClickIntent(new OnViewClickListener()
+		{
+
+			@Override
+			public void onViewClick(MyImageView view)
+			{
+				// TODO Auto-generated method stub
+				Toast.makeText(mContext, "功能尚未实现", 1).show();
+			}
 		});
 	}
 
