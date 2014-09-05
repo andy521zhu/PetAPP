@@ -3,10 +3,14 @@
  */
 package com.peo.ceneral;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -27,6 +31,11 @@ public class MainActivity extends Activity
 	private MyImageView lost_pet;
 	private MyImageView find_pet;
 	private Context mContext;
+
+	// 是否退出程序
+	private static boolean isExit = false;
+	// 退出程序的定时器
+	private static Timer exitTimer = null;
 
 	GPSLocation getlocation;
 	Thread t;
@@ -93,6 +102,44 @@ public class MainActivity extends Activity
 				Toast.makeText(mContext, "功能尚未实现", 1).show();
 			}
 		});
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event)
+	{
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			if (isExit == false)
+			{
+				isExit = true;
+				if (exitTimer != null)
+				{
+					exitTimer.cancel(); // 将原任务从队列中移除
+				}
+				// 重新实例一个定时器
+				exitTimer = new Timer();
+				TimerTask task = new TimerTask()
+				{
+					@Override
+					public void run()
+					{
+						isExit = false;
+					}
+				};
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				// 延时两秒触发task任务
+				exitTimer.schedule(task, 2000);
+			}
+			else
+			{
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+
+		return super.onKeyUp(keyCode, event);
 	}
 
 	@Override
