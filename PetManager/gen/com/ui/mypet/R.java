@@ -9,649 +9,449 @@ package com.ui.mypet;
 
 public final class R {
     public static final class attr {
-        /** 
-        When set to alignMargins, causes alignment to take place between the outer
-        boundary of a view, as defined by its margins. When set to alignBounds,
-        causes alignment to take place between the edges of the view.
-        The default is alignMargins.
-        See {@link android.widget.GridLayout#setAlignmentMode(int)}.
-        
-         <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>alignBounds</code></td><td>0</td><td>
-            Align the bounds of the children.
-            See {@link android.widget.GridLayout#ALIGN_BOUNDS}.
-            </td></tr>
-<tr><td><code>alignMargins</code></td><td>1</td><td>
-            Align the margins of the children.
-            See {@link android.widget.GridLayout#ALIGN_MARGINS}.
-            </td></tr>
-</table>
-         */
-        public static final int alignmentMode=0x7f010004;
-        /**  The maximum number of columns to create when automatically positioning children. 
-         <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int columnCount=0x7f010002;
-        /** 
-        When set to true, forces column boundaries to appear in the same order
-        as column indices.
-        The default is true.
-        See {@link android.widget.GridLayout#setColumnOrderPreserved(boolean)}.
-        
-         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int columnOrderPreserved=0x7f010006;
-        /** 
-        The column boundary delimiting the left of the group of cells
-        occupied by this view.
-        
-         <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int layout_column=0x7f010009;
-        /** 
-        The column span: the difference between the right and left
-        boundaries delimiting the group of cells occupied by this view.
-        The default is one.
-        See {@link android.widget.GridLayout.Spec}.
-        
-         <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int layout_columnSpan=0x7f01000a;
-        /** 
-        Gravity specifies how a component should be placed in its group of cells.
-        The default is LEFT | BASELINE.
-        See {@link android.widget.GridLayout.LayoutParams#setGravity(int)}.
-        
-         <p>Must be one or more (separated by '|') of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>top</code></td><td>0x30</td><td> Push object to the top of its container, not changing its size. </td></tr>
-<tr><td><code>bottom</code></td><td>0x50</td><td> Push object to the bottom of its container, not changing its size. </td></tr>
-<tr><td><code>left</code></td><td>0x03</td><td> Push object to the left of its container, not changing its size. </td></tr>
-<tr><td><code>right</code></td><td>0x05</td><td> Push object to the right of its container, not changing its size. </td></tr>
-<tr><td><code>center_vertical</code></td><td>0x10</td><td> Place object in the vertical center of its container, not changing its size. </td></tr>
-<tr><td><code>fill_vertical</code></td><td>0x70</td><td> Grow the vertical size of the object if needed so it completely fills its container. </td></tr>
-<tr><td><code>center_horizontal</code></td><td>0x01</td><td> Place object in the horizontal center of its container, not changing its size. </td></tr>
-<tr><td><code>fill_horizontal</code></td><td>0x07</td><td> Grow the horizontal size of the object if needed so it completely fills its container. </td></tr>
-<tr><td><code>center</code></td><td>0x11</td><td> Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. </td></tr>
-<tr><td><code>fill</code></td><td>0x77</td><td> Grow the horizontal and vertical size of the object if needed so it completely fills its container. </td></tr>
-<tr><td><code>clip_vertical</code></td><td>0x80</td><td>
-             Additional option that can be set to have the top and/or bottom edges of
-             the child clipped to its container's bounds.
-             The clip will be based on the vertical gravity: a top gravity will clip the bottom
-             edge, a bottom gravity will clip the top edge, and neither will clip both edges.
-            </td></tr>
-<tr><td><code>clip_horizontal</code></td><td>0x08</td><td>
-             Additional option that can be set to have the left and/or right edges of
-             the child clipped to its container's bounds.
-             The clip will be based on the horizontal gravity: a left gravity will clip the right
-             edge, a right gravity will clip the left edge, and neither will clip both edges.
-            </td></tr>
-<tr><td><code>start</code></td><td>0x00800003</td><td> Push object to the beginning of its container, not changing its size. </td></tr>
-<tr><td><code>end</code></td><td>0x00800005</td><td> Push object to the end of its container, not changing its size. </td></tr>
-</table>
-         */
-        public static final int layout_gravity=0x7f01000b;
-        /**  END MarginLayout layoutparams 
-
-        The row boundary delimiting the top of the group of cells
-        occupied by this view.
-        
-         <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int layout_row=0x7f010007;
-        /** 
-        The row span: the difference between the bottom and top
-        boundaries delimiting the group of cells occupied by this view.
-        The default is one.
-        See {@link android.widget.GridLayout.Spec}.
-        
-         <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int layout_rowSpan=0x7f010008;
-        /** 
-              support versions. All attributes not present in ViewGroup/View are
-              redefined in the support library namespace.
-        
-
-        The orientation property is not used during layout. It is only used to
-        allocate row and column parameters when they are not specified by its children's
-        layout parameters. GridLayout works like LinearLayout in this case;
-        putting all the components either in a single row or in a single column -
-        depending on the value of this flag. In the horizontal case, a columnCount
-        property may be additionally supplied to force new rows to be created when a
-        row is full. The rowCount attribute may be used similarly in the vertical case.
-        The default is horizontal.
-        
-         <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>horizontal</code></td><td>0</td><td> Defines an horizontal widget. </td></tr>
-<tr><td><code>vertical</code></td><td>1</td><td> Defines a vertical widget. </td></tr>
-</table>
-         */
-        public static final int orientation=0x7f010000;
-        /**  The maximum number of rows to create when automatically positioning children. 
-         <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int rowCount=0x7f010001;
-        /** 
-        When set to true, forces row boundaries to appear in the same order
-        as row indices.
-        The default is true.
-        See {@link android.widget.GridLayout#setRowOrderPreserved(boolean)}.
-        
-         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int rowOrderPreserved=0x7f010005;
-        /** 
-        When set to true, tells GridLayout to use default margins when none are specified
-        in a view's layout parameters.
-        The default value is false.
-        See {@link android.widget.GridLayout#setUseDefaultMargins(boolean)}.
-        
-         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int useDefaultMargins=0x7f010003;
     }
     public static final class color {
         /** 蜜色 
          */
-        public static final int aliceblue=0x7f06002d;
+        public static final int aliceblue=0x7f04002d;
         /** 亚麻色 
          */
-        public static final int antiquewhite=0x7f060023;
+        public static final int antiquewhite=0x7f040023;
         /** 中灰兰色 
          */
-        public static final int aqua=0x7f060083;
+        public static final int aqua=0x7f040083;
         /** 粟色 
          */
-        public static final int aquamarine=0x7f060064;
+        public static final int aquamarine=0x7f040064;
         /** 沙褐色 
          */
-        public static final int azure=0x7f06002b;
+        public static final int azure=0x7f04002b;
         /** 烟白色 
          */
-        public static final int beige=0x7f060028;
+        public static final int beige=0x7f040028;
         /** 浅玫瑰色 
          */
-        public static final int bisque=0x7f06000e;
+        public static final int bisque=0x7f04000e;
         /** 海军色 
          */
-        public static final int black=0x7f060092;
+        public static final int black=0x7f040092;
         /** 番木色 
          */
-        public static final int blanchedalmond=0x7f06000b;
+        public static final int blanchedalmond=0x7f04000b;
         /** 暗绿色 
          */
-        public static final int blue=0x7f06008e;
+        public static final int blue=0x7f04008e;
         /** 暗红色 
          */
-        public static final int blueviolet=0x7f06005c;
+        public static final int blueviolet=0x7f04005c;
         /** 暗灰色 
          */
-        public static final int brown=0x7f060051;
+        public static final int brown=0x7f040051;
         /** 亮青色 
          */
-        public static final int burlywood=0x7f060035;
+        public static final int burlywood=0x7f040035;
         /** 菊兰色 
          */
-        public static final int cadetblue=0x7f060072;
+        public static final int cadetblue=0x7f040072;
         /** 碧绿色 
          */
-        public static final int chartreuse=0x7f060065;
+        public static final int chartreuse=0x7f040065;
         /** 茶色 
          */
-        public static final int chocolate=0x7f060040;
+        public static final int chocolate=0x7f040040;
         /** 暗桔黄色 
          */
-        public static final int coral=0x7f060018;
+        public static final int coral=0x7f040018;
         /** 中绿色
 
          */
-        public static final int cornflowerblue=0x7f060071;
+        public static final int cornflowerblue=0x7f040071;
         /** 柠檬绸色 
          */
-        public static final int cornsilk=0x7f060007;
+        public static final int cornsilk=0x7f040007;
         /** 淡灰色 
          */
-        public static final int crimson=0x7f060038;
+        public static final int crimson=0x7f040038;
         /** 浅绿色 
          */
-        public static final int cyan=0x7f060084;
+        public static final int cyan=0x7f040084;
         /** 中兰色 
          */
-        public static final int darkblue=0x7f060090;
+        public static final int darkblue=0x7f040090;
         /** 深天蓝色 
          */
-        public static final int darkcyan=0x7f06008a;
+        public static final int darkcyan=0x7f04008a;
         /** 中粉紫色 
          */
-        public static final int darkgoldenrod=0x7f060048;
+        public static final int darkgoldenrod=0x7f040048;
         /** 亮蓝色 
          */
-        public static final int darkgray=0x7f06004f;
+        public static final int darkgray=0x7f04004f;
         /** 绿色 
          */
-        public static final int darkgreen=0x7f06008d;
+        public static final int darkgreen=0x7f04008d;
         /** 暗灰色 
          */
-        public static final int darkgrey=0x7f060050;
+        public static final int darkgrey=0x7f040050;
         /** 银色 
          */
-        public static final int darkkhaki=0x7f060045;
+        public static final int darkkhaki=0x7f040045;
         /** 重褐色 
          */
-        public static final int darkmagenta=0x7f06005a;
+        public static final int darkmagenta=0x7f04005a;
         /** 军兰色 
          */
-        public static final int darkolivegreen=0x7f060073;
+        public static final int darkolivegreen=0x7f040073;
         /** 亮肉色 
          */
-        public static final int darkorange=0x7f060017;
+        public static final int darkorange=0x7f040017;
         /** 赭色 
          */
-        public static final int darkorchid=0x7f060053;
+        public static final int darkorchid=0x7f040053;
         /** 暗洋红 
          */
-        public static final int darkred=0x7f06005b;
+        public static final int darkred=0x7f04005b;
         /** 紫罗兰色 
          */
-        public static final int darksalmon=0x7f060032;
+        public static final int darksalmon=0x7f040032;
         /** 亮绿色 
          */
-        public static final int darkseagreen=0x7f060058;
+        public static final int darkseagreen=0x7f040058;
         /** 中绿宝石
          */
-        public static final int darkslateblue=0x7f060076;
+        public static final int darkslateblue=0x7f040076;
         /** 橙绿色 
          */
-        public static final int darkslategray=0x7f06007c;
+        public static final int darkslategray=0x7f04007c;
         /** 暗瓦灰色 
          */
-        public static final int darkslategrey=0x7f06007d;
+        public static final int darkslategrey=0x7f04007d;
         /** 中春绿色 
          */
-        public static final int darkturquoise=0x7f060088;
+        public static final int darkturquoise=0x7f040088;
         /** 苍绿色 
          */
-        public static final int darkviolet=0x7f060055;
+        public static final int darkviolet=0x7f040055;
         /** 红橙色 
          */
-        public static final int deeppink=0x7f06001c;
+        public static final int deeppink=0x7f04001c;
         /** 暗宝石绿 
          */
-        public static final int deepskyblue=0x7f060089;
+        public static final int deepskyblue=0x7f040089;
         /** 石蓝色 
          */
-        public static final int dimgray=0x7f06006e;
+        public static final int dimgray=0x7f04006e;
         /** 暗灰色 
          */
-        public static final int dimgrey=0x7f06006f;
+        public static final int dimgrey=0x7f04006f;
         /** 亮海蓝色 
          */
-        public static final int dodgerblue=0x7f060081;
+        public static final int dodgerblue=0x7f040081;
         /** 暗金黄色 
          */
-        public static final int firebrick=0x7f060049;
+        public static final int firebrick=0x7f040049;
         /** 雪白色 
          */
-        public static final int floralwhite=0x7f060005;
+        public static final int floralwhite=0x7f040005;
         /** 海绿色 
          */
-        public static final int forestgreen=0x7f06007f;
+        public static final int forestgreen=0x7f04007f;
         /** 深粉红色 
          */
-        public static final int fuchsia=0x7f06001d;
+        public static final int fuchsia=0x7f04001d;
         /** 洋李色 
          */
-        public static final int gainsboro=0x7f060037;
+        public static final int gainsboro=0x7f040037;
         /** 鲜肉色 
          */
-        public static final int ghostwhite=0x7f060025;
+        public static final int ghostwhite=0x7f040025;
         /** 桃色 
          */
-        public static final int gold=0x7f060012;
+        public static final int gold=0x7f040012;
         /** 苍紫罗兰色
 
          */
-        public static final int goldenrod=0x7f06003a;
+        public static final int goldenrod=0x7f04003a;
         /** 天蓝色 
          */
-        public static final int gray=0x7f06005f;
+        public static final int gray=0x7f04005f;
         /** 水鸭色 
          */
-        public static final int green=0x7f06008c;
+        public static final int green=0x7f04008c;
         /** 苍宝石绿 
          */
-        public static final int greenyellow=0x7f06004d;
+        public static final int greenyellow=0x7f04004d;
         /** 灰色 
          */
-        public static final int grey=0x7f060060;
+        public static final int grey=0x7f040060;
         /** 天蓝色 
          */
-        public static final int honeydew=0x7f06002c;
+        public static final int honeydew=0x7f04002c;
         /** 珊瑚色 
          */
-        public static final int hotpink=0x7f060019;
+        public static final int hotpink=0x7f040019;
         /** 秘鲁色 
          */
-        public static final int indianred=0x7f060042;
+        public static final int indianred=0x7f040042;
         /**  暗橄榄绿 
          */
-        public static final int indigo=0x7f060074;
+        public static final int indigo=0x7f040074;
         /** 白色 
          */
-        public static final int ivory=0x7f060001;
+        public static final int ivory=0x7f040001;
         /** 艾利斯兰 
          */
-        public static final int khaki=0x7f06002e;
+        public static final int khaki=0x7f04002e;
         /** 暗肉色 
          */
-        public static final int lavender=0x7f060033;
+        public static final int lavender=0x7f040033;
         /** 海贝色 
          */
-        public static final int lavenderblush=0x7f060009;
+        public static final int lavenderblush=0x7f040009;
         /** 黄绿色 
          */
-        public static final int lawngreen=0x7f060066;
+        public static final int lawngreen=0x7f040066;
         /** 花白色 
          */
-        public static final int lemonchiffon=0x7f060006;
+        public static final int lemonchiffon=0x7f040006;
         /** 黄绿色 
          */
-        public static final int lightblue=0x7f06004e;
+        public static final int lightblue=0x7f04004e;
         /** 黄褐色 
          */
-        public static final int lightcoral=0x7f06002f;
+        public static final int lightcoral=0x7f04002f;
         /** 淡紫色 
          */
-        public static final int lightcyan=0x7f060034;
+        public static final int lightcyan=0x7f040034;
         /** 老花色 
          */
-        public static final int lightgoldenrodyellow=0x7f060021;
+        public static final int lightgoldenrodyellow=0x7f040021;
         /** 蓟色 
          */
-        public static final int lightgray=0x7f06003d;
+        public static final int lightgray=0x7f04003d;
         /** 中紫色 
          */
-        public static final int lightgreen=0x7f060057;
+        public static final int lightgreen=0x7f040057;
         /** 亮灰色 
          */
-        public static final int lightgrey=0x7f06003e;
+        public static final int lightgrey=0x7f04003e;
         /** 粉红色 
          */
-        public static final int lightpink=0x7f060014;
+        public static final int lightpink=0x7f040014;
         /** 橙色 
          */
-        public static final int lightsalmon=0x7f060016;
+        public static final int lightsalmon=0x7f040016;
         /** 森林绿 
          */
-        public static final int lightseagreen=0x7f060080;
+        public static final int lightseagreen=0x7f040080;
         /**  紫罗兰蓝色
          */
-        public static final int lightskyblue=0x7f06005d;
+        public static final int lightskyblue=0x7f04005d;
         /** 中暗蓝色 
          */
-        public static final int lightslategray=0x7f060068;
+        public static final int lightslategray=0x7f040068;
         /** 亮蓝灰 
          */
-        public static final int lightslategrey=0x7f060069;
+        public static final int lightslategrey=0x7f040069;
         /** 粉蓝色 
          */
-        public static final int lightsteelblue=0x7f06004b;
+        public static final int lightsteelblue=0x7f04004b;
         /** 象牙色 
          */
-        public static final int lightyellow=0x7f060002;
+        public static final int lightyellow=0x7f040002;
         /** 春绿色 
          */
-        public static final int lime=0x7f060086;
+        public static final int lime=0x7f040086;
         /** 中海蓝 
          */
-        public static final int limegreen=0x7f06007b;
+        public static final int limegreen=0x7f04007b;
         /** 亮金黄色 
          */
-        public static final int linen=0x7f060022;
+        public static final int linen=0x7f040022;
         /** 紫红色 
          */
-        public static final int magenta=0x7f06001e;
+        public static final int magenta=0x7f04001e;
         /** 紫色 
          */
-        public static final int maroon=0x7f060063;
+        public static final int maroon=0x7f040063;
         /** 暗灰色 
          */
-        public static final int mediumaquamarine=0x7f060070;
+        public static final int mediumaquamarine=0x7f040070;
         /** 蓝色 
          */
-        public static final int mediumblue=0x7f06008f;
+        public static final int mediumblue=0x7f04008f;
         /** 褐玫瑰红
          */
-        public static final int mediumorchid=0x7f060047;
+        public static final int mediumorchid=0x7f040047;
         /** 暗紫罗兰色 
          */
-        public static final int mediumpurple=0x7f060056;
+        public static final int mediumpurple=0x7f040056;
         /** 青绿色 
          */
-        public static final int mediumseagreen=0x7f06007a;
+        public static final int mediumseagreen=0x7f04007a;
         /** 草绿色 
          */
-        public static final int mediumslateblue=0x7f060067;
+        public static final int mediumslateblue=0x7f040067;
         /** 酸橙色 
          */
-        public static final int mediumspringgreen=0x7f060087;
+        public static final int mediumspringgreen=0x7f040087;
         /** 靛青色 
          */
-        public static final int mediumturquoise=0x7f060075;
+        public static final int mediumturquoise=0x7f040075;
         /** 印第安红 
          */
-        public static final int mediumvioletred=0x7f060043;
+        public static final int mediumvioletred=0x7f040043;
         /** 闪兰色 
          */
-        public static final int midnightblue=0x7f060082;
+        public static final int midnightblue=0x7f040082;
         /** 幽灵白 
          */
-        public static final int mintcream=0x7f060026;
+        public static final int mintcream=0x7f040026;
         /** 白杏色 
          */
-        public static final int mistyrose=0x7f06000c;
+        public static final int mistyrose=0x7f04000c;
         /** 桔黄色 
          */
-        public static final int moccasin=0x7f06000f;
+        public static final int moccasin=0x7f04000f;
         /** 鹿皮色 
          */
-        public static final int navajowhite=0x7f060010;
+        public static final int navajowhite=0x7f040010;
         /** 暗蓝色 
          */
-        public static final int navy=0x7f060091;
+        public static final int navy=0x7f040091;
         /** 红色 
          */
-        public static final int oldlace=0x7f060020;
+        public static final int oldlace=0x7f040020;
         /** 灰色 
          */
-        public static final int olive=0x7f060061;
+        public static final int olive=0x7f040061;
         /** 灰石色 
          */
-        public static final int olivedrab=0x7f06006c;
+        public static final int olivedrab=0x7f04006c;
         /** 亮粉红色 
          */
-        public static final int orange=0x7f060015;
+        public static final int orange=0x7f040015;
         /** 西红柿色 
          */
-        public static final int orangered=0x7f06001b;
+        public static final int orangered=0x7f04001b;
         /** 金麒麟色 
          */
-        public static final int orchid=0x7f06003b;
+        public static final int orchid=0x7f04003b;
         /** 亮珊瑚色 
          */
-        public static final int palegoldenrod=0x7f060030;
+        public static final int palegoldenrod=0x7f040030;
         /** 暗紫色 
          */
-        public static final int palegreen=0x7f060054;
+        public static final int palegreen=0x7f040054;
         /** 亮钢兰色 
          */
-        public static final int paleturquoise=0x7f06004c;
+        public static final int paleturquoise=0x7f04004c;
         /** 暗深红色 
          */
-        public static final int palevioletred=0x7f060039;
+        public static final int palevioletred=0x7f040039;
         /** 淡紫红 
          */
-        public static final int papayawhip=0x7f06000a;
+        public static final int papayawhip=0x7f04000a;
         /** 纳瓦白 
          */
-        public static final int peachpuff=0x7f060011;
+        public static final int peachpuff=0x7f040011;
         /** 巧可力色 
          */
-        public static final int peru=0x7f060041;
+        public static final int peru=0x7f040041;
         /** 金色 
          */
-        public static final int pink=0x7f060013;
+        public static final int pink=0x7f040013;
         /** 实木色 
          */
-        public static final int plum=0x7f060036;
+        public static final int plum=0x7f040036;
         /** 火砖色 
          */
-        public static final int powderblue=0x7f06004a;
+        public static final int powderblue=0x7f04004a;
         /** 橄榄色 
          */
-        public static final int purple=0x7f060062;
+        public static final int purple=0x7f040062;
         /** 红紫色 
          */
-        public static final int red=0x7f06001f;
+        public static final int red=0x7f04001f;
         /**  暗黄褐色 
          */
-        public static final int rosybrown=0x7f060046;
+        public static final int rosybrown=0x7f040046;
         /** 钢兰色 
          */
-        public static final int royalblue=0x7f060078;
+        public static final int royalblue=0x7f040078;
         /** 暗海兰色 
          */
-        public static final int saddlebrown=0x7f060059;
+        public static final int saddlebrown=0x7f040059;
         /** 古董白 
          */
-        public static final int salmon=0x7f060024;
+        public static final int salmon=0x7f040024;
         /** 浅黄色 
          */
-        public static final int sandybrown=0x7f06002a;
+        public static final int sandybrown=0x7f04002a;
         /** 暗瓦灰色 
          */
-        public static final int seagreen=0x7f06007e;
+        public static final int seagreen=0x7f04007e;
         /** 米绸色 
          */
-        public static final int seashell=0x7f060008;
+        public static final int seashell=0x7f040008;
         /** 褐色 
          */
-        public static final int sienna=0x7f060052;
+        public static final int sienna=0x7f040052;
         /** 中紫罗兰色 
          */
-        public static final int silver=0x7f060044;
+        public static final int silver=0x7f040044;
         /** 亮天蓝色
          */
-        public static final int skyblue=0x7f06005e;
+        public static final int skyblue=0x7f04005e;
         /** 深绿褐色 
          */
-        public static final int slateblue=0x7f06006d;
+        public static final int slateblue=0x7f04006d;
         /** 亮蓝灰 
          */
-        public static final int slategray=0x7f06006a;
+        public static final int slategray=0x7f04006a;
         /** 灰石色 
          */
-        public static final int slategrey=0x7f06006b;
+        public static final int slategrey=0x7f04006b;
         /** 黄色 
          */
-        public static final int snow=0x7f060004;
+        public static final int snow=0x7f040004;
         /** 青色 
          */
-        public static final int springgreen=0x7f060085;
+        public static final int springgreen=0x7f040085;
         /** 暗灰蓝色 
          */
-        public static final int steelblue=0x7f060077;
+        public static final int steelblue=0x7f040077;
         /** 亮灰色 
          */
-        public static final int tan=0x7f06003f;
+        public static final int tan=0x7f04003f;
         /** 暗青色 
          */
-        public static final int teal=0x7f06008b;
+        public static final int teal=0x7f04008b;
         /** 浅玫瑰色 
          */
-        public static final int text_color=0x7f06000d;
+        public static final int text_color=0x7f04000d;
         /** 淡紫色 
          */
-        public static final int thistle=0x7f06003c;
+        public static final int thistle=0x7f04003c;
         /** 热粉红色 
          */
-        public static final int tomato=0x7f06001a;
+        public static final int tomato=0x7f04001a;
         /** 皇家蓝 
          */
-        public static final int turquoise=0x7f060079;
+        public static final int turquoise=0x7f040079;
         /** 苍麒麟色 
          */
-        public static final int violet=0x7f060031;
+        public static final int violet=0x7f040031;
         /** 米色 
          */
-        public static final int wheat=0x7f060029;
-        public static final int white=0x7f060000;
+        public static final int wheat=0x7f040029;
+        public static final int white=0x7f040000;
         /** 薄荷色 
          */
-        public static final int whitesmoke=0x7f060027;
+        public static final int whitesmoke=0x7f040027;
         /** 亮黄色 
          */
-        public static final int yellow=0x7f060003;
+        public static final int yellow=0x7f040003;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -660,11 +460,8 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050001;
-        public static final int activity_vertical_margin=0x7f050002;
-        /**  The default gap between components in a layout. 
-         */
-        public static final int default_gap=0x7f050000;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int abc_ab_bottom_solid_dark_holo=0x7f020000;
@@ -674,162 +471,154 @@ containing a value of this type.
         public static final int actionbar_loud_icon=0x7f020004;
         public static final int actionbar_more_icon=0x7f020005;
         public static final int actionbar_search_icon=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
+        public static final int bottom=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int left_bottom=0x7f020009;
+        public static final int left_top=0x7f02000a;
+        public static final int main_activity_background=0x7f02000b;
+        public static final int right=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f04007a;
-        public static final int add=0x7f04006c;
-        public static final int alignBounds=0x7f040002;
-        public static final int alignMargins=0x7f040003;
-        public static final int asd=0x7f04001d;
-        public static final int autoLogin=0x7f040027;
-        public static final int bottom=0x7f040005;
-        public static final int boyButton=0x7f040036;
-        public static final int center=0x7f04000c;
-        public static final int center_horizontal=0x7f04000a;
-        public static final int center_vertical=0x7f040008;
-        public static final int checkPetImmune=0x7f040045;
-        public static final int checkPetSterilizations=0x7f040044;
-        public static final int clip_horizontal=0x7f04000f;
-        public static final int clip_vertical=0x7f04000e;
-        public static final int dsa=0x7f04001b;
-        public static final int editAddress=0x7f040023;
-        public static final int editCallPhone=0x7f040021;
-        public static final int editEmail=0x7f040020;
-        public static final int editName=0x7f040015;
-        public static final int editPetAge=0x7f04003d;
-        public static final int editPetColor=0x7f040042;
-        public static final int editPetDescript=0x7f040034;
-        public static final int editPetLong=0x7f040040;
-        public static final int editPetName=0x7f040033;
-        public static final int editPetState=0x7f040043;
-        public static final int editPetStyle=0x7f04003f;
-        public static final int editPetType=0x7f04003e;
-        public static final int editPetWeight=0x7f040041;
-        public static final int editPhone=0x7f040022;
-        public static final int editQQ=0x7f04001f;
-        public static final int editSay=0x7f040016;
-        public static final int end=0x7f040011;
-        public static final int ewq=0x7f04003b;
-        public static final int fill=0x7f04000d;
-        public static final int fill_horizontal=0x7f04000b;
-        public static final int fill_vertical=0x7f040009;
-        public static final int forgetPass=0x7f040028;
-        public static final int girlButton=0x7f040037;
-        public static final int horizontal=0x7f040000;
-        public static final int lastPetButton=0x7f040046;
-        public static final int left=0x7f040006;
-        public static final int loginIn=0x7f040029;
-        public static final int loginName=0x7f040024;
-        public static final int loginPassWord=0x7f040025;
-        public static final int mName=0x7f04002f;
-        public static final int mSay=0x7f040030;
-        public static final int manButton=0x7f040018;
-        public static final int myBirthDView=0x7f04001e;
-        public static final int myBirthMView=0x7f04001c;
-        public static final int myBirthYView=0x7f04001a;
-        public static final int myNameText=0x7f040049;
-        public static final int myNameView=0x7f040013;
-        public static final int myPic=0x7f040012;
-        public static final int mySexGroup=0x7f040017;
-        public static final int nearPetStorButton=0x7f040068;
-        public static final int nextPetButton=0x7f040047;
-        public static final int passWordText=0x7f04004a;
-        public static final int perfectView=0x7f040014;
-        public static final int personalCentral=0x7f04002b;
-        public static final int petBirthDView=0x7f04003c;
-        public static final int petBirthMView=0x7f04003a;
-        public static final int petBirthYView=0x7f040038;
-        public static final int petFind=0x7f04002e;
-        public static final int petImage=0x7f040069;
-        public static final int petImageView=0x7f040031;
-        public static final int petLoose=0x7f04002d;
-        public static final int petName=0x7f04006a;
-        public static final int petNameView=0x7f040032;
-        public static final int petSex=0x7f04006b;
-        public static final int petSexGroup=0x7f040035;
-        public static final int petShop=0x7f04002c;
-        public static final int qwe=0x7f040039;
-        public static final int regAnother=0x7f040062;
-        public static final int regAnotherServerText=0x7f040064;
-        public static final int regCheckStorEmail=0x7f040059;
-        public static final int regCheckStorNumber=0x7f040055;
-        public static final int regCheckStorPhone=0x7f040053;
-        public static final int regCheckStorQQ=0x7f040057;
-        public static final int regHairdressing=0x7f04005e;
-        public static final int regHospital=0x7f04005d;
-        public static final int regPetFood=0x7f040063;
-        public static final int regPetappliance=0x7f040060;
-        public static final int regSellPet=0x7f04005f;
-        public static final int regStartTime=0x7f04005b;
-        public static final int regStopTime=0x7f04005c;
-        public static final int regStorAddress=0x7f040052;
-        public static final int regStorEmail=0x7f04005a;
-        public static final int regStorNameText=0x7f04004f;
-        public static final int regStorNumber=0x7f040056;
-        public static final int regStorPassWordText=0x7f040050;
-        public static final int regStorPhone=0x7f040054;
-        public static final int regStorQQ=0x7f040058;
-        public static final int regStorRegisterText=0x7f04004e;
-        public static final int regSureStorPassWordText=0x7f040051;
-        public static final int regTravel=0x7f040061;
-        public static final int registerButton=0x7f04004c;
-        public static final int registerText=0x7f040048;
-        public static final int remPass=0x7f040026;
-        public static final int retOut=0x7f04002a;
-        public static final int returnButton=0x7f04004d;
-        public static final int right=0x7f040007;
-        public static final int start=0x7f040010;
-        public static final int storLoginButton=0x7f040067;
-        public static final int storRegisterButton=0x7f040065;
-        public static final int storReturnButton=0x7f040066;
-        public static final int surePassWordText=0x7f04004b;
-        public static final int top=0x7f040004;
-        public static final int trayMasterPic=0x7f04006d;
-        public static final int trayPetDescript=0x7f040070;
-        public static final int trayPetPic_0=0x7f040071;
-        public static final int trayPetPic_1=0x7f040072;
-        public static final int trayPetPic_2=0x7f040073;
-        public static final int trayPetPic_3=0x7f040074;
-        public static final int trayPetPic_4=0x7f040075;
-        public static final int trayPetPic_5=0x7f040076;
-        public static final int trayPetPic_6=0x7f040077;
-        public static final int trayPetPic_7=0x7f040078;
-        public static final int trayPetPic_8=0x7f040079;
-        public static final int trayPetTime=0x7f04006f;
-        public static final int trayPetTitle=0x7f04006e;
-        public static final int vertical=0x7f040001;
-        public static final int womanButton=0x7f040019;
+        public static final int action_settings=0x7f09006c;
+        public static final int add=0x7f09005e;
+        public static final int asd=0x7f09000b;
+        public static final int autoLogin=0x7f090015;
+        public static final int boyButton=0x7f090028;
+        public static final int checkPetImmune=0x7f090037;
+        public static final int checkPetSterilizations=0x7f090036;
+        public static final int dsa=0x7f090009;
+        public static final int editAddress=0x7f090011;
+        public static final int editCallPhone=0x7f09000f;
+        public static final int editEmail=0x7f09000e;
+        public static final int editName=0x7f090003;
+        public static final int editPetAge=0x7f09002f;
+        public static final int editPetColor=0x7f090034;
+        public static final int editPetDescript=0x7f090026;
+        public static final int editPetLong=0x7f090032;
+        public static final int editPetName=0x7f090025;
+        public static final int editPetState=0x7f090035;
+        public static final int editPetStyle=0x7f090031;
+        public static final int editPetType=0x7f090030;
+        public static final int editPetWeight=0x7f090033;
+        public static final int editPhone=0x7f090010;
+        public static final int editQQ=0x7f09000d;
+        public static final int editSay=0x7f090004;
+        public static final int ewq=0x7f09002d;
+        public static final int find_pet=0x7f090020;
+        public static final int forgetPass=0x7f090016;
+        public static final int girlButton=0x7f090029;
+        public static final int lastPetButton=0x7f090038;
+        public static final int loginIn=0x7f090017;
+        public static final int loginName=0x7f090012;
+        public static final int loginPassWord=0x7f090013;
+        public static final int lost_pet=0x7f09001f;
+        public static final int mName=0x7f090021;
+        public static final int mSay=0x7f090022;
+        public static final int manButton=0x7f090006;
+        public static final int myBirthDView=0x7f09000c;
+        public static final int myBirthMView=0x7f09000a;
+        public static final int myBirthYView=0x7f090008;
+        public static final int myNameText=0x7f09003b;
+        public static final int myNameView=0x7f090001;
+        public static final int myPic=0x7f090000;
+        public static final int mySexGroup=0x7f090005;
+        public static final int nearPetStorButton=0x7f09005a;
+        public static final int nextPetButton=0x7f090039;
+        public static final int passWordText=0x7f09003c;
+        public static final int perfectView=0x7f090002;
+        public static final int personalCentral=0x7f090019;
+        public static final int personal_center=0x7f09001d;
+        public static final int petBirthDView=0x7f09002e;
+        public static final int petBirthMView=0x7f09002c;
+        public static final int petBirthYView=0x7f09002a;
+        public static final int petFind=0x7f09001c;
+        public static final int petImage=0x7f09005b;
+        public static final int petImageView=0x7f090023;
+        public static final int petLoose=0x7f09001b;
+        public static final int petName=0x7f09005c;
+        public static final int petNameView=0x7f090024;
+        public static final int petSex=0x7f09005d;
+        public static final int petSexGroup=0x7f090027;
+        public static final int petShop=0x7f09001a;
+        public static final int pet_shop=0x7f09001e;
+        public static final int qwe=0x7f09002b;
+        public static final int regAnother=0x7f090054;
+        public static final int regAnotherServerText=0x7f090056;
+        public static final int regCheckStorEmail=0x7f09004b;
+        public static final int regCheckStorNumber=0x7f090047;
+        public static final int regCheckStorPhone=0x7f090045;
+        public static final int regCheckStorQQ=0x7f090049;
+        public static final int regHairdressing=0x7f090050;
+        public static final int regHospital=0x7f09004f;
+        public static final int regPetFood=0x7f090055;
+        public static final int regPetappliance=0x7f090052;
+        public static final int regSellPet=0x7f090051;
+        public static final int regStartTime=0x7f09004d;
+        public static final int regStopTime=0x7f09004e;
+        public static final int regStorAddress=0x7f090044;
+        public static final int regStorEmail=0x7f09004c;
+        public static final int regStorNameText=0x7f090041;
+        public static final int regStorNumber=0x7f090048;
+        public static final int regStorPassWordText=0x7f090042;
+        public static final int regStorPhone=0x7f090046;
+        public static final int regStorQQ=0x7f09004a;
+        public static final int regStorRegisterText=0x7f090040;
+        public static final int regSureStorPassWordText=0x7f090043;
+        public static final int regTravel=0x7f090053;
+        public static final int registerButton=0x7f09003e;
+        public static final int registerText=0x7f09003a;
+        public static final int remPass=0x7f090014;
+        public static final int retOut=0x7f090018;
+        public static final int returnButton=0x7f09003f;
+        public static final int storLoginButton=0x7f090059;
+        public static final int storRegisterButton=0x7f090057;
+        public static final int storReturnButton=0x7f090058;
+        public static final int surePassWordText=0x7f09003d;
+        public static final int trayMasterPic=0x7f09005f;
+        public static final int trayPetDescript=0x7f090062;
+        public static final int trayPetPic_0=0x7f090063;
+        public static final int trayPetPic_1=0x7f090064;
+        public static final int trayPetPic_2=0x7f090065;
+        public static final int trayPetPic_3=0x7f090066;
+        public static final int trayPetPic_4=0x7f090067;
+        public static final int trayPetPic_5=0x7f090068;
+        public static final int trayPetPic_6=0x7f090069;
+        public static final int trayPetPic_7=0x7f09006a;
+        public static final int trayPetPic_8=0x7f09006b;
+        public static final int trayPetTime=0x7f090061;
+        public static final int trayPetTitle=0x7f090060;
+        public static final int womanButton=0x7f090007;
     }
     public static final class layout {
         public static final int activity_all_message=0x7f030000;
         public static final int activity_login_man=0x7f030001;
         public static final int activity_main=0x7f030002;
-        public static final int activity_personal=0x7f030003;
-        public static final int activity_pet_message=0x7f030004;
-        public static final int activity_register=0x7f030005;
-        public static final int activity_register_stor=0x7f030006;
-        public static final int activity_stor_central=0x7f030007;
-        public static final int pet_listview=0x7f030008;
-        public static final int top1=0x7f030009;
-        public static final int tray_pet_listview=0x7f03000a;
+        public static final int activity_main_new=0x7f030003;
+        public static final int activity_personal=0x7f030004;
+        public static final int activity_pet_message=0x7f030005;
+        public static final int activity_register=0x7f030006;
+        public static final int activity_register_stor=0x7f030007;
+        public static final int activity_stor_central=0x7f030008;
+        public static final int pet_listview=0x7f030009;
+        public static final int top1=0x7f03000a;
+        public static final int tray_pet_listview=0x7f03000b;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
+        public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f070001;
-        public static final int allmessage=0x7f070006;
-        public static final int app_name=0x7f070000;
-        public static final int hello_world=0x7f070002;
-        public static final int login=0x7f070005;
-        public static final int loginStor=0x7f070009;
-        public static final int personal_central=0x7f070003;
-        public static final int petmessage=0x7f070007;
-        public static final int register=0x7f070004;
-        public static final int registerStor=0x7f070008;
-        public static final int stormenu=0x7f07000a;
-        public static final int straylist=0x7f07000b;
+        public static final int action_settings=0x7f060001;
+        public static final int allmessage=0x7f060006;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060002;
+        public static final int login=0x7f060005;
+        public static final int loginStor=0x7f060009;
+        public static final int personal_central=0x7f060003;
+        public static final int petmessage=0x7f060007;
+        public static final int register=0x7f060004;
+        public static final int registerStor=0x7f060008;
+        public static final int stormenu=0x7f06000a;
+        public static final int straylist=0x7f06000b;
     }
     public static final class style {
         /** 
@@ -853,458 +642,10 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f070001;
     }
-    public static final class styleable {
-        /** Attributes that can be used with a GridLayout.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #GridLayout_alignmentMode com.ui.mypet:alignmentMode}</code></td><td>
-        When set to alignMargins, causes alignment to take place between the outer
-        boundary of a view, as defined by its margins.</td></tr>
-           <tr><td><code>{@link #GridLayout_columnCount com.ui.mypet:columnCount}</code></td><td> The maximum number of columns to create when automatically positioning children.</td></tr>
-           <tr><td><code>{@link #GridLayout_columnOrderPreserved com.ui.mypet:columnOrderPreserved}</code></td><td>
-        When set to true, forces column boundaries to appear in the same order
-        as column indices.</td></tr>
-           <tr><td><code>{@link #GridLayout_orientation com.ui.mypet:orientation}</code></td><td>
-              support versions.</td></tr>
-           <tr><td><code>{@link #GridLayout_rowCount com.ui.mypet:rowCount}</code></td><td> The maximum number of rows to create when automatically positioning children.</td></tr>
-           <tr><td><code>{@link #GridLayout_rowOrderPreserved com.ui.mypet:rowOrderPreserved}</code></td><td>
-        When set to true, forces row boundaries to appear in the same order
-        as row indices.</td></tr>
-           <tr><td><code>{@link #GridLayout_useDefaultMargins com.ui.mypet:useDefaultMargins}</code></td><td>
-        When set to true, tells GridLayout to use default margins when none are specified
-        in a view's layout parameters.</td></tr>
-           </table>
-           @see #GridLayout_alignmentMode
-           @see #GridLayout_columnCount
-           @see #GridLayout_columnOrderPreserved
-           @see #GridLayout_orientation
-           @see #GridLayout_rowCount
-           @see #GridLayout_rowOrderPreserved
-           @see #GridLayout_useDefaultMargins
-         */
-        public static final int[] GridLayout = {
-            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
-            0x7f010004, 0x7f010005, 0x7f010006
-        };
-        /**
-          <p>
-          @attr description
-          
-        When set to alignMargins, causes alignment to take place between the outer
-        boundary of a view, as defined by its margins. When set to alignBounds,
-        causes alignment to take place between the edges of the view.
-        The default is alignMargins.
-        See {@link android.widget.GridLayout#setAlignmentMode(int)}.
-        
-
-
-          <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>alignBounds</code></td><td>0</td><td>
-            Align the bounds of the children.
-            See {@link android.widget.GridLayout#ALIGN_BOUNDS}.
-            </td></tr>
-<tr><td><code>alignMargins</code></td><td>1</td><td>
-            Align the margins of the children.
-            See {@link android.widget.GridLayout#ALIGN_MARGINS}.
-            </td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name android:alignmentMode
-        */
-        public static final int GridLayout_alignmentMode = 4;
-        /**
-          <p>
-          @attr description
-           The maximum number of columns to create when automatically positioning children. 
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:columnCount
-        */
-        public static final int GridLayout_columnCount = 2;
-        /**
-          <p>
-          @attr description
-          
-        When set to true, forces column boundaries to appear in the same order
-        as column indices.
-        The default is true.
-        See {@link android.widget.GridLayout#setColumnOrderPreserved(boolean)}.
-        
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:columnOrderPreserved
-        */
-        public static final int GridLayout_columnOrderPreserved = 6;
-        /**
-          <p>
-          @attr description
-          
-              support versions. All attributes not present in ViewGroup/View are
-              redefined in the support library namespace.
-        
-
-        The orientation property is not used during layout. It is only used to
-        allocate row and column parameters when they are not specified by its children's
-        layout parameters. GridLayout works like LinearLayout in this case;
-        putting all the components either in a single row or in a single column -
-        depending on the value of this flag. In the horizontal case, a columnCount
-        property may be additionally supplied to force new rows to be created when a
-        row is full. The rowCount attribute may be used similarly in the vertical case.
-        The default is horizontal.
-        
-
-
-          <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>horizontal</code></td><td>0</td><td> Defines an horizontal widget. </td></tr>
-<tr><td><code>vertical</code></td><td>1</td><td> Defines a vertical widget. </td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name android:orientation
-        */
-        public static final int GridLayout_orientation = 0;
-        /**
-          <p>
-          @attr description
-           The maximum number of rows to create when automatically positioning children. 
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:rowCount
-        */
-        public static final int GridLayout_rowCount = 1;
-        /**
-          <p>
-          @attr description
-          
-        When set to true, forces row boundaries to appear in the same order
-        as row indices.
-        The default is true.
-        See {@link android.widget.GridLayout#setRowOrderPreserved(boolean)}.
-        
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:rowOrderPreserved
-        */
-        public static final int GridLayout_rowOrderPreserved = 5;
-        /**
-          <p>
-          @attr description
-          
-        When set to true, tells GridLayout to use default margins when none are specified
-        in a view's layout parameters.
-        The default value is false.
-        See {@link android.widget.GridLayout#setUseDefaultMargins(boolean)}.
-        
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:useDefaultMargins
-        */
-        public static final int GridLayout_useDefaultMargins = 3;
-        /** Attributes that can be used with a GridLayout_Layout.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_height com.ui.mypet:android_layout_height}</code></td><td></td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_margin com.ui.mypet:android_layout_margin}</code></td><td>
-              Specifies extra space on the left, top, right and bottom
-              sides of this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_marginBottom com.ui.mypet:android_layout_marginBottom}</code></td><td>
-              Specifies extra space on the bottom side of this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_marginLeft com.ui.mypet:android_layout_marginLeft}</code></td><td>
-              Specifies extra space on the left side of this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_marginRight com.ui.mypet:android_layout_marginRight}</code></td><td>
-              Specifies extra space on the right side of this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_marginTop com.ui.mypet:android_layout_marginTop}</code></td><td>
-              Specifies extra space on the top side of this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_android_layout_width com.ui.mypet:android_layout_width}</code></td><td>
-              support versions.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_column com.ui.mypet:layout_column}</code></td><td>
-        The column boundary delimiting the left of the group of cells
-        occupied by this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_columnSpan com.ui.mypet:layout_columnSpan}</code></td><td>
-        The column span: the difference between the right and left
-        boundaries delimiting the group of cells occupied by this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_gravity com.ui.mypet:layout_gravity}</code></td><td>
-        Gravity specifies how a component should be placed in its group of cells.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_row com.ui.mypet:layout_row}</code></td><td> END MarginLayout layoutparams 
-
-        The row boundary delimiting the top of the group of cells
-        occupied by this view.</td></tr>
-           <tr><td><code>{@link #GridLayout_Layout_layout_rowSpan com.ui.mypet:layout_rowSpan}</code></td><td>
-        The row span: the difference between the bottom and top
-        boundaries delimiting the group of cells occupied by this view.</td></tr>
-           </table>
-           @see #GridLayout_Layout_android_layout_height
-           @see #GridLayout_Layout_android_layout_margin
-           @see #GridLayout_Layout_android_layout_marginBottom
-           @see #GridLayout_Layout_android_layout_marginLeft
-           @see #GridLayout_Layout_android_layout_marginRight
-           @see #GridLayout_Layout_android_layout_marginTop
-           @see #GridLayout_Layout_android_layout_width
-           @see #GridLayout_Layout_layout_column
-           @see #GridLayout_Layout_layout_columnSpan
-           @see #GridLayout_Layout_layout_gravity
-           @see #GridLayout_Layout_layout_row
-           @see #GridLayout_Layout_layout_rowSpan
-         */
-        public static final int[] GridLayout_Layout = {
-            0x010100f4, 0x010100f5, 0x010100f6, 0x010100f7,
-            0x010100f8, 0x010100f9, 0x010100fa, 0x7f010007,
-            0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b
-        };
-        /**
-          <p>This symbol is the offset where the {@link com.ui.mypet.R.attr#android_layout_height}
-          attribute's value can be found in the {@link #GridLayout_Layout} array.
-          @attr name android:android_layout_height
-        */
-        public static final int GridLayout_Layout_android_layout_height = 1;
-        /**
-          <p>
-          @attr description
-          
-              Specifies extra space on the left, top, right and bottom
-              sides of this view. This space is outside this view's bounds.
-        
-          <p>This corresponds to the global attribute          resource symbol {@link com.ui.mypet.R.attr#android_layout_margin}.
-          @attr name android:android_layout_margin
-        */
-        public static final int GridLayout_Layout_android_layout_margin = 2;
-        /**
-          <p>
-          @attr description
-          
-              Specifies extra space on the bottom side of this view.
-              This space is outside this view's bounds.
-        
-          <p>This corresponds to the global attribute          resource symbol {@link com.ui.mypet.R.attr#android_layout_marginBottom}.
-          @attr name android:android_layout_marginBottom
-        */
-        public static final int GridLayout_Layout_android_layout_marginBottom = 6;
-        /**
-          <p>
-          @attr description
-          
-              Specifies extra space on the left side of this view.
-              This space is outside this view's bounds.
-        
-          <p>This corresponds to the global attribute          resource symbol {@link com.ui.mypet.R.attr#android_layout_marginLeft}.
-          @attr name android:android_layout_marginLeft
-        */
-        public static final int GridLayout_Layout_android_layout_marginLeft = 3;
-        /**
-          <p>
-          @attr description
-          
-              Specifies extra space on the right side of this view.
-              This space is outside this view's bounds.
-        
-          <p>This corresponds to the global attribute          resource symbol {@link com.ui.mypet.R.attr#android_layout_marginRight}.
-          @attr name android:android_layout_marginRight
-        */
-        public static final int GridLayout_Layout_android_layout_marginRight = 5;
-        /**
-          <p>
-          @attr description
-          
-              Specifies extra space on the top side of this view.
-              This space is outside this view's bounds.
-        
-          <p>This corresponds to the global attribute          resource symbol {@link com.ui.mypet.R.attr#android_layout_marginTop}.
-          @attr name android:android_layout_marginTop
-        */
-        public static final int GridLayout_Layout_android_layout_marginTop = 4;
-        /**
-          <p>
-          @attr description
-          
-              support versions. All attributes not present in MarginLayout are
-              redefined in the support library name space.
-        
- START MarginLayout layoutparams 
-          <p>This corresponds to the global attribute          resource symbol {@link com.ui.mypet.R.attr#android_layout_width}.
-          @attr name android:android_layout_width
-        */
-        public static final int GridLayout_Layout_android_layout_width = 0;
-        /**
-          <p>
-          @attr description
-          
-        The column boundary delimiting the left of the group of cells
-        occupied by this view.
-        
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:layout_column
-        */
-        public static final int GridLayout_Layout_layout_column = 9;
-        /**
-          <p>
-          @attr description
-          
-        The column span: the difference between the right and left
-        boundaries delimiting the group of cells occupied by this view.
-        The default is one.
-        See {@link android.widget.GridLayout.Spec}.
-        
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:layout_columnSpan
-        */
-        public static final int GridLayout_Layout_layout_columnSpan = 10;
-        /**
-          <p>
-          @attr description
-          
-        Gravity specifies how a component should be placed in its group of cells.
-        The default is LEFT | BASELINE.
-        See {@link android.widget.GridLayout.LayoutParams#setGravity(int)}.
-        
-
-
-          <p>Must be one or more (separated by '|') of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>top</code></td><td>0x30</td><td> Push object to the top of its container, not changing its size. </td></tr>
-<tr><td><code>bottom</code></td><td>0x50</td><td> Push object to the bottom of its container, not changing its size. </td></tr>
-<tr><td><code>left</code></td><td>0x03</td><td> Push object to the left of its container, not changing its size. </td></tr>
-<tr><td><code>right</code></td><td>0x05</td><td> Push object to the right of its container, not changing its size. </td></tr>
-<tr><td><code>center_vertical</code></td><td>0x10</td><td> Place object in the vertical center of its container, not changing its size. </td></tr>
-<tr><td><code>fill_vertical</code></td><td>0x70</td><td> Grow the vertical size of the object if needed so it completely fills its container. </td></tr>
-<tr><td><code>center_horizontal</code></td><td>0x01</td><td> Place object in the horizontal center of its container, not changing its size. </td></tr>
-<tr><td><code>fill_horizontal</code></td><td>0x07</td><td> Grow the horizontal size of the object if needed so it completely fills its container. </td></tr>
-<tr><td><code>center</code></td><td>0x11</td><td> Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. </td></tr>
-<tr><td><code>fill</code></td><td>0x77</td><td> Grow the horizontal and vertical size of the object if needed so it completely fills its container. </td></tr>
-<tr><td><code>clip_vertical</code></td><td>0x80</td><td>
-             Additional option that can be set to have the top and/or bottom edges of
-             the child clipped to its container's bounds.
-             The clip will be based on the vertical gravity: a top gravity will clip the bottom
-             edge, a bottom gravity will clip the top edge, and neither will clip both edges.
-            </td></tr>
-<tr><td><code>clip_horizontal</code></td><td>0x08</td><td>
-             Additional option that can be set to have the left and/or right edges of
-             the child clipped to its container's bounds.
-             The clip will be based on the horizontal gravity: a left gravity will clip the right
-             edge, a right gravity will clip the left edge, and neither will clip both edges.
-            </td></tr>
-<tr><td><code>start</code></td><td>0x00800003</td><td> Push object to the beginning of its container, not changing its size. </td></tr>
-<tr><td><code>end</code></td><td>0x00800005</td><td> Push object to the end of its container, not changing its size. </td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name android:layout_gravity
-        */
-        public static final int GridLayout_Layout_layout_gravity = 11;
-        /**
-          <p>
-          @attr description
-           END MarginLayout layoutparams 
-
-        The row boundary delimiting the top of the group of cells
-        occupied by this view.
-        
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:layout_row
-        */
-        public static final int GridLayout_Layout_layout_row = 7;
-        /**
-          <p>
-          @attr description
-          
-        The row span: the difference between the bottom and top
-        boundaries delimiting the group of cells occupied by this view.
-        The default is one.
-        See {@link android.widget.GridLayout.Spec}.
-        
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name android:layout_rowSpan
-        */
-        public static final int GridLayout_Layout_layout_rowSpan = 8;
-    };
 }
