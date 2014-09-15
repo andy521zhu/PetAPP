@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="0dip"
+	    android:layout_weight="1"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom|center_vertical"
+        >
+        
+        
+        
+        <LinearLayout
+	        android:id="@+id/bottonBar"
+            android:layout_width="fill_parent"
+            android:layout_height="60sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/title"
+	        >
+	        
+            <TextView 
+                android:id="@+id/pet_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/buttonbg"
+                android:text="@string/pet_index"
+                android:textColor="#d6d6d6" 
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                />
+            
+            <TextView 
+                android:id="@+id/friends_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/buttonbg"
+                android:textColor="#d6d6d6" 
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:text="@string/friends_index"
+                />
+            <TextView 
+                android:id="@+id/social_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/buttonbg"
+                android:textColor="#d6d6d6" 
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:text="@string/social_index"
+                />
+            
+            <TextView 
+                android:id="@+id/my_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/buttonbg"
+                android:textColor="#d6d6d6" 
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:text="@string/my_index"
+                />
+            
+	        
+	        </LinearLayout>
+        <ImageView 
+				android:id="@+id/youbiao"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/v5_tab_indicator_arrow_light_down"       
+	            android:layout_alignTop="@+id/bottonBar" 
+	        />
+        
+    </RelativeLayout>
+
+</LinearLayout>

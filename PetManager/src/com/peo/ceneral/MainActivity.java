@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.peo.location.CELLLocation;
 import com.peo.location.GPSLocation;
-import com.peo.man.PersonalCentral;
 import com.peo.stor.StorCentral;
 import com.peo.straypet.StrayPetList;
 import com.peo.view.MyImageView;
@@ -38,6 +37,7 @@ public class MainActivity extends Activity
 	private static Timer exitTimer = null;
 
 	GPSLocation getlocation;
+
 	Thread t;
 
 	@Override
@@ -63,7 +63,7 @@ public class MainActivity extends Activity
 			public void onViewClick(MyImageView view)
 			{
 				// TODO Auto-generated method stub
-				Intent it = new Intent(MainActivity.this, PersonalCentral.class);
+				Intent it = new Intent(MainActivity.this, IndexActivity.class);
 				startActivity(it);
 			}
 		});

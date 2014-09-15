@@ -13,4 +13,20 @@
     <string name="loginStor">登录商店</string>
     <string name="stormenu">宠物商店</string>
     <string name="straylist">丢失宠物列表</string>
+    <!-- index activity 中Bar里面显示的内容 -->
+    <string name="pet_index">宠物</string>
+    <string name="friends_index">好友</string>
+    <string name="social_index">社交</string>
+    <string name="my_index">我的</string>
+
+    
+    <string name="petInfo_petActivity">宠物信息</string>
+    <string name="petGallery_petActivity">宠物图集</string>
+    <string name="petSearch_petActivity">宠物查询</string>
+
+    <string name="petName">宠物名字</string>
+    
+    
+    
+    
 </resources>

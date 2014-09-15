@@ -472,17 +472,30 @@ public final class R {
         public static final int actionbar_more_icon=0x7f020005;
         public static final int actionbar_search_icon=0x7f020006;
         public static final int bottom=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int left_bottom=0x7f020009;
-        public static final int left_top=0x7f02000a;
-        public static final int main_activity_background=0x7f02000b;
-        public static final int right=0x7f02000c;
+        public static final int buttonbg=0x7f020008;
+        public static final int buttonclickp=0x7f020009;
+        public static final int buttonnoclick=0x7f02000a;
+        public static final int ic_arrow=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int ic_more_item_default=0x7f02000d;
+        public static final int ic_more_item_pressed=0x7f02000e;
+        public static final int left_bottom=0x7f02000f;
+        public static final int left_top=0x7f020010;
+        public static final int main_activity_background=0x7f020011;
+        public static final int more_item_press=0x7f020012;
+        public static final int right=0x7f020013;
+        public static final int title=0x7f020014;
+        public static final int v5_tab_indicator_arrow_light_down=0x7f020015;
     }
     public static final class id {
-        public static final int action_settings=0x7f09006c;
-        public static final int add=0x7f09005e;
+        public static final int MorePageTableLayout_Favorite=0x7f090066;
+        public static final int MorePageTableLayout_Favorite1=0x7f090069;
+        public static final int MorePageTableLayout_Favorite2=0x7f09006c;
+        public static final int action_settings=0x7f090080;
+        public static final int add=0x7f090072;
         public static final int asd=0x7f09000b;
         public static final int autoLogin=0x7f090015;
+        public static final int bottonBar=0x7f09005c;
         public static final int boyButton=0x7f090028;
         public static final int checkPetImmune=0x7f090037;
         public static final int checkPetSterilizations=0x7f090036;
@@ -506,8 +519,11 @@ public final class R {
         public static final int ewq=0x7f09002d;
         public static final int find_pet=0x7f090020;
         public static final int forgetPass=0x7f090016;
+        public static final int friends_index=0x7f09005e;
         public static final int girlButton=0x7f090029;
+        public static final int headPic_pet=0x7f090064;
         public static final int lastPetButton=0x7f090038;
+        public static final int ll_index=0x7f090063;
         public static final int loginIn=0x7f090017;
         public static final int loginName=0x7f090012;
         public static final int loginPassWord=0x7f090013;
@@ -515,6 +531,9 @@ public final class R {
         public static final int mName=0x7f090021;
         public static final int mSay=0x7f090022;
         public static final int manButton=0x7f090006;
+        public static final int more_page_row0=0x7f090067;
+        public static final int more_page_row1=0x7f09006a;
+        public static final int more_page_row2=0x7f09006d;
         public static final int myBirthDView=0x7f09000c;
         public static final int myBirthMView=0x7f09000a;
         public static final int myBirthYView=0x7f090008;
@@ -522,8 +541,11 @@ public final class R {
         public static final int myNameView=0x7f090001;
         public static final int myPic=0x7f090000;
         public static final int mySexGroup=0x7f090005;
+        public static final int my_index=0x7f090060;
+        public static final int name_pet=0x7f090065;
         public static final int nearPetStorButton=0x7f09005a;
         public static final int nextPetButton=0x7f090039;
+        public static final int pager=0x7f09005b;
         public static final int passWordText=0x7f09003c;
         public static final int perfectView=0x7f090002;
         public static final int personalCentral=0x7f090019;
@@ -532,14 +554,18 @@ public final class R {
         public static final int petBirthMView=0x7f09002c;
         public static final int petBirthYView=0x7f09002a;
         public static final int petFind=0x7f09001c;
-        public static final int petImage=0x7f09005b;
+        public static final int petGallery=0x7f09006b;
+        public static final int petImage=0x7f09006f;
         public static final int petImageView=0x7f090023;
+        public static final int petInfo=0x7f090068;
         public static final int petLoose=0x7f09001b;
-        public static final int petName=0x7f09005c;
+        public static final int petName=0x7f090070;
         public static final int petNameView=0x7f090024;
-        public static final int petSex=0x7f09005d;
+        public static final int petSearch=0x7f09006e;
+        public static final int petSex=0x7f090071;
         public static final int petSexGroup=0x7f090027;
         public static final int petShop=0x7f09001a;
+        public static final int pet_index=0x7f09005d;
         public static final int pet_shop=0x7f09001e;
         public static final int qwe=0x7f09002b;
         public static final int regAnother=0x7f090054;
@@ -570,24 +596,27 @@ public final class R {
         public static final int remPass=0x7f090014;
         public static final int retOut=0x7f090018;
         public static final int returnButton=0x7f09003f;
+        public static final int social_index=0x7f09005f;
         public static final int storLoginButton=0x7f090059;
         public static final int storRegisterButton=0x7f090057;
         public static final int storReturnButton=0x7f090058;
         public static final int surePassWordText=0x7f09003d;
-        public static final int trayMasterPic=0x7f09005f;
-        public static final int trayPetDescript=0x7f090062;
-        public static final int trayPetPic_0=0x7f090063;
-        public static final int trayPetPic_1=0x7f090064;
-        public static final int trayPetPic_2=0x7f090065;
-        public static final int trayPetPic_3=0x7f090066;
-        public static final int trayPetPic_4=0x7f090067;
-        public static final int trayPetPic_5=0x7f090068;
-        public static final int trayPetPic_6=0x7f090069;
-        public static final int trayPetPic_7=0x7f09006a;
-        public static final int trayPetPic_8=0x7f09006b;
-        public static final int trayPetTime=0x7f090061;
-        public static final int trayPetTitle=0x7f090060;
+        public static final int textview=0x7f090062;
+        public static final int trayMasterPic=0x7f090073;
+        public static final int trayPetDescript=0x7f090076;
+        public static final int trayPetPic_0=0x7f090077;
+        public static final int trayPetPic_1=0x7f090078;
+        public static final int trayPetPic_2=0x7f090079;
+        public static final int trayPetPic_3=0x7f09007a;
+        public static final int trayPetPic_4=0x7f09007b;
+        public static final int trayPetPic_5=0x7f09007c;
+        public static final int trayPetPic_6=0x7f09007d;
+        public static final int trayPetPic_7=0x7f09007e;
+        public static final int trayPetPic_8=0x7f09007f;
+        public static final int trayPetTime=0x7f090075;
+        public static final int trayPetTitle=0x7f090074;
         public static final int womanButton=0x7f090007;
+        public static final int youbiao=0x7f090061;
     }
     public static final class layout {
         public static final int activity_all_message=0x7f030000;
@@ -599,9 +628,14 @@ public final class R {
         public static final int activity_register=0x7f030006;
         public static final int activity_register_stor=0x7f030007;
         public static final int activity_stor_central=0x7f030008;
-        public static final int pet_listview=0x7f030009;
-        public static final int top1=0x7f03000a;
-        public static final int tray_pet_listview=0x7f03000b;
+        public static final int index_activity=0x7f030009;
+        public static final int myactivity=0x7f03000a;
+        public static final int myfriends=0x7f03000b;
+        public static final int pet=0x7f03000c;
+        public static final int pet_listview=0x7f03000d;
+        public static final int social=0x7f03000e;
+        public static final int top1=0x7f03000f;
+        public static final int tray_pet_listview=0x7f030010;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -610,13 +644,23 @@ public final class R {
         public static final int action_settings=0x7f060001;
         public static final int allmessage=0x7f060006;
         public static final int app_name=0x7f060000;
+        public static final int friends_index=0x7f06000d;
         public static final int hello_world=0x7f060002;
         public static final int login=0x7f060005;
         public static final int loginStor=0x7f060009;
+        public static final int my_index=0x7f06000f;
         public static final int personal_central=0x7f060003;
+        public static final int petGallery_petActivity=0x7f060011;
+        public static final int petInfo_petActivity=0x7f060010;
+        public static final int petName=0x7f060013;
+        public static final int petSearch_petActivity=0x7f060012;
+        /**  index activity 中Bar里面显示的内容 
+         */
+        public static final int pet_index=0x7f06000c;
         public static final int petmessage=0x7f060007;
         public static final int register=0x7f060004;
         public static final int registerStor=0x7f060008;
+        public static final int social_index=0x7f06000e;
         public static final int stormenu=0x7f06000a;
         public static final int straylist=0x7f06000b;
     }
