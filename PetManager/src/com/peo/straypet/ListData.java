@@ -3,7 +3,7 @@
  */
 package com.peo.straypet;
 
-import com.peo.ceneral.OthersInfo;
+import com.gdut.pet.ui.OthersInfo;
 
 import android.provider.MediaStore.Images;
 

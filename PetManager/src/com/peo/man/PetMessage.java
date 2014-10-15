@@ -4,7 +4,7 @@
 package com.peo.man;
 
 
-import com.peo.ceneral.LogInfo;
+import com.gdut.pet.ui.LogInfo;
 import com.ui.mypet.R;
 
 import android.app.Activity;

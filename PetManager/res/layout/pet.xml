@@ -11,31 +11,39 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingTop="5dip"
         >
 		
         <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        android:background="@drawable/more_item_press"
-        android:padding="20dip"
-        >
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" 
+	        android:background="@drawable/more_item_press"
+	        android:clickable="true"
+	        android:id="@+id/ll_petInfo_head"
+	        >
         
-        <ImageView
-            android:id="@+id/headPic_pet"
-            android:layout_width="100dip"
-            android:layout_height="100dip"
-            android:layout_marginLeft="15dip"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:id="@+id/name_pet"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="@string/petName" />
+	        <ImageView
+	            android:id="@+id/headPic_pet"
+	            android:layout_width="100dip"
+	            android:layout_height="100dip"
+	            android:layout_marginLeft="15dip"
+	            android:src="@drawable/ic_launcher" 
+	            android:background="@drawable/ic_more_item_default"
+	            />
+	
+	        <TextView
+	            android:id="@+id/name_pet"
+	            android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical"
+	            android:gravity="center_horizontal"
+	            android:layout_weight="1"
+	            android:paddingLeft="15dip"
+	            android:text="@string/petName" 
+	            />
         </LinearLayout>
     </LinearLayout>
     
@@ -61,6 +69,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" 
+                android:clickable="true"
+                android:id="@+id/ll_petInfo"
                 >
                 <TableLayout
                     android:id="@+id/MorePageTableLayout_Favorite"
@@ -113,6 +123,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" 
+				android:clickable="true"
+				android:id="@+id/ll_petPics"
                 >
                 <TableLayout
                     android:id="@+id/MorePageTableLayout_Favorite1"
@@ -162,10 +174,12 @@
                 android:layout_marginBottom="15dip"
                 />
             
-            <!-- 宠物查询一栏 -->2
+            <!-- 宠物查询一栏 -->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" 
+                android:clickable="true"
+                android:id="@+id/ll_petSearch"
                 >
                 <TableLayout
                     android:id="@+id/MorePageTableLayout_Favorite2"

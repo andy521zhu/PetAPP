@@ -3,8 +3,8 @@
  */
 package com.peo.stor;
 
-import com.peo.ceneral.LogInfo;
-import com.peo.man.LoginMan;
+import com.gdut.pet.ui.LogInfo;
+import com.gdut.pet.ui.LoginActivity;
 import com.ui.mypet.R;
 
 import android.app.Activity;
@@ -42,7 +42,7 @@ public class StorCentral extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				LogInfo.MAN_STOR=0;//ил╣Й
-				Intent intent = new Intent(StorCentral.this,LoginMan.class);
+				Intent intent = new Intent(StorCentral.this,LoginActivity.class);
 				startActivity(intent);
 			}
 		});

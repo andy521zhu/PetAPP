@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <com.peo.view.MyImageView
+                <com.gdut.pet.common.view.MyImageView
                     android:id="@+id/personal_center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                     android:scaleType="matrix"
                     android:src="@drawable/left_top" />
 
-                <com.peo.view.MyImageView
+                <com.gdut.pet.common.view.MyImageView
                     android:id="@+id/pet_shop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                     android:src="@drawable/left_bottom" />
             </LinearLayout>
 
-            <com.peo.view.MyImageView
+            <com.gdut.pet.common.view.MyImageView
                 android:id="@+id/lost_pet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:src="@drawable/right" />
         </LinearLayout>
 
-        <com.peo.view.MyImageView
+        <com.gdut.pet.common.view.MyImageView
             android:id="@+id/find_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

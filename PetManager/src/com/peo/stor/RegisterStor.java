@@ -7,10 +7,10 @@
  */
 package com.peo.stor;
 
-import com.peo.ceneral.JudgeFormal;
-import com.peo.ceneral.LogInfo;
-import com.peo.man.LoginMan;
-import com.peo.man.Register;
+import com.gdut.pet.ui.JudgeFormat;
+import com.gdut.pet.ui.LogInfo;
+import com.gdut.pet.ui.LoginActivity;
+import com.gdut.pet.ui.RegisteActivity;
 import com.ui.mypet.R;
 
 import android.app.Activity;
@@ -78,19 +78,19 @@ public class RegisterStor extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (storRegister.getText().toString().isEmpty()
-						|| !JudgeFormal.isMobileNO(storRegister.getText()
+						|| !JudgeFormat.isMobileNO(storRegister.getText()
 								.toString())
-						&& !JudgeFormal.isEmail(storRegister.getText()
+						&& !JudgeFormat.isEmail(storRegister.getText()
 								.toString())) {
 					Toast.makeText(RegisterStor.this, "请填入有效手机号或邮箱名",
 							Toast.LENGTH_SHORT).show();
 				} else if (name.getText().toString().isEmpty()
-						|| !JudgeFormal.isLogical(name.getText().toString())) {
+						|| !JudgeFormat.isLogical(name.getText().toString())) {
 					Toast.makeText(RegisterStor.this, "请检查店名输入",
 							Toast.LENGTH_SHORT).show();
 				} else if (password.getText().toString().isEmpty()
 						|| password.getText().length() < 6
-						|| !JudgeFormal.isPassword(password.getText().toString())) {
+						|| !JudgeFormat.isPassword(password.getText().toString())) {
 					Toast.makeText(RegisterStor.this, "请填入6位以上的密码,密码只能包含数字和字母",
 							Toast.LENGTH_SHORT).show();
 				} else if (surePassword.getText().toString().isEmpty()) {
@@ -101,7 +101,7 @@ public class RegisterStor extends Activity{
 					Toast.makeText(RegisterStor.this, "输入的密码不一致",
 							Toast.LENGTH_SHORT).show();
 				} else if (phoneBox.isChecked()
-						&& (phone.getText().toString().isEmpty() || !JudgeFormal
+						&& (phone.getText().toString().isEmpty() || !JudgeFormat
 								.isMobileNO(phone.getText().toString()))) {
 					Toast.makeText(RegisterStor.this, "请检查手机号码输入",
 							Toast.LENGTH_SHORT).show();
@@ -110,12 +110,12 @@ public class RegisterStor extends Activity{
 					Toast.makeText(RegisterStor.this, "请检查固话号码输入",
 							Toast.LENGTH_SHORT).show();
 				} else if (qqBox.isChecked()
-						&& (qq.getText().toString().isEmpty() || !JudgeFormal
+						&& (qq.getText().toString().isEmpty() || !JudgeFormat
 								.isQQNumber(qq.getText().toString()))) {
 					Toast.makeText(RegisterStor.this, "请检查QQ输入",
 							Toast.LENGTH_SHORT).show();
 				} else if (emailBox.isChecked()
-						&& (email.getText().toString().isEmpty() || !JudgeFormal
+						&& (email.getText().toString().isEmpty() || !JudgeFormat
 								.isEmail(email.getText().toString()))) {
 					Toast.makeText(RegisterStor.this, "请检查邮箱输入",
 							Toast.LENGTH_SHORT).show();
@@ -158,7 +158,7 @@ public class RegisterStor extends Activity{
 		builder.setNeutralButton("立即登录", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				LogInfo.MAN_STOR = 0;		//设置登录者为商店
-				Intent intent = new Intent(RegisterStor.this, LoginMan.class);
+				Intent intent = new Intent(RegisterStor.this, LoginActivity.class);
 				startActivity(intent);
 				finish();
 			}
@@ -175,9 +175,9 @@ public class RegisterStor extends Activity{
 				// TODO Auto-generated method stub
 				if (!storRegister.isFocused()) {
 					if (storRegister.getText().toString().isEmpty()
-							|| !JudgeFormal.isMobileNO(storRegister.getText()
+							|| !JudgeFormat.isMobileNO(storRegister.getText()
 									.toString())
-							&& !JudgeFormal.isEmail(storRegister.getText()
+							&& !JudgeFormat.isEmail(storRegister.getText()
 									.toString())) {
 						Toast.makeText(RegisterStor.this, "请填入有效手机号或邮箱名",
 								Toast.LENGTH_SHORT).show();
@@ -195,7 +195,7 @@ public class RegisterStor extends Activity{
 					if (name.getText().toString().isEmpty()) {
 						Toast.makeText(RegisterStor.this, "请填入店名",
 								Toast.LENGTH_SHORT).show();
-					} else if (!JudgeFormal
+					} else if (!JudgeFormat
 							.isLogical(name.getText().toString())) {
 						Toast.makeText(RegisterStor.this, "店名不能含有非法字符",
 								Toast.LENGTH_SHORT).show();
@@ -217,7 +217,7 @@ public class RegisterStor extends Activity{
 					} else if (password.getText().length() < 6) {
 						Toast.makeText(RegisterStor.this, "密码长度至少为6位",
 								Toast.LENGTH_SHORT).show();
-					} else if(!JudgeFormal.isPassword(password.getText().toString())){
+					} else if(!JudgeFormat.isPassword(password.getText().toString())){
 						Toast.makeText(RegisterStor.this, "只能为数字字母组合",
 								Toast.LENGTH_SHORT).show();
 					}
@@ -256,7 +256,7 @@ public class RegisterStor extends Activity{
 						Toast.makeText(RegisterStor.this, "请输入手机号码",
 								Toast.LENGTH_SHORT).show();
 					}
-					if (!JudgeFormal.isMobileNO(phone.getText().toString())) {
+					if (!JudgeFormat.isMobileNO(phone.getText().toString())) {
 						Toast.makeText(RegisterStor.this, "请输入有效手机号码",
 								Toast.LENGTH_SHORT).show();
 					}
@@ -275,7 +275,7 @@ public class RegisterStor extends Activity{
 						Toast.makeText(RegisterStor.this, "请输入电话号码",
 								Toast.LENGTH_SHORT).show();
 					}
-					else if (!JudgeFormal.isQQNumber(number.getText().toString())) {
+					else if (!JudgeFormat.isQQNumber(number.getText().toString())) {
 						Toast.makeText(RegisterStor.this, "请输入有效电话号码",
 								Toast.LENGTH_SHORT).show();
 					}
@@ -294,7 +294,7 @@ public class RegisterStor extends Activity{
 						Toast.makeText(RegisterStor.this, "请输入QQ号码",
 								Toast.LENGTH_SHORT).show();
 					}
-					if (!JudgeFormal.isQQNumber(qq.getText().toString())) {
+					if (!JudgeFormat.isQQNumber(qq.getText().toString())) {
 						Toast.makeText(RegisterStor.this, "输入的QQ号码不合法",
 								Toast.LENGTH_SHORT).show();
 					}
@@ -313,7 +313,7 @@ public class RegisterStor extends Activity{
 						Toast.makeText(RegisterStor.this, "请输入QQ号码",
 								Toast.LENGTH_SHORT).show();
 					}
-					if (!JudgeFormal.isEmail(email.getText().toString())) {
+					if (!JudgeFormat.isEmail(email.getText().toString())) {
 						Toast.makeText(RegisterStor.this, "输入的QQ号码不合法",
 								Toast.LENGTH_SHORT).show();
 					}

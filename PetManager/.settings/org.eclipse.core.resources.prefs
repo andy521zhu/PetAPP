@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/com/peo/view/MyImageView.java=UTF-8
+encoding//src/com/gdut/pet/common/network/APNManager.java=UTF-8
+encoding//src/com/gdut/pet/common/network/NetWorkHelper.java=UTF-8
+encoding//src/com/gdut/pet/common/view/MyImageView.java=UTF-8
+encoding/<project>=GBK

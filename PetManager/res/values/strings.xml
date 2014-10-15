@@ -25,6 +25,43 @@
     <string name="petSearch_petActivity">宠物查询</string>
 
     <string name="petName">宠物名字</string>
+
+    <string name="myName">我的名字</string>
+
+    <string name="showMap">显示地图</string>
+
+    <string name="cancle_remember_pwd">记住密码取消</string>
+
+    <string name="remember_pwd">记住密码选中</string>
+
+    <string name="positive_button_save">确定</string>
+
+    <string name="negative_button_cancle">取消</string>
+
+    <string name="invalid_phone_email_warnning">请填入有效手机号或邮箱名</string>
+
+    <string name="please_input_username">请填入用户名</string>
+
+    <string name="username_should_be_num_letter">用户名必须为数字字母组合</string>
+
+    <string name="please_input_password">请填入密码</string>
+
+    <string name="password_less_then_six">密码长度至少为6位</string>
+
+    <string name="pwd_should_num_letter">密码只能为数字，字母组合</string>
+
+    <string name="please_input_sure_pwd">请输入确认密码</string>
+
+    <string name="different_pwd">输入的密码不一致</string>
+
+    <string name="login_fail">登录失败</string>
+
+    <string name="login_success">登录成功</string>
+
+    <string name="connecting">正在连接</string>
+
+    <string name="connecting_to_server">连接服务器</string>
+
     
     
     

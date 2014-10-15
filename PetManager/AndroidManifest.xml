@@ -4,12 +4,18 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <!-- 最低版本要3.0以上的  因为ACTIONBAR在3.0一下不支持 -->
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 使用网络功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     
 
     <application
@@ -18,7 +24,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.peo.ceneral.MainActivity"
+            android:name="com.gdut.pet.ui.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,27 +34,27 @@
         </activity>
         
         <activity
-            android:name="com.peo.ceneral.IndexActivity"
+            android:name="com.gdut.pet.ui.IndexActivity"
             android:label="@string/personal_central" >
         </activity>
         
         <activity
-            android:name="com.peo.ceneral.PetActivity"
+            android:name="com.gdut.pet.ui.PetActivity"
             android:label="@string/personal_central" >
         </activity>
         
         <activity
-            android:name="com.peo.ceneral.MyFriendsActivity"
+            android:name="com.gdut.pet.ui.MyFriendsActivity"
             android:label="@string/personal_central" >
         </activity>
         
         <activity
-            android:name="com.peo.ceneral.SocialActivity"
+            android:name="com.gdut.pet.ui.SocialActivity"
             android:label="@string/personal_central" >
         </activity>
         
         <activity
-            android:name="com.peo.ceneral.MyActivity"
+            android:name="com.gdut.pet.ui.MyActivity"
             android:label="@string/personal_central" >
         </activity>
         
@@ -58,12 +64,12 @@
         </activity>
         
         <activity 
-            android:name="com.peo.man.Register"
+            android:name="com.gdut.pet.ui.RegisteActivity"
             android:label="@string/register" >            
         </activity>
         
          <activity 
-            android:name="com.peo.man.LoginMan"
+            android:name="com.gdut.pet.ui.LoginActivity"
             android:label="@string/login" >            
         </activity>
         <activity 
@@ -95,6 +101,10 @@
           <activity android:name="com.peo.straypet.ItemDetail">
               
           </activity>
+          <activity android:name="com.gdut.pet.ui.BBSDetailActivity">
+              
+          </activity>
+          
     </application>
 
 </manifest>

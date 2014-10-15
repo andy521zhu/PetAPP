@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.peo.ceneral.*;
+import com.gdut.pet.ui.*;
 import com.ui.mypet.R;
 
 import android.app.AlertDialog;
@@ -124,7 +124,7 @@ public class PersonalCentral extends ListActivity{
         builder.setPositiveButton("зЂВс",  
                 new DialogInterface.OnClickListener() {  
                     public void onClick(DialogInterface dialog, int whichButton) {  
-                    	Intent intent = new Intent(PersonalCentral.this,Register.class);
+                    	Intent intent = new Intent(PersonalCentral.this,RegisteActivity.class);
                         startActivity(intent);
                     }  
                 });  
@@ -133,7 +133,7 @@ public class PersonalCentral extends ListActivity{
                 new DialogInterface.OnClickListener() {  
                     public void onClick(DialogInterface dialog, int whichButton) {  
                     	LogInfo.MAN_STOR = 1;
-                        Intent intent=new Intent(PersonalCentral.this,LoginMan.class);
+                        Intent intent=new Intent(PersonalCentral.this,LoginActivity.class);
                         startActivity(intent);
                         
                     }  
