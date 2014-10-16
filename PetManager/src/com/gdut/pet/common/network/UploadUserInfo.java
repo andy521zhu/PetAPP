@@ -8,12 +8,12 @@ import com.gdut.pet.common.tools.PersistentCookieStore;
  * @author andyzhu
  * 
  */
-public class GetBBS
+public class UploadUserInfo
 {
 
-	private static final String TAG = "com.gdut.pet.common.network.GetBBS";
+	private static final String TAG = "com.gdut.pet.common.network.UploadUserInfo";
 
-	public GetBBS(
+	public UploadUserInfo(
 			final String url, // final String action,
 			final PersistentCookieStore cookieStore,
 			final SuccessCallback successCallback,// »Øµ÷º¯Êý

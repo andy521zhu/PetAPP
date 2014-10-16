@@ -96,6 +96,7 @@ public class NetConnection
 				}
 				catch (IOException e)
 				{
+					System.out.println(e.toString());
 					e.printStackTrace();
 				}
 

@@ -32,14 +32,14 @@
                 android:text="用户名"
                 android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/perfectView"
+            <Button
+                android:id="@+id/editUserInfoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp"
-                android:text="信息完善率：" />
+                android:text="编辑" />
 
         </RelativeLayout>
     </LinearLayout>

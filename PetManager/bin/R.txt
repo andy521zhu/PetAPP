@@ -258,6 +258,7 @@ int id editPetWeight 0x7f060056
 int id editPhone 0x7f06001c
 int id editQQ 0x7f060019
 int id editSay 0x7f060010
+int id editUserInfoButton 0x7f06000e
 int id ewq 0x7f060050
 int id find_pet 0x7f06002e
 int id fl_inner 0x7f0600a3
@@ -303,7 +304,6 @@ int id nearPetStorButton 0x7f06007d
 int id nextPetButton 0x7f06005c
 int id pager 0x7f06007e
 int id passWordText 0x7f06005f
-int id perfectView 0x7f06000e
 int id personalCentral 0x7f060027
 int id personal_center 0x7f06002b
 int id petBirthDView 0x7f060051

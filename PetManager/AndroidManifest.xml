@@ -73,7 +73,7 @@
             android:label="@string/login" >            
         </activity>
         <activity 
-            android:name="com.peo.man.AllMessage"
+            android:name="com.gdut.pet.ui.AllMessageActivity"
             android:label="@string/allmessage" >            
         </activity>
         

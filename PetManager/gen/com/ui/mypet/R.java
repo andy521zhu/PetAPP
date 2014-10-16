@@ -694,6 +694,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int editPhone=0x7f06001c;
         public static final int editQQ=0x7f060019;
         public static final int editSay=0x7f060010;
+        public static final int editUserInfoButton=0x7f06000e;
         public static final int ewq=0x7f060050;
         public static final int find_pet=0x7f06002e;
         public static final int fl_inner=0x7f0600a3;
@@ -739,7 +740,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int nextPetButton=0x7f06005c;
         public static final int pager=0x7f06007e;
         public static final int passWordText=0x7f06005f;
-        public static final int perfectView=0x7f06000e;
         public static final int personalCentral=0x7f060027;
         public static final int personal_center=0x7f06002b;
         public static final int petBirthDView=0x7f060051;

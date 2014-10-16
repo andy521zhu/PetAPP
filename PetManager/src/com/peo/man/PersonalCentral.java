@@ -60,7 +60,7 @@ public class PersonalCentral extends ListActivity{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(PersonalCentral.this,AllMessage.class);
+				Intent intent=new Intent(PersonalCentral.this,AllMessageActivity.class);
 				startActivity(intent);
 			}
 	    	

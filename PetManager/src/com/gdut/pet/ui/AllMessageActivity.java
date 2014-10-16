@@ -1,5 +1,5 @@
 //显示用户详细信息，并提供更改
-package com.peo.man;
+package com.gdut.pet.ui;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +11,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,20 +22,21 @@ import android.widget.Toast;
 import com.gdut.pet.common.network.GetUserData;
 import com.gdut.pet.common.tools.PersistentCookieStore;
 import com.gdut.pet.config.Configs;
-import com.gdut.pet.ui.LogInfo;
 import com.ui.mypet.R;
 
-public class AllMessage extends Activity
+public class AllMessageActivity extends Activity
 {
 
 	EditText editName, editSay, editCallPhone, editPhone, editEmail, editQQ,
 			editAddress;
 	ImageView editImg;
 	TextView myNameView, birthD, birthM, birthY, asd, dsa;// 生日
+	Button editUserInfoButton;
 	RadioGroup sex;
 	MyDateClickListener md;
 
 	private Context mContext;
+	private static int flag = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -49,13 +51,16 @@ public class AllMessage extends Activity
 
 		md = new MyDateClickListener();
 		readData();
+
 	}
 
 	private void finsdIDs()
 	{
 		// TODO Auto-generated method stub
 		myNameView = (TextView) findViewById(R.id.myNameView);
+
 		editName = (EditText) findViewById(R.id.editName);
+
 		editSay = (EditText) findViewById(R.id.editSay);
 		editCallPhone = (EditText) findViewById(R.id.editCallPhone);
 		editPhone = (EditText) findViewById(R.id.editPhone);
@@ -69,6 +74,47 @@ public class AllMessage extends Activity
 		birthD = (TextView) findViewById(R.id.myBirthDView);
 		asd = (TextView) findViewById(R.id.asd);
 		dsa = (TextView) findViewById(R.id.dsa);
+
+		editUserInfoButton = (Button) findViewById(R.id.editUserInfoButton);
+		editUserInfoButton.setOnClickListener(new View.OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				if (flag == 1)
+				{
+					myNameView.setEnabled(true);
+					editName.setEnabled(true);
+					editSay.setEnabled(true);
+					editCallPhone.setEnabled(true);
+					editPhone.setEnabled(true);
+					editEmail.setEnabled(true);
+					editQQ.setEnabled(true);
+					editAddress.setEnabled(true);
+					flag = 2;
+					editUserInfoButton.setText("完成");
+				}
+				else
+				{
+					flag = 1;
+					editUserInfoButton.setText("编辑");
+					// 得到数据并且上传数据 上传用户信息
+					getAndUpdate();
+				}
+
+			}
+
+		});
+
+		myNameView.setEnabled(false);
+		editName.setEnabled(false);
+		editSay.setEnabled(false);
+		editCallPhone.setEnabled(false);
+		editPhone.setEnabled(false);
+		editEmail.setEnabled(false);
+		editQQ.setEnabled(false);
+		editAddress.setEnabled(false);
 	}
 
 	public void readData()
@@ -214,22 +260,31 @@ public class AllMessage extends Activity
 		public void onClick(View v)
 		{
 			// TODO Auto-generated method stub
-			new DatePickerDialog(AllMessage.this, new OnDateSetListener()
-			{
+			new DatePickerDialog(AllMessageActivity.this,
+					new OnDateSetListener()
+					{
 
-				@Override
-				public void onDateSet(DatePicker view, int year,
-						int monthOfYear, int dayOfMonth)
-				{
-					// TODO Auto-generated method stub
-					birthY.setText(year + "");
-					birthM.setText(monthOfYear + "");
-					birthD.setText(dayOfMonth + "");
-					System.out.println("setdate");
-				}
+						@Override
+						public void onDateSet(DatePicker view, int year,
+								int monthOfYear, int dayOfMonth)
+						{
+							// TODO Auto-generated method stub
+							birthY.setText(year + "");
+							birthM.setText(monthOfYear + "");
+							birthD.setText(dayOfMonth + "");
+							System.out.println("setdate");
+						}
 
-			}, LogInfo.BIRTH_Y, LogInfo.BIRTH_M, LogInfo.BIRTH_D).show();
+					}, LogInfo.BIRTH_Y, LogInfo.BIRTH_M, LogInfo.BIRTH_D)
+					.show();
 		}
+
+	}
+
+	// 得到用户填写的数据 并且上传服务器
+	private void getAndUpdate()
+	{
+		// TODO Auto-generated method stub
 
 	}
 

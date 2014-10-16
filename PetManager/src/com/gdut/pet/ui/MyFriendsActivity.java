@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,6 +52,7 @@ public class MyFriendsActivity extends Activity
 
 	ListView actualListView;
 	private List<Map<String, String>> list;
+	private SharedPreferences userdataSP;
 
 	private static final String TAG = "com.gdut.pet.ui.MyFriendsActivity";
 
@@ -62,7 +64,8 @@ public class MyFriendsActivity extends Activity
 		setContentView(R.layout.myfriends);
 
 		mContext = this;
-
+		userdataSP = getSharedPreferences(Configs.USERDATA_SP,
+				Context.MODE_PRIVATE);
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_listView);
 
 		// 列表拉到最后一个的时候 提示用户已经到底了
@@ -104,7 +107,7 @@ public class MyFriendsActivity extends Activity
 								.setLastUpdatedLabel(label);
 
 						// Do work to refresh the list here.
-						getBBSList();
+						getBBSList(true, "");
 					}
 				});
 
@@ -122,7 +125,15 @@ public class MyFriendsActivity extends Activity
 		// map.put("title", "nihao");
 		// list.add(0, map);
 		// }
-		getBBSList();
+		if (userdataSP.getBoolean(Configs.IS_LOGIN, false))
+		{
+			// 已经登陆了
+			getBBSList(false, "");
+		}
+		else
+		{
+
+		}
 
 		mPullToRefreshListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -136,9 +147,10 @@ public class MyFriendsActivity extends Activity
 						@SuppressWarnings("unused")
 						HashMap<String, String> mapItem;
 
-						TextView tx = (TextView) view
+						TextView titleTextView = (TextView) view
 								.findViewById(R.id.trayPetTitle);
-						String text = tx.getText().toString();
+
+						String text = titleTextView.getText().toString();
 						Intent intent = new Intent();
 						intent.setClass(MyFriendsActivity.this,
 								BBSDetailActivity.class);
@@ -149,7 +161,7 @@ public class MyFriendsActivity extends Activity
 	}
 
 	// 得到bbs的列表数据
-	private void getBBSList()
+	private void getBBSList(boolean isRefresh, String id)
 	{
 
 		// 进度Dialog
@@ -210,7 +222,11 @@ public class MyFriendsActivity extends Activity
 						// TODO Auto-generated method stub
 						pd.dismiss();
 					}
-				});
+				},
+				// 是否是从刷新过去的
+				isRefresh,
+				//
+				id);
 	}
 
 	private class GetDataTask extends AsyncTask<Void, Void, String[]>

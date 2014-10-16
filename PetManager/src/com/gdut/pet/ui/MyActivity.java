@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gdut.pet.config.Configs;
-import com.peo.man.AllMessage;
 import com.ui.mypet.R;
 
 public class MyActivity extends Activity implements OnClickListener
@@ -89,7 +88,7 @@ public class MyActivity extends Activity implements OnClickListener
 			{
 				// 显示用户信息
 				intent = new Intent();
-				intent.setClass(MyActivity.this, AllMessage.class);
+				intent.setClass(MyActivity.this, AllMessageActivity.class);
 				startActivity(intent);
 			}
 			else
@@ -106,19 +105,19 @@ public class MyActivity extends Activity implements OnClickListener
 		// 点击进入宠物商店界面
 		case R.id.ll_petShop:
 			intent = new Intent();
-			intent.setClass(MyActivity.this, AllMessage.class);
+			intent.setClass(MyActivity.this, AllMessageActivity.class);
 			startActivity(intent);
 			break;
 		// 点击进入宠物丢失界面
 		case R.id.ll_lostPet:
 			intent = new Intent();
-			intent.setClass(MyActivity.this, AllMessage.class);
+			intent.setClass(MyActivity.this, AllMessageActivity.class);
 			startActivity(intent);
 			break;
 		// 点击进入设置界面
 		case R.id.ll_settings:
 			intent = new Intent();
-			intent.setClass(MyActivity.this, AllMessage.class);
+			intent.setClass(MyActivity.this, AllMessageActivity.class);
 			startActivity(intent);
 			break;
 		default:
