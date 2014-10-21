@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.gdut.pet.common.network.GetUserData;
 import com.gdut.pet.common.tools.PersistentCookieStore;
+import com.gdut.pet.common.utils.ShowToast;
 import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
 
@@ -86,6 +87,9 @@ public class AllMessageActivity extends Activity
 				{
 					myNameView.setEnabled(true);
 					editName.setEnabled(true);
+					// editName.setFocusable(true);
+					editName.setFocusableInTouchMode(true);
+					// editName.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
 					editSay.setEnabled(true);
 					editCallPhone.setEnabled(true);
 					editPhone.setEnabled(true);
@@ -108,13 +112,21 @@ public class AllMessageActivity extends Activity
 		});
 
 		myNameView.setEnabled(false);
+		myNameView.setFocusable(false);
 		editName.setEnabled(false);
+		editName.setFocusable(false);
 		editSay.setEnabled(false);
+		editSay.setFocusable(false);
 		editCallPhone.setEnabled(false);
+		editCallPhone.setFocusable(false);
 		editPhone.setEnabled(false);
+		editPhone.setFocusable(false);
 		editEmail.setEnabled(false);
+		editEmail.setFocusable(false);
 		editQQ.setEnabled(false);
+		editQQ.setFocusable(false);
 		editAddress.setEnabled(false);
+		editAddress.setFocusable(false);
 	}
 
 	public void readData()
@@ -156,6 +168,7 @@ public class AllMessageActivity extends Activity
 					public void onFail()
 					{
 						// TODO Auto-generated method stub
+						ShowToast.ShowToast1(mContext, "Ê§°Ü");
 
 					}
 				});

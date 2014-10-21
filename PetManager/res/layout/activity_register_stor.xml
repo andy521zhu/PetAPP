@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="#ffefebe7"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="1" 
+        android:columnCount="1"
         android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.00"
-            android:text="欢迎使用本程序，请输入有效手机号或邮箱以便找回密码。可嵌入广告"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.00" >
 
             <TextView
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"              
+                android:layout_height="wrap_content"
                 android:text="手机/邮箱：" />
 
             <EditText
@@ -42,9 +42,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.00" >
 
             <TextView
@@ -63,9 +63,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.00" >
 
             <TextView
@@ -84,9 +84,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.00" >
 
             <TextView
@@ -105,24 +105,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.00"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_weight="0.00"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="地 址：" />
-
-            <EditText
-                android:id="@+id/regStorAddress"
+                android:text="地 区：" />
+            
+            <Spinner
+                android:id="@+id/province_spinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10" />
+                android:layout_height="wrap_content" 
+                />
 
+            <Spinner
+                android:id="@+id/city_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner 
+                android:id="@+id/county_spinner"  
+		        android:layout_width="wrap_content"  
+		        android:layout_height="wrap_content"  
+		     
+		          />
         </LinearLayout>
 
         <TextView
@@ -153,40 +163,41 @@
                 android:layout_column="1"
                 android:layout_gravity="left|top"
                 android:layout_row="0"
+                android:ems="10"
                 android:focusable="false"
-                android:inputType="phone"
-                android:ems="10" />
-<!-- falsable=false即不允许获得焦点 -->
+                android:inputType="phone" />
+            <!-- falsable=false即不允许获得焦点 -->
+
             <CheckBox
                 android:id="@+id/regCheckStorNumber"
                 android:layout_column="0"
                 android:layout_gravity="left|top"
                 android:layout_row="1"
                 android:text="固 话：" />
-            
+
             <EditText
                 android:id="@+id/regStorNumber"
                 android:layout_column="1"
                 android:layout_gravity="left|top"
                 android:layout_row="1"
+                android:ems="10"
                 android:focusable="false"
-                android:inputType="phone"
-                android:ems="10" />
-            
-			<CheckBox
+                android:inputType="phone" />
+
+            <CheckBox
                 android:id="@+id/regCheckStorQQ"
                 android:layout_column="0"
                 android:layout_gravity="left|top"
                 android:layout_row="2"
                 android:text=" Q Q：" />
-			
+
             <EditText
                 android:id="@+id/regStorQQ"
                 android:layout_column="1"
-                android:focusable="false"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_row="2"
-                android:ems="10" />           
+                android:ems="10"
+                android:focusable="false" />
 
             <CheckBox
                 android:id="@+id/regCheckStorEmail"
@@ -198,20 +209,19 @@
             <EditText
                 android:id="@+id/regStorEmail"
                 android:layout_column="1"
-                android:focusable="false"
                 android:layout_gravity="left|top"
                 android:layout_row="3"
-                android:inputType="textEmailAddress"
-                android:ems="10" />
-           
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="textEmailAddress" />
         </GridLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="0.00" >
 
             <TextView
@@ -224,8 +234,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:text="00:00:00"
-                android:inputType="time" />
+                android:inputType="time"
+                android:text="00:00:00" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -238,29 +248,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:text="00:00:00"
-                android:inputType="time" />
-
+                android:inputType="time"
+                android:text="00:00:00" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp" >
 
             <TextView
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="服务：" />
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="3"
-                android:rowCount="3"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:rowCount="3" >
 
                 <CheckBox
                     android:id="@+id/regHospital"
@@ -275,56 +284,53 @@
                     android:layout_gravity="left|top"
                     android:layout_row="0"
                     android:text="美容" />
-                
-                 <CheckBox
+
+                <CheckBox
                     android:id="@+id/regSellPet"
                     android:layout_column="0"
                     android:layout_gravity="left|top"
                     android:layout_row="1"
                     android:text="卖宠" />
-                
-                  <CheckBox
+
+                <CheckBox
                     android:id="@+id/regPetappliance"
                     android:layout_column="1"
                     android:layout_gravity="left|top"
                     android:layout_row="1"
                     android:text="宠物用品" />
-                
-                   <CheckBox
+
+                <CheckBox
                     android:id="@+id/regTravel"
                     android:layout_column="2"
                     android:layout_gravity="left|top"
                     android:layout_row="1"
                     android:text="旅游" />
-                   
-                   <CheckBox
+
+                <CheckBox
                     android:id="@+id/regAnother"
                     android:layout_column="0"
                     android:layout_gravity="left|top"
                     android:layout_row="2"
                     android:text="其他:" />
 
-                   <CheckBox
-                       android:id="@+id/regPetFood"
-                       android:layout_column="1"
-                       android:layout_gravity="left|top"
-                       android:layout_row="0"
-                       android:text="宠物粮" />
+                <CheckBox
+                    android:id="@+id/regPetFood"
+                    android:layout_column="1"
+                    android:layout_gravity="left|top"
+                    android:layout_row="0"
+                    android:text="宠物粮" />
 
-                   <EditText
-                       android:id="@+id/regAnotherServerText"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_column="1"
-                       android:layout_columnSpan="2"
-                       android:layout_gravity="left|top"
-                       android:layout_row="2"
-                       android:ems="10" />
-                
+                <EditText
+                    android:id="@+id/regAnotherServerText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnSpan="2"
+                    android:layout_gravity="left|top"
+                    android:layout_row="2"
+                    android:ems="10" />
             </GridLayout>
-
         </LinearLayout>
-
 
         <Button
             android:id="@+id/storRegisterButton"
@@ -342,8 +348,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="登 录" />
-
     </LinearLayout>
-        
 
 </ScrollView>

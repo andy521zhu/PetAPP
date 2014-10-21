@@ -16,7 +16,7 @@
             android:id="@+id/myPic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/actionbar_camera_icon" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,9 +36,10 @@
                 android:id="@+id/editUserInfoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/btn_normal_press"
                 android:text="编辑" />
 
         </RelativeLayout>
@@ -63,7 +64,6 @@
             android:ems="10" 
             >
 
-            <requestFocus android:layout_width="match_parent" />
 
         </EditText>
     </LinearLayout>
@@ -264,5 +264,15 @@
             android:inputType="textPostalAddress" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/quit_login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnthinround_bg_qianse"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="注销登录" />
 
     </LinearLayout>
