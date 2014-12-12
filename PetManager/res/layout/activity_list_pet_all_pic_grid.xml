@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  
+    <RelativeLayout
+	    android:id="@+id/head_top"
+	    android:orientation="vertical" 
+	    android:background="@drawable/head"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="50dip"
+	    >
+	    <ImageView 
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_centerInParent="true"
+	      android:textSize="16pt"
+	      android:textColor="@android:color/black"
+	   	  android:src="@drawable/ic_launcher"
+	     />
+	    <LinearLayout
+			android:layout_alignParentRight="true"
+			android:id="@+id/layout_post_petImage"
+			android:orientation="horizontal"
+			android:gravity="center"
+			android:clickable="true"
+			android:layout_width="wrap_content"
+			android:layout_height="30dip"
+			android:layout_centerInParent="true"
+			android:layout_marginRight="10dip"
+			>
+			
+			<ImageView 
+				android:layout_width="wrap_content" android:layout_height="wrap_content" 
+				android:layout_marginLeft="5.0dip" android:layout_marginRight="10.0dip" 
+				android:src="@drawable/pet_drawable_fatie_btn_press"  />
+		</LinearLayout>
+	</RelativeLayout>
+    
+    <com.handmark.pulltorefresh.library.PullToRefreshGridView 
+        android:id="@+id/pulltorefresh_gridview" 
+        android:padding="4.0dip" 
+        android:scrollbars="none" 
+        android:layout_width="fill_parent" 
+        android:layout_height="match_parent" 
+        android:horizontalSpacing="5.0dip" 
+        android:verticalSpacing="5.0dip" 
+        android:stretchMode="columnWidth" 
+        android:numColumns="3" />
+    <LinearLayout 
+        android:orientation="vertical" 
+        android:id="@+id/layout_no_network" 
+        android:visibility="gone" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent">
+        <ImageView 
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:src="@drawable/no_network_title" 
+            android:scaleType="fitStart" 
+            android:adjustViewBounds="true" />
+        <ImageView 
+            android:background="@color/no_network_background" 
+            android:layout_width="fill_parent" 
+            android:layout_height="0.0dip" 
+            android:layout_marginLeft="50.0dip" 
+            android:layout_marginRight="50.0dip" 
+            android:layout_marginBottom="70.0dip"
+            android:src="@drawable/no_network_content" 
+            android:scaleType="centerInside" 
+            android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

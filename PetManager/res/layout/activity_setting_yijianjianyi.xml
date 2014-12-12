@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Setting_yijian"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffefebe7"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/head_top"
+        android:orientation="vertical" 
+        android:background="@drawable/skin_header_bar_bg"
+        android:layout_width="fill_parent" 
+        android:layout_height="50dip"
+        >
+	
+        <Button
+            android:id="@+id/yijianjianyi_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/head_btn_back"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView 
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_centerInParent="true"
+	         android:textSize="14pt"
+	         android:textColor="@android:color/black"
+	         android:text="意见建议"
+         />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="您的想法和建议："
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/yijianfankui_Edittext1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/input_single_active"
+                android:gravity="start"
+                android:hint="在这里感觉如何?留两句言吧"
+                android:padding="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="联系方式（QQ或邮箱）：(可选)"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/yijianfankui_Edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/input_single_active"
+                android:gravity="start"
+                android:hint="QQ或邮箱"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/yijianfankui_button"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/pet_drawable_blue_btn_press"
+                android:orientation="vertical"
+                android:text="发送反馈"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

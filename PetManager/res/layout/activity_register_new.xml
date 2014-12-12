@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+	    android:id="@+id/head_top_reg"
+	    android:orientation="vertical" 
+	    android:background="@drawable/head"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="50dip"
+	    >
+	
+	    <Button
+	        android:id="@+id/reg_back"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="5dp"
+	        android:paddingLeft="10dp"
+	        android:background="@drawable/head_btn_back"
+	        android:layout_centerVertical="true"
+	        />
+	
+	    <TextView 
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_centerInParent="true"
+	      android:textSize="16pt"
+	      android:text="注册"
+	      android:textColor="#ffffff"
+	     />
+	    <TextView 
+	      android:id="@+id/text_not_reg_now"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	      android:textSize="10pt"
+	      android:text="暂不注册"
+	      android:textColor="#ffffff"
+	      android:layout_marginRight="10dip"
+	     />
+	</RelativeLayout>
+    
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.00" 
+        android:background="@drawable/shape_button_light_pressed"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+
+        <EditText
+	            android:id="@+id/reg_loginName_email"
+	            android:layout_width="0dip"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            android:hint="请输入您的邮箱"
+	            android:textSize="24px"
+	            android:gravity="center_vertical"
+	            android:textColor="#656363"	            
+	            android:ems="10" 
+				android:background="@drawable/srk"	            
+	            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.00" 
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+
+       <EditText
+	            android:id="@+id/reg_nickname"
+	            android:layout_width="0dip"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            android:hint="请输入您的昵称"
+	            android:textSize="24px"
+	            android:gravity="center_vertical"
+	            android:textColor="#656363"	            
+	            android:ems="10" 
+				android:background="@drawable/srk"	            
+	            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.00" 
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+	            android:id="@+id/reg_password"
+	            android:layout_width="0dip"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            android:hint="请输入您的密码"
+	            android:textSize="24px"
+	            android:gravity="center_vertical"
+	            android:textColor="#656363"	            
+	            android:password="true"
+				android:background="@drawable/srk"	            
+	            />
+        <ImageView 
+            android:id="@+id/reg_showpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pet_drawable_showpwd_btn_press"
+            />
+
+    </LinearLayout>
+
+
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.00" 
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:orientation="horizontal"
+        >
+
+        <CheckBox
+            android:id="@+id/reg_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pet_drawable_user_agreement_btn_press"
+            />
+
+        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_vertical"
+	            android:text="我已经同意"
+	            android:textColor="#858585"
+	            android:textSize="24px"
+	            />
+        <TextView
+           		android:id="@+id/text_user_agreement"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_vertical"
+	            android:text="《用户协议》"
+	            android:textColor="#84c309"
+	            android:textSize="24px"
+	            />
+        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_vertical"
+	            android:text="与"
+	            android:textColor="#858585"
+	            android:textSize="24px"
+	            />
+        <TextView
+            android:id="@+id/text_privacy_policy"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_vertical"
+	            android:text="《隐私条款》"
+	            android:textColor="#84c309"
+	            android:textSize="24px"
+	            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/reg_rightnow_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="立即注册" 
+        android:textSize="26px"
+        android:textColor="#fff"
+        android:background="@drawable/pet_drawable_lijizhuce_btn_press"/>
+</LinearLayout>

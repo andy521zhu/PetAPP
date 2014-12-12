@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffefebe7"
+    android:orientation="vertical" >
+
+
+	<LinearLayout 
+	    android:id="@+id/linearlayout_reply"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical" >
+
+		<RelativeLayout
+		    android:id="@+id/head_top"
+		    android:layout_width="fill_parent"
+		    android:layout_height="50dip"
+		    android:background="@drawable/skin_header_bar_bg"
+		    android:orientation="vertical" >
+
+		    <Button
+		        android:id="@+id/edit_sign_back"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:layout_marginLeft="5dp"
+		        android:background="@drawable/head_btn_back"
+		        android:paddingLeft="10dp" />
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerInParent="true"
+		        android:text="编辑签名"
+		        android:textColor="@android:color/black"
+		        android:textSize="20sp" />
+
+		    <TextView
+		        android:id="@+id/edit_sign_confirm"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_centerVertical="true"
+		        android:layout_marginRight="5dp"
+		        android:text="确定"
+		        android:textColor="@color/black"
+		        android:textSize="15sp" />
+		</RelativeLayout>
+	    
+	    <EditText 
+	        android:id="@+id/edit_sign_content"
+	    	android:layout_marginTop="10dp"
+	        android:background="@color/white"
+	        android:hint="编辑签名"
+	        android:layout_width="fill_parent"
+	        android:layout_height="150dp"
+	        android:gravity="top"
+	        android:textColor="@android:color/black"
+	        android:textCursorDrawable="@null"
+	        />
+	    
+	    
+	    <View 
+	        android:background="@color/liuliu_divider_light" 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="1.0dip" />
+	    
+	    
+	    
+	 </LinearLayout>
+	 
+	 
+ 
+</LinearLayout>
+

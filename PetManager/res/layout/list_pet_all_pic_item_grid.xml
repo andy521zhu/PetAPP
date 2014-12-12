@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- grid列表里面的item 大头像是帖子里面的 小头像是用户头像 -->
+	<!-- 这个是帖子内容图片 -->
+    <com.gdut.pet.common.view.MyPetImageView
+        android:id="@+id/image_pet_bbs_detail"
+        android:background="#ffece6e1" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:scaleType="centerInside" 
+        android:adjustViewBounds="true" 
+        android:layout_centerHorizontal="true" 
+        android:src="@drawable/pet_list_default"
+        />
+	<!-- 这个是用户头像 -->
+    <ImageView
+        android:id="@+id/image_person_bbs_detail" 
+        android:paddingRight="3.0dip" 
+        android:paddingBottom="3.0dip" 
+        android:layout_width="28.0dip" 
+        android:layout_height="28.0dip"
+        android:background="@drawable/pet_user_pic_default" 
+        android:layout_alignRight="@id/image_pet_bbs_detail" 
+        android:layout_alignBottom="@id/image_pet_bbs_detail" 
+        android:contentDescription="@string/usercontent"
+        />
+</RelativeLayout>

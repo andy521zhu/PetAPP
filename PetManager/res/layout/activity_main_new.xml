@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/main_activity_background"
+    android:background="@drawable/pet_bg"
     android:gravity="center"
     android:orientation="vertical" >
 
@@ -14,20 +14,28 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
+            <com.gdut.pet.common.view.MyImageView
+                android:id="@+id/personal_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:scaleType="matrix"
+                android:src="@drawable/pet_user_manger" />
+            
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="horizontal" >
 
                 <com.gdut.pet.common.view.MyImageView
-                    android:id="@+id/personal_center"
+                    android:id="@+id/lost_pet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:scaleType="matrix"
-                    android:src="@drawable/left_top" />
+                    android:src="@drawable/pet_lost" />
 
                 <com.gdut.pet.common.view.MyImageView
                     android:id="@+id/pet_shop"
@@ -35,16 +43,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:scaleType="matrix"
-                    android:src="@drawable/left_bottom" />
+                    android:src="@drawable/pet_shop" />
             </LinearLayout>
 
-            <com.gdut.pet.common.view.MyImageView
-                android:id="@+id/lost_pet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:scaleType="matrix"
-                android:src="@drawable/right" />
+            
         </LinearLayout>
 
         <com.gdut.pet.common.view.MyImageView
@@ -53,7 +55,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:scaleType="matrix"
-            android:src="@drawable/bottom" />
+            android:src="@drawable/pet_system_update" />
     </LinearLayout>
+    
+    <RelativeLayout android:id="@+id/adcontainer"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_alignParentTop="true">
+	</RelativeLayout>
 
 </LinearLayout>

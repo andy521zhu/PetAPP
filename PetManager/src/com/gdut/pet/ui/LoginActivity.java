@@ -17,6 +17,8 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,12 +35,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -48,20 +54,27 @@ import android.widget.Toast;
 
 import com.gdut.pet.common.network.HttpMethod;
 import com.gdut.pet.common.network.NetConnectionLogin;
-import com.gdut.pet.common.utils.ShowToast;
+import com.gdut.pet.common.utils.L;
+import com.gdut.pet.common.utils.toastMgr;
 import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class LoginActivity extends Activity implements OnClickListener
 {
 
 	private static final String TAG = "com.gdut.pet.ui.LoginActivity";
 
+	EditText loginNameEditText;
+
 	// 定义变量
-	private EditText loginNameEditText, loginPasswordEditText;
+	private EditText loginPasswordEditText;
 	private CheckBox rememberPwdCheckBox, autoLoginCheckBox;
 	private Button loginButton, registeButton;
 	private TextView forgetPwpTextView;
+
+	private Button pet_login_user_clear;// 删除按钮 图标
+	private Button pet_login_password_clear;
 
 	private Context mContext;
 
@@ -81,6 +94,7 @@ public class LoginActivity extends Activity implements OnClickListener
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login_main);
 		// 得到存储用户数据的SP
 		userdataSP = getSharedPreferences("userdata", MODE_PRIVATE);
@@ -133,8 +147,10 @@ public class LoginActivity extends Activity implements OnClickListener
 	{
 		// 用户名
 		loginNameEditText = (EditText) findViewById(R.id.loginName);
+		loginNameEditText.addTextChangedListener(myTextWatcherU);
 		// 密码
 		loginPasswordEditText = (EditText) findViewById(R.id.loginPassWord);
+		loginPasswordEditText.addTextChangedListener(myTextWatcherP);
 		// 记住密码
 		rememberPwdCheckBox = (CheckBox) findViewById(R.id.rememberPassword);
 		// 自动登录
@@ -146,6 +162,98 @@ public class LoginActivity extends Activity implements OnClickListener
 		// 忘记密码
 		forgetPwpTextView = (TextView) findViewById(R.id.forgetPass);
 	}
+
+	/**
+	 * 添加文本内容改变监听器
+	 */
+	private TextWatcher myTextWatcherU = new TextWatcher()
+	{
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count)
+		{
+			// TODO Auto-generated method stub
+			// toastMgr.builder.display(s, 0);
+			if (s.length() != 0)
+			{
+				pet_login_user_clear = (Button) findViewById(R.id.pet_login_user_clear);
+				pet_login_user_clear.setVisibility(View.VISIBLE);
+				pet_login_user_clear
+						.setOnClickListener(new View.OnClickListener()
+						{
+
+							@Override
+							public void onClick(View v)
+							{
+								// TODO Auto-generated method stub
+								loginNameEditText.setText("");
+							}
+						});
+			}
+
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable s)
+		{
+			// TODO Auto-generated method stub
+
+		}
+	};
+
+	// 监听 密码 更改密码是否可见
+	private TextWatcher myTextWatcherP = new TextWatcher()
+	{
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after)
+		{
+			// TODO Auto-generated method stub
+			if (s.length() != 0)
+			{
+				pet_login_password_clear = (Button) findViewById(R.id.pet_login_password_clear);
+				pet_login_password_clear.setVisibility(View.VISIBLE);
+				pet_login_password_clear
+						.setOnClickListener(new View.OnClickListener()
+						{
+
+							@Override
+							public void onClick(View v)
+							{
+								// TODO Auto-generated method stub
+								loginPasswordEditText
+										.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+							}
+						});
+			}
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable s)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+	};
 
 	//
 	private void RegisteListeners()
@@ -191,13 +299,13 @@ public class LoginActivity extends Activity implements OnClickListener
 							editor.putBoolean(Configs.REMEMBER_PASSWORD, true);
 							Log.i(TAG + "记住密码",
 									getString(R.string.remember_pwd));
-							ShowToast.ShowToast1(mContext, "记住密码");
+							toastMgr.builder.display("记住密码", 0);
 						}
 						else
 						{
 							editor.putBoolean(Configs.REMEMBER_PASSWORD, false);
 							Log.i(TAG, getString(R.string.cancle_remember_pwd));
-							ShowToast.ShowToast1(mContext, "不记住密码");
+							toastMgr.builder.display("不记住密码", 0);
 						}
 						editor.commit();
 
@@ -302,7 +410,7 @@ public class LoginActivity extends Activity implements OnClickListener
 			if (username.equals("") || username == null || password.equals("")
 					|| password == null)
 			{
-				ShowToast.ShowToast1(mContext, "用户名密码不能为空");
+				toastMgr.builder.display("用户名密码不能为空", 0);
 				return;
 			}
 			// 进度Dialog
@@ -312,7 +420,7 @@ public class LoginActivity extends Activity implements OnClickListener
 			NetConnectionLogin connection = new NetConnectionLogin(mContext,
 
 			Configs.LOGIN_PATH, HttpMethod.POST,
-					// 成功回调函数, result就是传回来的值
+			// 成功回调函数, result就是传回来的值
 					new NetConnectionLogin.SuccessCallback()
 					{
 
@@ -322,8 +430,21 @@ public class LoginActivity extends Activity implements OnClickListener
 							// TODO Auto-generated method stub
 
 							pd.dismiss();
+							String result1 = "";
+							try
+							{
+								JSONObject object = new JSONObject(result);
+								result1 = object.getString("status");
+							}
+							catch (JSONException e)
+							{
+								// TODO Auto-generated catch block
+								L.i(TAG, "json error");
+								e.printStackTrace();
+							}
+
 							// 判断是否登录成功
-							if (result.equals("success"))
+							if (result1.equals("success"))
 							{
 								Toast.makeText(mContext,
 										R.string.login_success,
@@ -340,9 +461,8 @@ public class LoginActivity extends Activity implements OnClickListener
 											Configs.REMEMBER_PASSWORD, true);
 									userdataEditor.putBoolean(Configs.IS_LOGIN,
 											true);
-
-									ShowToast.ShowToast1(mContext,
-											"点击登录,并且保存了用户名密码");
+									toastMgr.builder.display(
+											"点击登录, 并且保存了用户名密码", 0);
 								}
 								else
 								{
@@ -362,6 +482,14 @@ public class LoginActivity extends Activity implements OnClickListener
 								}
 								userdataEditor.commit();
 								LoginActivity.this.finish();
+							}
+							else
+							{
+								Toast.makeText(mContext, R.string.login_fail,
+										Toast.LENGTH_LONG).show();
+								Editor userdataEditor = userdataSP.edit();
+								userdataEditor.putBoolean(Configs.IS_LOGIN,
+										false);
 							}
 
 						}
@@ -385,8 +513,12 @@ public class LoginActivity extends Activity implements OnClickListener
 					},
 					// Configs.USERNAME, username, Configs.PASSWORD, password
 					// LoginType=userlogin&login=on&username=12345&password=123
-					"LoginType", "userlogin", "login", "on", "username",
-					username, "password", password);
+					"LoginType", "userlogin",
+					//
+					"login", "on",
+					// Configs.ACTION, "Login",
+					//
+					"username", username, "password", password);
 			connection = null;
 			// 取消之前的方法
 			// Thread loginThread = new Thread(new LoginThread());
@@ -395,7 +527,7 @@ public class LoginActivity extends Activity implements OnClickListener
 			break;
 		case R.id.registeBtn:
 			Intent intent = new Intent();
-			intent.setClass(LoginActivity.this, RegisteActivity.class);
+			intent.setClass(LoginActivity.this, ActivityRegisteNew.class);
 			startActivity(intent);
 			break;
 
@@ -511,6 +643,22 @@ public class LoginActivity extends Activity implements OnClickListener
 			}
 		}
 
+	}
+
+	@Override
+	protected void onResume()
+	{
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(mContext);
+	}
+
+	@Override
+	protected void onPause()
+	{
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(mContext);
 	}
 
 }

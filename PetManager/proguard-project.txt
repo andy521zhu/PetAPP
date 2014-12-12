@@ -17,4 +17,59 @@
 # class:
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
+
+#第三方jar包的配置
+# 1.图片异步加载组件universal-image-loader配置
+-libraryjars libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar  #imageLoader的jar包不要混淆
+-keep class com.nostra13.universalimageloader.**{*;}  #imageLoader包下所有类及类里面的内容不要混淆
+
+-libraryjars libs/libraryemojicon.jar
+-keep class com.rockerhieu.emojicon.**{*;}
+
+
+# 2.友盟统计组建配置
+-libraryjars libs/umeng-analytics-v5.2.4.jar #友盟统计的jar包不要混淆
+-keep class com.umeng.**{*;} #友盟统计jar包下的所有类及类里面的所有内容不要混淆
+
+# 3.个推 配置  
+-libraryjars libs/GetuiExt-2.0.3.jar
+-keep class com.igexin.getuiext.**{*;}
+
+-libraryjars libs/GetuiSdk2.3.0.0.jar
+-keep class com.igexin.**{*;}
+-libraryjars libs/armeabi/libgetuiext.so
+
+# 4.百度地图相关
+-libraryjars libs/baidumapapi_v2_4_0.jar        #地图相关的jar包不要混淆
+-keep class com.baidu.** { *; }                         #地图组件包括图层、定位等接口所有的类及类里面的内容都不要混淆
+-keep class vi.com.gdi.bgl.android.**{*;}         #交通实况相关的类及类里面的所有内容不要混淆
+-libraryjars libs/locSDK_4.0.jar                         #定位jar包不要混淆
+-libraryjars libs/armeabi/libBaiduMapSDK_v2_4_0.so  #地图相关的C++编译的可执行文件（引擎）不要混淆
+-libraryjars libs/armeabi/liblocSDK4.so                         #定位相关的C++编译的可执行文件（引擎）不要混淆
+
+# 5.自定义控件及组件不要打包混淆
+####四大组件不能混淆
+-keep public class * extends android.app.Activity                      
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
+####自定义view不能混淆
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+# 6.不检查警告
+-dontwarn android.support.v4.**
+-dontwarn android.annotation
+-dontwarn com.fivefeiwo.coverscreen.**
+-dontwarn com.feiwoone.banner.**
+-dontwarn android.support.**
+
+
 #}

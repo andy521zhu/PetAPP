@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 import com.gdut.pet.common.network.GetBBS;
 import com.gdut.pet.common.tools.PersistentCookieStore;
-import com.gdut.pet.common.utils.ShowToast;
+import com.gdut.pet.common.utils.L;
 import com.gdut.pet.common.view.adapter.BBSListviewAdapter;
 import com.gdut.pet.config.Configs;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -107,7 +107,11 @@ public class MyFriendsActivity extends Activity
 								.setLastUpdatedLabel(label);
 
 						// Do work to refresh the list here.
-						getBBSList(true, "");
+						if (userdataSP.getBoolean(Configs.IS_LOGIN, false))
+						{
+							getBBSList(true, "0");
+
+						}
 					}
 				});
 
@@ -128,13 +132,14 @@ public class MyFriendsActivity extends Activity
 		if (userdataSP.getBoolean(Configs.IS_LOGIN, false))
 		{
 			// ÒÑ¾­µÇÂ½ÁË
-			getBBSList(false, "");
+			getBBSList(false, "0");
 		}
 		else
 		{
 
 		}
 
+		// item click
 		mPullToRefreshListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener()
 				{
@@ -147,13 +152,24 @@ public class MyFriendsActivity extends Activity
 						@SuppressWarnings("unused")
 						HashMap<String, String> mapItem;
 
-						TextView titleTextView = (TextView) view
-								.findViewById(R.id.trayPetTitle);
+						mapItem = (HashMap<String, String>) list
+								.get(position - 1);
+						String id1 = mapItem.get("id");
 
+						TextView titleTextView = (TextView) view
+								.findViewById(R.id.Item_MainTitle);
+						TextView usernameTextView = (TextView) view
+								.findViewById(R.id.Item_UserName);
 						String text = titleTextView.getText().toString();
+						String username = usernameTextView.getText().toString();
+						Bundle bundle = new Bundle();
+						bundle.putString("id", id1);
+						bundle.putString("bbsTitle", text);
+						bundle.putString("username", username);
 						Intent intent = new Intent();
 						intent.setClass(MyFriendsActivity.this,
 								BBSDetailActivity.class);
+						intent.putExtras(bundle);
 						startActivity(intent);
 					}
 				});
@@ -168,6 +184,7 @@ public class MyFriendsActivity extends Activity
 		final ProgressDialog pd = ProgressDialog.show(mContext, getResources()
 				.getString(R.string.connecting),
 				getResources().getString(R.string.connecting_to_server));
+
 		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext),
 				new GetBBS.SuccessCallback()
 				{
@@ -188,14 +205,18 @@ public class MyFriendsActivity extends Activity
 											.getJSONObject(i);
 									Map<String, String> map = new HashMap<String, String>();
 
-									jsonObject.get("id");
+									map.put("id", (String) jsonObject.get("id"));
 
 									map.put("title",
 											(String) jsonObject.get("title"));
 									map.put("description",
 											(String) jsonObject.get("content"));
 									map.put("time",
-											(String) jsonObject.get("imgNum"));
+											(String) jsonObject.get("time"));
+									map.put("username",
+											(String) jsonObject.get("username"));
+									map.put("replynum",
+											(String) jsonObject.get("replynum"));
 									list.add(0, map);
 
 								}
@@ -204,6 +225,7 @@ public class MyFriendsActivity extends Activity
 							catch (JSONException e)
 							{
 								// TODO Auto-generated catch block
+								System.out.println(e.toString());
 								e.printStackTrace();
 							}
 							Message msg = new Message();
@@ -280,8 +302,7 @@ public class MyFriendsActivity extends Activity
 	protected void onResume()
 	{
 		// TODO Auto-generated method stub
-		int a = 10;
-		ShowToast.ShowToast1(mContext, "onresume");
+		L.i(TAG, "onresume");
 		super.onResume();
 	}
 

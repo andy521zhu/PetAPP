@@ -1,6 +1,7 @@
 package com.gdut.pet.common.network;
 
 import com.gdut.pet.common.tools.PersistentCookieStore;
+import com.gdut.pet.config.Configs;
 
 /**
  * 连接网络 使用回调函数
@@ -41,7 +42,7 @@ public class GetBBS
 						// TODO Auto-generated method stub
 						if (successCallback != null)
 						{
-							// 调用回调函数
+							// 调用回调函数[{"content":"宠物不见了，5555","id":"1","title":"宠物丢失啦！","imgNum":"0"},{"status":"success"}]
 							successCallback.onSuccess(result);
 
 						}
@@ -60,13 +61,13 @@ public class GetBBS
 							failCallback.onFail();
 						}
 					}
-				},
+				}, Configs.ACTION, "testGetBBS",
 				//
 				"poststype", "1",
 				//
-				"firstid", "1",
+				"firstid", "0",
 				//
-				"lastid", "2");
+				"lastid", id);
 	}
 
 	// 回调函数

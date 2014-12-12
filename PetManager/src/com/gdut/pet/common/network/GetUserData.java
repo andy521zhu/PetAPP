@@ -14,6 +14,19 @@ public class GetUserData
 
 	private static final String TAG = "com.gdut.pet.common.network.GetUserData";
 
+	/**
+	 * 
+	 * @param url
+	 *            请求地址
+	 * @param action
+	 *            action
+	 * @param cookieStore
+	 *            cookie
+	 * @param successCallback
+	 *            成功回调
+	 * @param failCallback
+	 *            失败回调
+	 */
 	public GetUserData(final String url, final String action,
 			final PersistentCookieStore cookieStore,
 			final SuccessCallback successCallback,// 回调函数
@@ -27,6 +40,7 @@ public class GetUserData
 					public void onSuccess(String result)
 					{
 						// TODO Auto-generated method stub
+						// 这里应该解析一下json 判断时候成功, 成功就是success 否则就是fail
 						if (successCallback != null)
 						{
 							// 调用回调函数

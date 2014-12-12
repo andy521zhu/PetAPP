@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="" >
+
+    <!--
+     change this !!!
+     set ANDROID_HOME env PATH to SDK HOme
+    -->
+
+    <property
+        name="keystore"
+        value="android.keystore" />
+
+    <property
+        name="keystore.password"
+        value="jss35zxtsm" />
+
+    <property
+        name="key.alias"
+        value="android.keystore" />
+
+    <property
+        name="key.password"
+        value="jss35zxtsm" />
+    <property
+        name="android-jar"
+        value="E:/D/Program Files/adt-bundle-windows-x86-20130917/sdk/platforms/android-18/android.jar" />
+    
+    <!-- 生成class目录 -->
+    <property
+        name="outdir-classes"
+        value="bin" />
+    <!-- 代码混淆配置 -->
+    <property
+        name="proguard-home"
+        value="E:/D/Program Files/adt-bundle-windows-x86-20130917/sdk/tools/proguard/lib" />
+
+    <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <target
+        name="mytest"
+        depends="release" >
+
+        <echo>
+	---------------------signing the unsigned apk to final product apk ... 
+        </echo>
+    </target>
+
+    <!-- build channel macro -->
+
+    <macrodef name="bc" >
+        <!-- must set channel.name param -->
+        <attribute name="channelName" />
+        <sequential>
+		<echo>
+			---------------------bc.. 
+        </echo>
+            <echo message="*** CHANNEL NAME: @{channelName}" />
+            <!-- replace channel in AndroidManifest.xml -->
+
+            <replaceregexp
+                byline="true"
+                file="AndroidManifest.xml"
+                match="U0(\d)+"
+                replace="@{channelName}" />
+            <!-- build apk -->
+            <antcall target="clean" />
+            <antcall target="release" />
+            <!-- sign apk -->
+            <sign-release />
+            <zipalign-release />
+            <mkdir dir="channels/@{channelName}" />
+            <move
+                file="bin/${ant.project.name}-release-zipalign.apk"
+                todir="channels/@{channelName}/" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="sign-release" >
+        <sequential>
+			<echo>
+		    ------------------------------sign-release
+			</echo>
+            <echo message="signing the unsigned apk to final product apk bin/${ant.project.name}-release-unsigned.apk" />
+            <echo message="jarsigner -keystore ${keystore} -storepass ${keystore.password} -keypass ${key.password} -signedjar bin/${ant.project.name}-release.apk bin/${ant.project.name}-release-unsigned.apk ${key.alias} " />
+            <exec executable="jarsigner" >
+                <arg value="-keystore" />
+                <arg value="${keystore}" />
+                <arg value="-storepass" />
+                <arg value="${keystore.password}" />
+                <!-- 验证密钥完整性的口令，创建时建立的 -->
+                <arg value="-keypass" />
+                <arg value="${key.password}" />
+                <!-- 专用密钥的口令，就是key密码 -->
+                <arg value="-signedjar" />
+                <arg value="bin/${ant.project.name}-release.apk" />
+                <!-- 输出 -->
+                <arg value="bin/${ant.project.name}-release-unsigned.apk" />
+                <!-- 未签名的apk -->
+                <arg value="${key.alias}" />
+                <!-- 别名,创建时建立的 -->
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="zipalign-release" >
+        <sequential>
+			<echo>
+		 ------------------------   zipalign-release
+		</echo>
+            <echo message="zipalign the signed apk" />
+            <exec executable="${sdk.dir}/tools/zipalign" >
+                <arg value="-v" />
+                <arg value="4" />
+                <arg value="bin/${ant.project.name}-release.apk" />
+                <!-- signed apk -->
+                <arg value="bin/${ant.project.name}-release-zipalign.apk" />
+                <!-- zipalign output -->
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <target name="buildchannels" >
+		<bc channelName="U068"/>
+    </target>
+    
+    
+    <!-- 混淆代码 -->
+    <target
+        name="proguard"
+        >
+     	<echo>
+        ..........Proguad ....
+        </echo>
+        <echo>
+		    ------------------------------Proguad
+		</echo>
+        <jar
+            basedir="${outdir-classes}"
+            destfile="temp.jar" />
+ 
+        <java
+            failonerror="true"
+            fork="true"
+            jar="${proguard-home}/proguard.jar" >
+ 
+ 			<arg value="-injars temp.jar" />
+ 			<arg value="-outjars optimized.jar" />
+ 
+            <arg value="-libraryjars ${android-jar}" />
+ 
+           
+            <!-- 混淆配置的引用 -->
+             
+            <arg value="@proguard-project.txt"/>  
+           
+ 
+        </java>
+        <delete file="temp.jar" />
+ 	
+        <delete dir="${outdir-classes}" />
+ 
+        <mkdir dir="${outdir-classes}" />
+ 
+        <unzip
+            dest="${outdir-classes}"
+            src="optimized.jar" />
+ 
+        <delete file="optimized.jar" />
+ 
+    </target>
+    
+    
+
+</project>

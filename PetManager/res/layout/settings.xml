@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffefebe7"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+	    android:id="@+id/head_top"
+	    android:orientation="vertical" 
+	    android:background="@drawable/skin_header_bar_bg"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="50dip"
+	    >
+	
+	    <Button
+	        android:id="@+id/settings_back_detail"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="5dp"
+	        android:paddingLeft="10dp"
+	        android:background="@drawable/head_btn_back"
+	        android:layout_centerVertical="true"
+	        />
+	
+	    <TextView 
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_centerInParent="true"
+	      android:textSize="16pt"
+	      android:textColor="@android:color/black"
+	      android:text="设置"
+	     />
+	 </RelativeLayout>
+    
+    
+    
+    <LinearLayout
+	    android:id="@+id/setting_tongzhi"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:text="偏好"
+	        android:gravity="bottom"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#f1333333"
+	        android:textSize="10dp" />
+	
+	</LinearLayout>
+	
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp" 
+	    android:clickable="true"
+	    android:id="@+id/setting_clean_cache"
+	    android:orientation="horizontal"
+		android:background="@drawable/more_item_press"
+	    >
+        	<TextView 
+        	    android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:drawablePadding="10.0dip"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:layout_weight="1"
+                android:paddingLeft="17.0dip"
+                android:text="清除缓存"
+                android:textColor="#ff333333"
+                android:textSize="16.0dp" />   
+                
+        	<ImageView
+		        android:layout_width="wrap_content"
+		        android:layout_height="fill_parent"
+		        android:layout_gravity="right"
+		        android:gravity="center_vertical"
+		        android:paddingRight="10.0dip"
+		        android:src="@drawable/ic_arrow" 
+		        />
+    </LinearLayout>
+    
+    <LinearLayout
+	    android:id="@+id/setting_tongzhi"
+	    android:layout_width="match_parent"
+	    android:layout_height="60dp"
+	    android:clickable="true"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:text="通知"
+	        android:gravity="center_vertical"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#ff333333"
+	        android:textSize="16dp" />
+	
+	    <CheckBox
+	        android:id="@+id/setting_tongzhi_checkbox"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0"
+	        android:checked="true" />
+	</LinearLayout>
+	
+    <LinearLayout
+	    android:id="@+id/setting_other"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:text="其他"
+	        android:gravity="bottom"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#f1333333"
+	        android:textSize="10dp" />
+	
+	</LinearLayout>
+    
+    
+    
+    <LinearLayout
+	    android:id="@+id/setting_yijianfankui"
+	    android:layout_width="match_parent"
+	    android:layout_height="60dp"
+	    android:clickable="true"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:text="意见反馈"
+	        android:gravity="center_vertical"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#ff333333"
+	        android:textSize="16dp" />
+	
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="right"
+	        android:gravity="center_vertical"
+	        android:paddingRight="10.0dip"
+	        android:src="@drawable/ic_arrow" 
+	        />
+	</LinearLayout>
+	
+    
+    
+    <LinearLayout
+	    android:id="@+id/setting_dianzan"
+	    android:layout_width="match_parent"
+	    android:layout_height="60dp"
+	    android:clickable="true"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:text="即刻点赞"
+	        android:gravity="center_vertical"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#ff333333"
+	        android:textSize="16dp" />
+	
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="right"
+	        android:gravity="center_vertical"
+	        android:paddingRight="10.0dip"
+	        android:src="@drawable/ic_arrow" 
+	        />
+	</LinearLayout>
+    
+    
+    <LinearLayout
+	    android:id="@+id/setting_checkNewVersioin"
+	    android:layout_width="match_parent"
+	    android:layout_height="60dp"
+	    android:clickable="true"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:text="新版本检测"
+	        android:gravity="center_vertical"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#ff333333"
+	        android:textSize="16dp" />
+	
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="right"
+	        android:gravity="center_vertical"
+	        android:paddingRight="10.0dip"
+	        android:src="@drawable/ic_arrow" 
+	        />
+	</LinearLayout>
+	
+    <LinearLayout
+	    android:id="@+id/setting_about"
+	    android:layout_width="match_parent"
+	    android:layout_height="60dp"
+	    android:clickable="true"
+	    android:gravity="center_vertical"
+		android:background="@drawable/more_item_press"
+	    android:orientation="horizontal" >
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:text="关于宠物APP"
+	        android:gravity="center_vertical"
+	        android:paddingLeft="17.0dip"
+	        android:textColor="#ff333333"
+	        android:textSize="16dp" />
+	
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_gravity="right"
+	        android:gravity="center_vertical"
+	        android:paddingRight="10.0dip"
+	        android:src="@drawable/ic_arrow" 
+	        />
+	</LinearLayout>
+	
+    <Button 
+        android:id="@+id/setting_quit_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="退出登录"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textSize="16sp"
+        android:background="@drawable/pet_drawable_quit_btn_press"
+        />
+    
+    
+
+</LinearLayout>

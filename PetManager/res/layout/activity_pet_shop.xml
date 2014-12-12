@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/pet_bg1"
+    >
+    
+    <!-- 头部 带返回的 -->
+    <RelativeLayout
+        android:id="@+id/head_top"
+        android:orientation="vertical" 
+        android:background="@drawable/head"
+        android:layout_width="fill_parent" 
+        android:layout_height="50dip"
+        >
+        <Button
+            android:id="@+id/back_pet_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/head_btn_back"
+            android:layout_centerVertical="true"
+            />
+        <TextView 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:textSize="14pt"
+			android:textColor="@android:color/black"
+			android:text="宠物商店"
+         	/>
+        
+        <LinearLayout
+            android:layout_alignParentRight="true"
+               android:id="@+id/layout_setting"
+               android:orientation="horizontal"
+               android:gravity="center"
+               android:clickable="true"
+               android:background="@drawable/shape_edit"
+               android:layout_width="wrap_content"
+               android:layout_height="30dip"
+			android:layout_centerInParent="true"
+			android:layout_marginRight="10dip"
+			android:visibility="gone"
+               >
+               <TextView 
+                android:textColor="@color/liuliu_text_light" android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" 
+                android:text="设置" />
+               <ImageView 
+                android:layout_width="10.0dip" android:layout_height="10.0dip" 
+                android:layout_marginLeft="5.0dip" android:layout_marginRight="10.0dip" 
+                android:src="@drawable/arrow" android:scaleType="fitCenter" />
+           </LinearLayout>
+        
+     </RelativeLayout>
+	
+	<com.handmark.pulltorefresh.library.PullToRefreshGridView 
+        android:id="@+id/pet_shop_pull_torefresh_gridview" 
+        android:padding="4.0dip" 
+        android:scrollbars="none" 
+        android:layout_width="fill_parent" 
+        android:layout_height="match_parent" 
+        android:horizontalSpacing="5.0dip" 
+        android:verticalSpacing="5.0dip" 
+        android:stretchMode="columnWidth" 
+        android:numColumns="2" />
+	
+    
+    
+
+</LinearLayout>

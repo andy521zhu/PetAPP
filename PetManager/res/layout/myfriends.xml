@@ -4,13 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    
-    <TextView 
-        android:id="@+id/textview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="这是我的好友界面"
-        />
+   
     
     <com.handmark.pulltorefresh.library.PullToRefreshListView 
         android:id="@+id/pull_refresh_listView"

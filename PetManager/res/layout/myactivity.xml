@@ -25,16 +25,17 @@
 	        >
         
 	        <ImageView
-	            android:id="@+id/headPic_myInfo"
+	            android:id="@+id/other_user_headPic_myInfo"
 	            android:layout_width="100dip"
 	            android:layout_height="100dip"
+	            android:layout_marginTop="5sp"
+	            android:layout_marginBottom="5sp"
 	            android:layout_marginLeft="15dip"
 	            android:src="@drawable/ic_launcher" 
-	            android:background="@drawable/ic_more_item_default"
 	            />
 	
 	        <TextView
-	            android:id="@+id/name_myInfo"
+	            android:id="@+id/other_user_name_myInfo"
 	            android:layout_width="0dip"
 	            android:layout_height="wrap_content"
 	            android:layout_gravity="center_vertical"
@@ -222,13 +223,6 @@
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
-            
-            <Button 
-                android:id="@+id/showMap"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/showMap"
-                />
             
         </LinearLayout>
         

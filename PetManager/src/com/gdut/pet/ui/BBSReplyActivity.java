@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.gdut.pet.common.utils.L;
 import com.ui.mypet.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class BBSReplyActivity extends Activity
 {
@@ -26,10 +27,10 @@ public class BBSReplyActivity extends Activity
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_bbs_reply);
+		setContentView(R.layout.activity_edit_mood);
 		mContext = this;
 		L.i(TAG, "onCreate");
-		backButton = (Button) findViewById(R.id.bbs_back_reply);
+		backButton = (Button) findViewById(R.id.post_pet_back);
 		backButton.setOnClickListener(new View.OnClickListener()
 		{
 
@@ -42,7 +43,7 @@ public class BBSReplyActivity extends Activity
 			}
 		});
 
-		confirmButton = (TextView) findViewById(R.id.bbs_confirm_repley);
+		confirmButton = (TextView) findViewById(R.id.post_pet_confirm);
 		confirmButton.setOnClickListener(new View.OnClickListener()
 		{
 
@@ -56,4 +57,21 @@ public class BBSReplyActivity extends Activity
 		});
 
 	}
+
+	@Override
+	protected void onResume()
+	{
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(mContext);
+	}
+
+	@Override
+	protected void onPause()
+	{
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(mContext);
+	}
+
 }

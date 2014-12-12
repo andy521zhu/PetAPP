@@ -20,7 +20,7 @@
 	        >
 	
 	        <Button
-	            android:id="@+id/bbs_back_reply"
+	            android:id="@+id/post_pet_back"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="5dp"
@@ -39,7 +39,7 @@
 	         />
 	        
 	        <TextView
-	            android:id="@+id/bbs_confirm_repley"
+	            android:id="@+id/post_pet_confirm"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="确定"
@@ -65,10 +65,40 @@
 	        />
 	    
 	    
+	    <View 
+	        android:background="@color/liuliu_divider_light" 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="1.0dip" />
+	    
+	    <ImageView
+	        android:id="@+id/image_post_pet_image"
+	        android:layout_width="65dip"
+	        android:layout_height="65dip"
+	        android:layout_marginLeft="10dip"
+	        android:src="@drawable/camera"
+	        />
+	    
+	    
 	    
 	 </LinearLayout>
 	 
 	 
  
 </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

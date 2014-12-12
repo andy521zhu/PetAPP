@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffefebe7"
+    android:orientation="vertical" >
+    
+    
+    <!-- 头部 带返回的 -->
+	<LinearLayout 
+	    android:id="@+id/linearlayout_detail"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    <RelativeLayout
+	        android:id="@+id/head_top"
+	        android:orientation="vertical" 
+	        android:background="@drawable/head"
+	        android:layout_width="fill_parent" 
+	        android:layout_height="50dip"
+	        >
+	        
+	        <TextView 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:textSize="14pt"
+				android:textColor="@android:color/black"
+				android:text="我的"
+	         	/>
+	        
+	        <LinearLayout
+	            android:layout_alignParentRight="true"
+                android:id="@+id/layout_setting"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="30dip"
+				android:layout_centerInParent="true"
+				android:layout_marginRight="10dip"
+                >
+                <ImageView 
+	                android:layout_width="wrap_content" android:layout_height="wrap_content" 
+	                android:layout_marginLeft="5.0dip" android:layout_marginRight="10.0dip" 
+	                android:src="@drawable/pet_drawable_setting_btn_press" android:scaleType="fitCenter" />
+            </LinearLayout>
+	        
+	     </RelativeLayout>
+	</LinearLayout>
+    
+    
+    
+    <LinearLayout
+        android:layout_below="@+id/linearlayout_detail"
+        android:id="@+id/ll_index"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:paddingLeft="5dip"
+        android:paddingRight="5dip"
+        android:paddingTop="5dip"
+        >
+		
+        <LinearLayout
+            android:id="@+id/myInfo_head"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_item_press"
+            android:orientation="horizontal" >
+			<!-- 头像 -->
+            <ImageView
+                android:id="@+id/other_user_headPic_myInfo"
+                android:layout_width="70dip"
+                android:layout_height="70dip"
+                android:layout_marginBottom="5sp"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="5sp"
+                android:src="@drawable/ic_launcher" />
+			<!-- 用户名和地址 -->
+            <LinearLayout
+                android:id="@+id/other_user_myInfo_name_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_weight="0.57"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/other_user_name_myInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dip"
+                    android:paddingTop="20dip"
+                    android:text="@string/myName" />
+
+                <TextView
+                    android:id="@+id/other_user_name_myplace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dip"
+                    android:paddingTop="5dip"
+                    android:text="@string/place" />
+            </LinearLayout>
+			<!-- 编辑个人信息 -->
+            <LinearLayout
+                android:id="@+id/layout_edit"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/shape_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="30dip"
+                android:layout_gravity="center_vertical|right"
+                >
+                <TextView 
+                    android:id="@+id/text_login_or_edit"
+	                android:textColor="@color/liuliu_text_light" 
+	                android:layout_width="wrap_content" 
+	                android:layout_height="wrap_content" 
+	                android:layout_marginLeft="10.0dip" 
+	                android:text="编辑" />
+                <ImageView 
+	                android:layout_width="10.0dip" android:layout_height="10.0dip" 
+	                android:layout_marginLeft="5.0dip" android:layout_marginRight="10.0dip" 
+	                android:src="@drawable/arrow" android:scaleType="fitCenter" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <View
+        android:layout_marginTop="5dip"
+        android:id="@+id/line" 
+        android:layout_below="@+id/ll_index"
+	    android:background="@color/liuliu_divider_light" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="1.0px" />
+    
+    <LinearLayout
+        android:layout_below="@+id/line"
+        android:id="@+id/like"
+                android:orientation="horizontal" android:background="#fffcfaf9" 
+                android:paddingLeft="10.0dip" android:paddingRight="15.0dip" 
+                android:layout_width="fill_parent" android:layout_height="45.0dip">
+                <LinearLayout 
+                    android:gravity="left|center" android:orientation="horizontal" 
+                    android:id="@+id/layout_like" android:layout_width="0.0dip" 
+                    android:layout_height="45.0dip" android:layout_weight="1.0">
+                    <TextView 
+                        android:textSize="16.0sp" android:textColor="@color/liuliu_text_light" 
+                        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+                        android:text="被  赞  " />
+                    <TextView 
+                        android:textSize="16.0sp" android:textColor="@color/liuliu_text_dark" 
+                        android:id="@+id/text_liked" android:layout_width="wrap_content" 
+                        android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" 
+                        android:text="0" />
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:gravity="center" android:orientation="horizontal" 
+                    android:id="@+id/layout_follow" android:layout_width="0.0dip" 
+                    android:layout_height="45.0dip" android:layout_weight="1.0">
+                    <TextView 
+                        android:textSize="16.0sp" android:textColor="@color/liuliu_text_light" 
+                        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+                        android:text="关  注  " />
+                    <TextView 
+                        android:textSize="16.0sp" android:textColor="@color/liuliu_text_dark" 
+                        android:id="@+id/text_follow" android:layout_width="wrap_content" 
+                        android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" 
+                        android:text="0" />
+                </LinearLayout>
+                <LinearLayout 
+                    android:gravity="right|center" android:orientation="horizontal" 
+                    android:id="@+id/layout_fans" android:layout_width="0.0dip" 
+                    android:layout_height="45.0dip" android:layout_weight="1.0">
+                    <TextView 
+                        android:textSize="16.0sp" android:textColor="@color/liuliu_text_light" 
+                        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+                        android:text="粉  丝  " />
+                    <TextView 
+                        android:textSize="16.0sp" android:textColor="@color/liuliu_text_dark" 
+                        android:id="@+id/text_fans" android:layout_width="wrap_content" 
+                        android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" 
+                        android:text="0" />
+                </LinearLayout>
+    </LinearLayout>
+    
+    
+    <!-- 如果添加的项目很多的话 就希望能上下滑动查看 -->
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none"
+        android:layout_below="@+id/like"
+        >
+        <!-- 总体用线性布局 --> 
+  		<LinearLayout 
+		    android:orientation="vertical" 
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content" 
+		    >
+			<!-- 宠物图片 -->
+			<LinearLayout 
+			    android:orientation="vertical" 
+			    android:id="@+id/layout_all_pet_photo" 
+			    android:layout_width="fill_parent" 
+			    android:layout_height="wrap_content" 
+			    android:background="@drawable/layout_white_background"
+			    android:clickable="true" 
+			    android:layout_marginTop="5.0dip"
+			    android:visibility="visible"
+			    >
+			    <LinearLayout 
+			        android:gravity="center_vertical" 
+			        android:id="@+id/linearLayout_all_photo" 
+			         
+			        android:layout_width="fill_parent" 
+			        android:layout_height="wrap_content"
+			        >
+			        <!-- 宠物的照片   只显示4个  只有点进去 跳到另一个界面  才会显示全部 -->
+			        <GridView 
+			            android:id="@+id/gridview_all_pet_photo" 
+			            android:padding="6.0dip" 
+			            android:scrollbars="none" 
+			            android:layout_width="0.0dip" 
+			            android:layout_height="fill_parent" 
+			            android:layout_marginLeft="5.0dip" 
+			            android:horizontalSpacing="5.0dip" 
+			            android:verticalSpacing="5.0dip" 
+			            android:stretchMode="columnWidth" 
+			            android:numColumns="4" 
+			            android:layout_weight="1.0" 
+			            />
+			        <FrameLayout 
+			            android:id="@+id/layout_petimage_more" 
+			            android:layout_width="30.0dip" 
+			            android:layout_height="fill_parent"
+			            >
+			            <ImageView 
+			                android:layout_gravity="right|center" 
+			                android:layout_width="10.0dip" 
+			                android:layout_height="10.0dip" 
+			                android:layout_marginLeft="5.0dip" 
+			                android:layout_marginRight="15.0dip" 
+			                android:src="@drawable/arrow" 
+			                />
+			        </FrameLayout>
+				</LinearLayout>
+			</LinearLayout>
+	        
+	        
+	        <!-- 心情 -->
+	        <LinearLayout 
+	                android:gravity="center_vertical" 
+	                android:orientation="horizontal" 
+	                android:id="@+id/layout_mood"
+	                android:clickable="true"
+	                android:background="@drawable/layout_white_background" 
+	                android:layout_width="fill_parent" 
+	                android:layout_height="45.0dip" 
+	                android:layout_marginTop="5.0dip"
+	                >
+	                <TextView 
+	                    android:textSize="16.0sp" 
+	                    android:textColor="@color/liuliu_text_light" 
+	                    android:layout_width="wrap_content" 
+	                    android:layout_height="wrap_content" 
+	                    android:layout_marginLeft="10.0dip" 
+	                    android:text="心 情" />
+	                <LinearLayout 
+	                    android:orientation="vertical"
+	                    android:layout_width="0.0dip" 
+	                    android:layout_height="fill_parent" 
+	                    android:layout_marginLeft="10.0dip" 
+	                    android:layout_weight="1.0">
+	                    <LinearLayout 
+	                        android:gravity="center_vertical" 
+	                        android:orientation="horizontal" 
+	                        android:id="@+id/layout_exp" 
+	                        android:layout_width="fill_parent" 
+	                        android:layout_height="0.0dip" 
+	                        android:layout_weight="1.0">
+	                        <ImageView android:id="@+id/image_exp_1" android:visibility="gone" android:layout_width="12.0dip" 
+	                            android:layout_height="19.0dip" android:layout_marginRight="7.0dip" />
+	                        <ImageView android:id="@+id/image_exp_2" android:visibility="gone" android:layout_width="12.0dip" 
+	                            android:layout_height="19.0dip" android:layout_marginRight="7.0dip" />
+	                        <ImageView android:id="@+id/image_exp_3" android:visibility="gone" android:layout_width="12.0dip" 
+	                            android:layout_height="19.0dip" android:layout_marginRight="7.0dip" />
+	                        <TextView 
+	                            android:textSize="14.0sp" 
+	                            android:textColor="@color/liuliu_text_light" 
+	                            android:gravity="left" 
+	                            android:id="@+id/text_mood" 
+	                            android:layout_width="0.0dip" 
+	                            android:layout_height="wrap_content" 
+	                            android:layout_weight="1.0" />
+	                        <FrameLayout 
+	                            android:paddingLeft="5.0dip" 
+	                            android:layout_width="30.0dip" 
+	                            android:layout_height="45.0dip">
+	                            <ImageView 
+	                                android:layout_gravity="left|center" 
+	                                android:layout_width="10.0dip" 
+	                                android:layout_height="10.0dip" 
+	                                android:src="@drawable/arrow" />
+	                        </FrameLayout>
+	                    </LinearLayout>
+	                    
+	                    <View 
+	                        android:background="@color/liuliu_divider_light" 
+	                        android:layout_width="fill_parent" 
+	                        android:layout_height="1.0dip" />
+	              	</LinearLayout>
+	        </LinearLayout>
+	            
+	        
+	        <!-- 签名 -->
+	        <LinearLayout 
+                android:orientation="horizontal" 
+                android:background="@drawable/layout_white_background" 
+                android:id="@+id/layout_sign"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content">
+                <TextView 
+                    android:textSize="16.0sp" 
+                    android:textColor="@color/liuliu_text_light" 
+                    android:gravity="center" 
+                    android:layout_gravity="top" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="10.0dip" 
+                    android:layout_marginTop="10.0dip" 
+                    android:text="签 名" />
+                <TextView 
+                    android:textColor="@color/liuliu_text_light" 
+                    android:gravity="left" 
+                    android:id="@+id/text_sign"
+                    android:layout_gravity="center"
+                    android:layout_width="0.0dip" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="3.0dip" 
+                    android:layout_weight="1.0" />
+                <FrameLayout 
+                    android:id="@+id/layout_description_more" 
+                    android:paddingLeft="5.0dip" 
+                    android:layout_width="30.0dip" 
+                    android:layout_height="45.0dip">
+                    <ImageView
+                        android:layout_gravity="left|center" 
+                        android:layout_width="10.0dip" 
+                        android:layout_height="10.0dip" 
+                        android:src="@drawable/arrow" 
+                        />
+                </FrameLayout>
+	        </LinearLayout>
+	            
+	        <!-- 分割 -->
+	        <LinearLayout 
+                android:orientation="vertical" 
+                android:id="@+id/layout_added_pet_profile" 
+                android:background="@drawable/layout_white_background" 
+                android:layout_width="fill_parent" 
+                android:layout_height="match_parent" 
+                android:layout_marginTop="5.0dip">
+               
+                <com.gdut.pet.common.view.MyDetailsListView
+                	android:id="@+id/added_pet_list"
+                	android:layout_width="fill_parent"
+                	android:layout_height="wrap_content"
+                	android:scrollbars="none"
+                	android:layout_marginLeft="5dip"
+                	android:layout_marginRight="5dip"
+                	/>
+            </LinearLayout>
+	        
+	        <!-- 添加宠物 -->
+            <LinearLayout 
+                android:gravity="center_vertical" 
+                android:orientation="horizontal" 
+                android:id="@+id/layout_add_pet"
+                android:clickable="true"
+                android:background="#fffcfaf9" 
+                android:layout_width="fill_parent" 
+                android:layout_height="45.0dip">
+                <ImageView 
+                    android:layout_width="15.0dip" 
+                    android:layout_height="15.0dip" 
+                    android:layout_marginLeft="10.0dip" 
+                    android:src="@drawable/add_pet_cross" />
+                <TextView 
+                    android:textColor="@color/liuliu_text_light" 
+                    android:gravity="left" 
+                    android:layout_width="0.0dip" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="3.0dip" 
+                    android:text="添加宠物" 
+                    android:layout_weight="1.0" />
+                <FrameLayout 
+                    android:paddingLeft="5.0dip" 
+                    android:layout_width="30.0dip" 
+                    android:layout_height="45.0dip">
+                    <ImageView 
+                        android:layout_gravity="left|center" 
+                        android:layout_width="10.0dip" 
+                        android:layout_height="10.0dip" 
+                        android:src="@drawable/arrow" />
+                </FrameLayout>
+            </LinearLayout>
+	        
+        
+        </LinearLayout>
+        
+    </ScrollView>
+
+</RelativeLayout>

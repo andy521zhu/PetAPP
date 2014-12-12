@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="" >
+
+    <!--
+     change this !!!
+     set ANDROID_HOME env PATH to SDK HOme
+    -->
+
+    <property
+        name="keystore"
+        value="WeiyuSoftKeyboard_Key" />
+
+    <property
+        name="keystore.password"
+        value="04012412" />
+
+    <property
+        name="key.alias"
+        value="ziipin" />
+
+    <property
+        name="key.password"
+        value="04012412" />
+
+    <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <target
+        name="mytest"
+        depends="release" >
+
+        <echo>
+signing the unsigned apk to final product apk ... 
+
+
+        </echo>
+    </target>
+
+    <!-- build channel macro -->
+
+    <macrodef name="bc" >
+
+        <!-- must set channel.name param -->
+
+        <attribute name="channelName" />
+
+        <sequential>
+
+            <echo message="*** CHANNEL NAME: @{channelName}" />
+            <echo>-------------test------bc-------------</echo>
+            <!-- replace channel in AndroidManifest.xml -->
+
+            <replaceregexp
+                byline="true"
+                file="AndroidManifest.xml"
+                match="U0(\d)+"
+                replace="@{channelName}" />
+
+            <!-- build apk -->
+
+            <antcall target="clean" />
+
+            <antcall target="release" />
+
+            <!-- sign apk -->
+
+            <sign-release />
+
+            <zipalign-release />
+
+            <mkdir dir="channels/@{channelName}" />
+
+            <move
+                file="bin/${ant.project.name}-release-zipalign.apk"
+                todir="channels/@{channelName}/" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="sign-release" >
+
+        <sequential>
+
+            <!-- test
+            <echo message="signing the unsigned apk to final product apk bin/${ant.project.name}-release-unsigned.apk" />
+
+            <echo message="jarsigner -keystore ${keystore} -storepass ${keystore.password} -keypass ${key.password} -signedjar bin/${ant.project.name}-release.apk bin/${ant.project.name}-release-unsigned.apk ${key.alias} " />
+			-->
+			<echo>-------------test------sign-release-------------</echo>
+            <exec executable="jarsigner" >
+
+                <arg value="-keystore" />
+
+                <arg value="${keystore}" />
+
+                <arg value="-storepass" />
+
+                <arg value="${keystore.password}" />
+                <!-- 验证密钥完整性的口令，创建时建立的 -->
+
+                <arg value="-keypass" />
+
+                <arg value="${key.password}" />
+                <!-- 专用密钥的口令，就是key密码 -->
+
+                <arg value="-signedjar" />
+
+                <arg value="bin/${ant.project.name}-release.apk" />
+                <!-- 输出 -->
+
+                <arg value="bin/${ant.project.name}-release-unsigned.apk" />
+                <!-- 未签名的apk -->
+
+                <arg value="${key.alias}" />
+                <!-- 别名,创建时建立的 -->
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="zipalign-release" >
+
+        <sequential>
+
+            <echo>----zipalign-release</echo>
+            <echo message="zipalign the signed apk" />
+
+            <exec executable="${sdk.dir}/tools/zipalign" >
+
+                <arg value="-v" />
+
+                <arg value="4" />
+
+                <arg value="bin/${ant.project.name}-release.apk" />
+                <!-- signed apk -->
+
+                <arg value="bin/${ant.project.name}-release-zipalign.apk" />
+                <!-- zipalign output -->
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <target name="buildchannels" >
+	<echo>--------------buildchannels--</echo>
+        
+		<bc channelName="U068"/>
+    </target>
+
+</project>

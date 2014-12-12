@@ -1,5 +1,14 @@
 eclipse.preferences.version=1
+encoding//src/cn/sharesdk/onekeyshare/EditPage.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/FollowList.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/OnekeyShare.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/PlatformGridView.java=UTF-8
+encoding//src/cn/sharesdk/onekeyshare/Shake2Share.java=UTF-8
 encoding//src/com/gdut/pet/common/network/APNManager.java=UTF-8
 encoding//src/com/gdut/pet/common/network/NetWorkHelper.java=UTF-8
+encoding//src/com/gdut/pet/common/network/UploadUtil.java=UTF-8
+encoding//src/com/gdut/pet/common/utils/L.java=UTF-8
+encoding//src/com/gdut/pet/common/view/MyDetailsListView.java=UTF-8
 encoding//src/com/gdut/pet/common/view/MyImageView.java=UTF-8
-encoding/<project>=GBK
+encoding//src/com/gdut/pet/ui/IndexActivityNew.java=UTF-8
+encoding/<project>=UTF-8

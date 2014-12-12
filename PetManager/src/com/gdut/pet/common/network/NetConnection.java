@@ -87,20 +87,26 @@ public class NetConnection
 					}
 
 					System.out.println("Result:" + result);
+					if (result == null)
+					{
+						return null;
+					}
 					return result.toString();
 
 				}
 				catch (MalformedURLException e)
 				{
 					e.printStackTrace();
+					return null;
 				}
 				catch (IOException e)
 				{
-					System.out.println(e.toString());
+					System.out.println("--" + e.toString());
 					e.printStackTrace();
+					return null;
 				}
 
-				return null;
+				// return null;
 			}
 
 			/**
@@ -128,7 +134,7 @@ public class NetConnection
 					}
 				}
 
-				super.onPostExecute(result);
+				// super.onPostExecute(result);
 			}
 		}.execute();
 

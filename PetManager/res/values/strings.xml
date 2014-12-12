@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PetManager</string>
+    <string name="app_name">乐宠</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="personal_central">个人中心</string>
@@ -26,7 +26,7 @@
 
     <string name="petName">宠物名字</string>
 
-    <string name="myName">我的名字</string>
+    <string name="myName">andy521zhu</string>
 
     <string name="showMap">显示地图</string>
 
@@ -61,6 +61,8 @@
     <string name="connecting">正在连接</string>
 
     <string name="connecting_to_server">连接服务器</string>
+    
+    <string name="usercontent">grid_user_pic_content</string>
 
     <!-- 含个省、自治区、直辖市、特别行政区-->
     <string-array name="province_item">
@@ -2734,7 +2736,6 @@
     
              
     <string-array name="guangzhou_city_item">
-<item>东山区</item>
 <item>荔湾区</item>
 <item>越秀区</item>
 <item>海珠区</item>
@@ -4186,7 +4187,14 @@
     <string-array name="taiwan_city_item">           
         <item>台湾</item>
         
-    </string-array>
+    </string-array>           
+        <string name="place">广东广州</string>           
+        <string name="pet_name">宠物名字</string>           
+        <string name="choose_speciese">填写品种</string>           
+        <string name="login_string">登录</string>           
+        <string name="please_input_your_password">请输入您的密码</string>           
+        <string name="password_lock_image_string">密码锁</string>           
+    
     
     
     

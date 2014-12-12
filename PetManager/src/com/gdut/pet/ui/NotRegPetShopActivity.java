@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ui.mypet.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class NotRegPetShopActivity extends Activity
 {
@@ -52,4 +53,21 @@ public class NotRegPetShopActivity extends Activity
 		});
 
 	}
+
+	@Override
+	protected void onResume()
+	{
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(mContext);
+	}
+
+	@Override
+	protected void onPause()
+	{
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(mContext);
+	}
+
 }

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.gdut.pet.common.utils.ScreenInfo;
 import com.ui.mypet.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class IndexActivity extends ActivityGroup
 {
@@ -184,6 +185,7 @@ public class IndexActivity extends ActivityGroup
 	{
 		// TODO Auto-generated method stub
 		super.onResume();
+		MobclickAgent.onResume(mContext);
 		mActivityManager.dispatchResume();
 		if (viewPager != null)
 		{
@@ -241,10 +243,10 @@ public class IndexActivity extends ActivityGroup
 			actionBar.setTitle("我的宠物");
 			break;
 		case 1:
-			actionBar.setTitle("我的好友");
+			actionBar.setTitle("我的社区");
 			break;
 		case 2:
-			actionBar.setTitle("我的社区");
+			actionBar.setTitle("附近");
 			break;
 		case 3:
 			actionBar.setTitle("我的信息");
@@ -252,6 +254,14 @@ public class IndexActivity extends ActivityGroup
 		default:
 			break;
 		}
+	}
+
+	@Override
+	protected void onPause()
+	{
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(mContext);
 	}
 
 }

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDE4D6"
+    android:padding="3dp" 
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+	        android:id="@+id/head_top"
+	        android:orientation="vertical" 
+	        android:background="@drawable/skin_header_bar_bg"
+	        android:layout_width="fill_parent" 
+	        android:layout_height="50dip"
+	        >
+	
+	        <Button
+	            android:id="@+id/bbs_detail_back_detail"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="5dp"
+	            android:paddingLeft="10dp"
+	            android:background="@drawable/head_btn_back"
+	            android:layout_centerVertical="true"
+	            />
+	
+	        <TextView 
+		         android:layout_width="wrap_content"
+		         android:layout_height="wrap_content"
+		         android:layout_centerInParent="true"
+		         android:textSize="16pt"
+		         android:textColor="@android:color/black"
+		         android:text="详细"
+	         />
+	        <Button
+	            android:id="@+id/bbs_head_comment_btn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="5dp"
+	            android:paddingRight="10dp"
+	            android:layout_alignParentRight="true"
+	            android:text="评论"
+	            android:textSize="10pt"
+	            />
+	     </RelativeLayout>
+    
+    
+    <ScrollView
+        android:id="@+id/Detail_ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/listview_item_background"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="12dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/Detail_UserHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/shit" />
+
+                    <TextView
+                        android:id="@+id/Detail_UserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="UserName"
+                        android:textColor="#815F3D"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                
+                <TextView
+		            android:id="@+id/Item_MainTitle"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginBottom="5dp"
+		            android:layout_marginTop="5dp"
+		            android:text="帖子标题"
+		            android:textColor="#815F3D"
+		            android:textSize="20sp" />
+                
+
+                <TextView
+                    android:id="@+id/Detail_MainText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="　　一日，将军潜入花木兰帐内欲行不归，强行要上木兰姐姐，就在这时，将军忽然指着花木兰大叫一声：你~你~你~竟然是个女的......"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/Detail_MainImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/default_content_pic" />
+
+                <RelativeLayout
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content" >
+			
+		            <LinearLayout
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:gravity="center"
+		                android:orientation="horizontal"
+		                android:paddingLeft="5dp"
+		                android:paddingRight="5dp"
+		                android:layout_alignParentRight="true"
+		                 >
+						
+		                <TextView
+		                    android:id="@+id/Item_PeplyNum"
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:paddingLeft="3dp"
+		                    android:paddingRight="3dp"
+		                    android:text="回复 : 99"
+		                    android:textColor="#815F3D"
+		                    android:textSize="15sp" />
+		            </LinearLayout>
+		        </RelativeLayout>
+                
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/SignGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/listview_item_background"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp" >
+
+                <TextView
+                    android:id="@+id/Detail_CommentsNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="该糗事暂无评论"
+                    android:textColor="#815F3D"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/Detail__progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="visible" >
+
+                    <ProgressBar
+                        style="@style/myProgressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拼命加载中..."
+                        android:textColor="#815F3D"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <com.gdut.pet.common.view.MyDetailsListView
+                    android:id="@+id/bbs_detail_commemt_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:listSelector="#00000000"
+                    android:paddingTop="10dp"
+                    android:scrollbars="none"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

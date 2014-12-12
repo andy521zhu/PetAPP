@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="vertical" 
+    >
+    
+    <LinearLayout 
+        android:background="@color/liuliu_tabhost_light" 
+        android:layout_width="fill_parent" 
+        android:layout_height="50.0dip" 
+        android:layout_alignParentBottom="true">
+	    
+        <RelativeLayout 
+            android:id="@+id/layout_discover" 
+            android:layout_width="0.0dip" 
+            android:layout_height="fill_parent" 
+            android:layout_weight="1.0">
+            <ImageView 
+                android:id="@+id/image_discover_foot" 
+                android:layout_width="wrap_content" 
+                android:layout_height="38.0dip" 
+                android:src="@drawable/tabhost_all_dark_press" 
+                android:scaleType="fitCenter" 
+                android:layout_centerInParent="true" />
+            
+        </RelativeLayout>
+        <FrameLayout android:id="@+id/layout_camera" android:layout_width="0.0dip" 
+            android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ImageView 
+                android:id="@+id/image_camera_foot" 
+                android:layout_width="fill_parent"
+                android:layout_height="38.0dip"
+                android:layout_gravity="center" 
+                android:layout_margin="3.0dip" 
+                android:src="@drawable/tabhost_follow_bnormal" />
+            <ImageView 
+                android:layout_gravity="center"
+                android:id="@+id/image_cross"
+                android:layout_width="22.0dip" 
+                android:layout_height="22.0dip" 
+                android:src="@drawable/camera_cross" 
+                android:scaleType="centerInside" 
+                android:visibility="gone"
+                />
+        </FrameLayout>
+        <FrameLayout android:id="@+id/layout_me" 
+            android:layout_width="0.0dip" 
+            android:layout_height="fill_parent" 
+            android:layout_weight="1.0">
+            <ImageView
+                android:layout_gravity="center" 
+                android:id="@+id/image_me_foot" 
+                android:layout_width="wrap_content" 
+                android:layout_height="38.0dip" 
+                android:src="@drawable/tabhost_my_normal" 
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+    </LinearLayout>
+
+</RelativeLayout>

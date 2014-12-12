@@ -1,18 +1,17 @@
 package com.gdut.pet.ui;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import com.gdut.pet.common.network.GetBBS;
-import com.gdut.pet.common.tools.PersistentCookieStore;
-import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
 
 public class SocialActivity extends Activity
 {
-	private static final String TAG = "com.gdut.pet.ui.SocialActivity";
-	private Context mContext;
+
+	private Button nearbybtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -20,30 +19,24 @@ public class SocialActivity extends Activity
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.social);
-		mContext = this;
-		PersistentCookieStore cookieStore = new PersistentCookieStore(mContext);
-		new GetBBS(Configs.GET_BBS_PATH, cookieStore,
-				new GetBBS.SuccessCallback()
-				{
+		findID();
+	}
 
-					@Override
-					public void onSuccess(String result)
-					{
-						// TODO Auto-generated method stub
+	private void findID()
+	{
+		nearbybtn = (Button) findViewById(R.id.showmap);
+		nearbybtn.setOnClickListener(new View.OnClickListener()
+		{
 
-					}
-				},
-				//
-				new GetBBS.FailCallback()
-				{
-
-					@Override
-					public void onFail()
-					{
-						// TODO Auto-generated method stub
-
-					}
-				}, false, "0");
+			@Override
+			public void onClick(View v)
+			{
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(SocialActivity.this, MapActivity.class);
+				startActivity(intent);
+			}
+		});
 
 	}
 }

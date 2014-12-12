@@ -113,6 +113,10 @@ public class NetConnectionLogin
 					}
 
 					System.out.println("Result:" + result);
+					if (result == null)
+					{
+						return null;
+					}
 					return result.toString();
 
 				}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    android:background="@drawable/layout_white_background" 
+    android:layout_width="fill_parent" 
+    android:layout_height="65.0dip"
+    android:clickable="true"
+    android:id="@+id/layout_added_pet_profile1"
+  	xmlns:android="http://schemas.android.com/apk/res/android" xmlns:emojicon="http://schemas.android.com/apk/res-auto">
+  	
+  	<!-- 宠物小头像 -->
+    <ImageView 
+        android:id="@+id/added_pet_avatar" 
+        android:layout_width="45.0dip" 
+        android:layout_height="45.0dip" 
+        android:layout_marginLeft="10.0dip" 
+        android:src="@drawable/element_pet_avatar_placeholder" 
+        android:layout_alignParentLeft="true" 
+        android:layout_centerVertical="true" />
+    <!-- 上面一行  宠物名字 是否需要寄养之类flag -->
+    <LinearLayout
+        android:id="@+id/layout_added_pet_profile"
+        android:gravity="center_vertical" 
+        android:orientation="horizontal" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/layout_white_background"
+        android:layout_toRightOf="@+id/added_pet_avatar" 
+        android:layout_alignTop="@+id/added_pet_avatar">
+        
+        <com.rockerhieu.emojicon.EmojiconTextView 
+            android:textSize="16.0sp" 
+            android:textStyle="bold" 
+            android:textColor="@color/liuliu_text_dark" 
+            android:text="pet name"
+            android:id="@+id/added_pet_name" android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" 
+            emojicon:emojiconSize="20.0sp" />
+        <!-- 需要寄养 -->
+        <ImageView 
+            android:id="@+id/need_adoption" android:visibility="gone" 
+            android:layout_width="13.0dip" android:layout_height="13.0dip" 
+            android:layout_marginLeft="5.0dip" android:src="@drawable/element_pet_avatar_placeholder" />
+        <!-- 需要关爱 -->
+        <ImageView 
+            android:id="@+id/need_love" android:visibility="gone" 
+            android:layout_width="13.0dip" android:layout_height="13.0dip" 
+            android:layout_marginLeft="5.0dip" android:src="@drawable/element_pet_avatar_placeholder" />
+        <!-- 需要卖掉 -->
+        <ImageView 
+            android:id="@+id/need_leave" android:visibility="gone" 
+            android:layout_width="13.0dip" android:layout_height="13.0dip" 
+            android:layout_marginLeft="5.0dip" android:src="@drawable/element_pet_avatar_placeholder" />
+    </LinearLayout>
+    
+    <!-- 宠物性别 以及种类 -->
+    <LinearLayout 
+        android:orientation="horizontal" 
+        android:id="@+id/layoutadded_pet_gender_species" 
+        android:background="@drawable/shape_pet_male" 
+        android:layout_width="wrap_content" android:layout_height="20.0dip" 
+        android:layout_marginLeft="5.0dip" android:layout_toRightOf="@+id/added_pet_avatar" 
+        android:layout_alignBottom="@+id/added_pet_avatar">
+        <!-- 宠物性别 -->
+        <ImageView 
+            android:layout_gravity="center_vertical" 
+            android:id="@+id/added_pet_gender" android:layout_width="12.0dip" 
+            android:layout_height="12.0dip" android:layout_marginLeft="5.0dip" 
+            android:src="@drawable/dog" android:scaleType="centerInside" />
+        <!-- 宠物种类 -->
+        <TextView 
+            android:textSize="12.0sp" android:textColor="#ffffffff" 
+            android:layout_gravity="center_vertical" android:id="@+id/added_pet_species" 
+            android:paddingLeft="5.0dip" android:paddingRight="5.0dip" 
+            android:layout_width="wrap_content" android:layout_height="wrap_content" 
+            android:singleLine="true" />
+    </LinearLayout>
+    
+    <!-- 宠物年龄 -->
+    <TextView 
+        android:textSize="12.0sp" android:textColor="@color/liuliu_text_light" 
+        android:gravity="center" android:id="@+id/added_pet_age" android:paddingLeft="5.0dip" 
+        android:paddingRight="5.0dip" android:layout_width="wrap_content" 
+        android:layout_height="20.0dip" android:layout_toRightOf="@+id/layoutadded_pet_gender_species" 
+        android:layout_alignTop="@+id/layoutadded_pet_gender_species" />
+    
+    <!-- 箭头 -->
+    <FrameLayout 
+        android:id="@+id/pet_more" android:visibility="visible" 
+        android:layout_width="30.0dip" android:layout_height="fill_parent" 
+        android:layout_alignParentRight="true">
+        <ImageView 
+            android:layout_gravity="center_vertical" android:layout_width="10.0dip" 
+            android:layout_height="10.0dip" android:layout_marginLeft="5.0dip" 
+            android:layout_marginRight="15.0dip" android:src="@drawable/arrow" />
+    </FrameLayout>
+    
+    <!-- 分割 -->
+    <View 
+        android:background="@color/liuliu_divider_light" android:layout_width="fill_parent" 
+        android:layout_height="1.0dip" android:layout_alignParentBottom="true" />
+</RelativeLayout>

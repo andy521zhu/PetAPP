@@ -45,7 +45,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gdut.pet.common.utils.ShowToast;
+import com.gdut.pet.common.utils.toastMgr;
 import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
 
@@ -298,7 +298,7 @@ public class LoginActivity1 extends Activity implements OnClickListener
 			if (username.equals("") || username == null || password.equals("")
 					|| password == null)
 			{
-				ShowToast.ShowToast1(mContext, "用户名密码不能为空");
+				toastMgr.builder.display("用户名密码不能为空", 0);
 				break;
 			}
 			Thread loginThread = new Thread(new LoginThread());

@@ -11,25 +11,58 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <!-- 使用网络功能所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- SDK离线地图和cache功能需要读写外部存储器 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+	<!-- 获取设置信息和详情页直接拨打电话需要以下权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 使用定位功能所需权限,demo已集成百度定位SDK,不使用定位功能可去掉以下6项 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <!-- 百度云推送 -->
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="getui.permission.GetuiService"/>
+    <!-- shareSDK -->
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+ 	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <!--自定义权限-->
+	<permission
+		android:name="getui.permission.GetuiService"
+		android:protectionLevel="normal" >
+	</permission>
     
-
+    
     <application
-        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:name="com.gudt.pet.PetApplication"
+        >
+        
         <!-- 主界面 -->
         <activity
             android:name="com.gdut.pet.ui.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait"
+            android:launchMode="standard"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,16 +72,6 @@
             android:label="@string/personal_central" 
             android:theme="@android:style/Theme.Holo.Light"
             >
-        </activity>
-        <!-- 我的宠物界面 -->
-        <activity
-            android:name="com.gdut.pet.ui.PetActivity"
-            android:label="@string/personal_central" >
-        </activity>
-        <!-- 我的好友界面 -->
-        <activity
-            android:name="com.gdut.pet.ui.MyFriendsActivity"
-            android:label="@string/personal_central" >
         </activity>
         <!-- 社交  也就是帖子界面 -->
         <activity
@@ -73,65 +96,357 @@
         <!-- 个人登录界面 -->
          <activity 
             android:name="com.gdut.pet.ui.LoginActivity"
-            android:label="@string/login" >            
+            android:label="@string/login" 
+            android:screenOrientation="portrait"
+            >            
         </activity>
         <!-- 个人信息界面 -->
         <activity 
-            android:name="com.gdut.pet.ui.AllMessageActivity"
-            android:label="@string/allmessage" >            
+            android:name="com.gdut.pet.ui.ActivityAllMessageActivity"
+            android:label="@string/allmessage" 
+            android:screenOrientation="portrait"
+            >            
         </activity>
         
         <activity 
             android:name="com.peo.man.PetMessage"
-            android:label="@string/petmessage" >            
+            android:label="@string/petmessage" 
+            android:screenOrientation="portrait"
+            >            
         </activity>
         
         <!-- delte -->
          <activity 
             android:name="com.peo.stor.RegisterStor"
-            android:label="@string/registerStor" >            
+            android:label="@string/registerStor" 
+            android:screenOrientation="portrait"
+            >            
         </activity>
-        <!-- delete -->
-         <activity 
-            android:name="com.peo.stor.StorCentral"
-            android:label="@string/stormenu" >            
-        </activity>
-        
-         <!-- delete -->
-          <activity 
-            android:name="com.peo.straypet.StrayPetList"
-            android:label="@string/straylist" >            
-        </activity>
-         
-          <!-- 这个可以删除 -->
-          <activity android:name="com.peo.straypet.ItemDetail">
-          </activity>
+
           <!-- 帖子详细内容界面 -->
           <activity android:name="com.gdut.pet.ui.BBSDetailActivity"
               android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
               >
               
           </activity>
           <!-- 对具体一个帖子的回复评论界面 -->
           <activity android:name="com.gdut.pet.ui.BBSReplyActivity"
               android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
               >
               
           </activity>
           <!-- 宠物店没有注册  提示界面 -->
           <activity android:name="com.gdut.pet.ui.NotRegPetShopActivity"
               android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
               >
           </activity>
           <!-- 注册宠物店界面 -->
           <activity android:name="com.gdut.pet.ui.RegPetShopActivity"
               android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
               >
+          </activity>
+          <!-- 百度地图 -->
+          <activity android:name="com.gdut.pet.ui.MapActivity"
+              android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
+              >
+          </activity>
+          <!-- 设置 -->
+          <activity android:name="com.gdut.pet.ui.SettingsActivity"
+              android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
+              >
+          </activity>
+          <!-- 关于 -->
+          <activity android:name="com.gdut.pet.ui.AboutActivity"
+              android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
+              >
+          </activity>
+          
+          <!-- 意见反馈 -->
+          <activity android:name="com.gdut.pet.ui.YiJianJianYiActivity"
+              android:theme="@android:style/Theme.Holo.NoActionBar"
+              android:screenOrientation="portrait"
+              >
+          </activity>
+          
+          <!-- 这个是点击头像的时候 弹出来的 -->
+          <activity
+            android:name="com.gdut.pet.ui.ImageShowerActivity"
+            android:theme="@style/ImageScale" 
+            android:screenOrientation="portrait"
+            />
+         <!-- 全新的index界面, 底下三个按钮, 不再是viewpager那种滑动的 -->
+          <activity
+            android:name="com.gdut.pet.ui.IndexActivityNew"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+        <!-- 宠物和用户管理点进去   第一个   发现界面(全部) -->
+          <activity
+            android:name="com.gdut.pet.ui.AllPetListActivity"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+  
+		<!-- 帖子详细列表  new -->
+          <activity
+            android:name="com.gdut.pet.ui.BBSDetailActivityNew"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>    
+         
+          <!-- 关注的帖子  new -->
+          <activity
+            android:name="com.gdut.pet.ui.BBSGuanzhuActivity"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- lost and found 丢失和找到的帖子 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityPetLostFound"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 宠物丢失帖子集合 有上拉刷新 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityPetLostBBS"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+
+          <!-- 宠物发现帖子集合 有上拉刷新 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityPetFoundBBS"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 宠物商店 有上拉刷新 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityPetShop"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 添加宠物 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityAddPet"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          <!-- 在我的   这个界面 点击图片  进入到所有宠物图片的界面 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityAllPetPic"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 发帖界面-->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityPostPetImage"
+            android:label="@string/personal_central" 
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 发帖界面里面的选择照片-->
+          <activity
+            android:name="com.gdut.pet.ui.ActivitySelectPic"
+            android:label="@string/personal_central" 
+            android:theme="@style/DialogStyleBottom"
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          <!-- 注册界面 新的-->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityRegisteNew"
+            android:label="@string/personal_central" 
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 显示其他用户的个人信息-->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityMyActivityOtherUser"
+            android:label="@string/personal_central" 
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 编辑用户心情 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityEditMood"
+            android:label="@string/personal_central" 
+            android:screenOrientation="portrait"
+            >
+          </activity>
+          
+          <!-- 编辑用户签名 -->
+          <activity
+            android:name="com.gdut.pet.ui.ActivityEditSign"
+            android:label="@string/personal_central" 
+            android:screenOrientation="portrait"
+            >
           </activity>
           
           
           
           
+          <!-- 百度地图-->
+		<meta-data android:name="api_key" android:value="622PXiozIGStPGR4MHOEpNh1"></meta-data>
+		          
+        <!-- 百度地图的服务 定位服务 -->
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
+			
+        <!-- 友盟的 -->
+        <meta-data android:value="5450da23fd98c5a66d031ea2" android:name="UMENG_APPKEY"></meta-data>
+		<meta-data android:value="pettest" android:name="UMENG_CHANNEL"/>
+          
+          <!-- 个推SDK配置开始 -->
+			<!-- 配置的第三方参数属性 -->
+			<meta-data android:name="PUSH_APPID" android:value="hbk3G0zFhV6ytwTCIwNdd" />
+			<meta-data android:name="PUSH_APPSECRET" android:value="VjeoPvyygkAgGO5Hvstz6A" />
+			<meta-data android:name="PUSH_APPKEY" android:value="VH1eT2pGjU9s5l0uzgRRn5" />
+			<meta-data android:name="PUSH_GROUPID" android:value="" />
+			<!-- 第三方, 也就是我自己定义的receiver -->
+			<receiver
+	            android:name="com.gdut.pet.getuiReceiver.MyPushReceiver"
+	            android:exported="false" >
+	            <intent-filter>
+	                <action android:name="com.igexin.sdk.action.hbk3G0zFhV6ytwTCIwNdd" />
+	            </intent-filter>
+       		</receiver>
+			
+			<!--配置SDK核心服务-->
+			<service android:name="com.igexin.sdk.PushService"
+				android:exported="true"
+				android:label="NotificationCenter"
+				android:process=":pushservice" >
+			</service>
+			
+			<receiver android:name="com.igexin.sdk.PushReceiver">
+				<intent-filter>
+					<action android:name="android.intent.action.BOOT_COMPLETED" />
+					<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+					<action android:name="android.intent.action.USER_PRESENT" />
+					<action android:name="com.igexin.sdk.action.refreshls" />
+				</intent-filter>
+			</receiver>
+			<receiver android:name="com.igexin.sdk.PushManagerReceiver"
+				android:exported="false" >
+				<intent-filter>
+			    		<action android:name="com.igexin.sdk.action.pushmanager" />
+				</intent-filter>
+			</receiver>
+			
+			<activity android:name="com.igexin.sdk.PushActivity"
+				android:process=":pushservice"
+				android:theme="@android:style/Theme.Translucent.NoTitleBar"
+				android:taskAffinity="com.igexin.sdk.PushActivityTask"
+				android:excludeFromRecents="true"
+				android:exported="false">
+			</activity>
+			
+			<!-- 配置弹框activity -->
+			<activity android:name="com.igexin.getuiext.activity.GetuiExtActivity"  
+				android:process=":pushservice"
+				android:configChanges="orientation|keyboard|keyboardHidden"
+				android:excludeFromRecents="true"
+				android:taskAffinity="android.task.myServicetask"
+				android:theme="@android:style/Theme.Translucent.NoTitleBar"
+				android:exported="false" />
+			<receiver android:name="com.igexin.getuiext.service.PayloadReceiver"
+				android:exported="false" >
+				<intent-filter>
+					<!-- 这个com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4固定，不能修改  -->
+					<action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4" />
+					<!-- android:name="com.igexin.sdk.action.第三方的appId" -->			
+					<action android:name="com.igexin.sdk.action.hbk3G0zFhV6ytwTCIwNdd" />
+				</intent-filter>
+			</receiver>
+			<service android:name="com.igexin.getuiext.service.GetuiExtService" 
+				android:process=":pushservice" />
+			
+			<!-- 个推download模块配置-->
+			<service android:name="com.igexin.download.DownloadService"
+				android:process=":pushservice" />
+			<receiver
+				android:exported="false" android:name="com.igexin.download.DownloadReceiver"> 
+				<intent-filter>
+					<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+				</intent-filter>
+			</receiver>
+			<provider android:name="com.igexin.download.DownloadProvider" 
+				android:process=":pushservice" 
+				android:authorities="downloads.com.ui.mypet"/>
+				<!-- android:authorities="downloads.第三方包名" -->
+			<!-- ====================================================== -->
+          
+          <!-- 以下是多盟广告 -->
+          <activity 
+              android:name="cn.domob.android.ads.DmActivity"
+              android:theme="@android:style/Theme.Translucent"
+              >
+          </activity>
+          <!-- 以下是shareSDK -->
+          <activity
+			 android:name="cn.sharesdk.framework.ShareSDKUIShell"
+			 android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			 android:configChanges="keyboardHidden|orientation|screenSize"
+			 android:screenOrientation="portrait"
+			 android:windowSoftInputMode="stateHidden|adjustResize" >
+			 <intent-filter>
+				 <data android:scheme="tencent100371282" />
+				 <action android:name="android.intent.action.VIEW" />
+				 <category android:name="android.intent.category.BROWSABLE" />
+				 <category android:name="android.intent.category.DEFAULT" />
+			 </intent-filter>
+		 </activity>
+		 <!--微信分享回调 -->
+		 <activity
+			 android:name=".wxapi.WXEntryActivity"
+			 android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			 android:configChanges="keyboardHidden|orientation|screenSize"
+			 android:exported="true"
+			 android:screenOrientation="portrait" /> 
+		
+		<!--易信分享回调 -->
+		 <activity
+			 android:name=".yxapi.YXEntryActivity"
+			 android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			 android:configChanges="keyboardHidden|orientation|screenSize"
+			 android:exported="true"
+			 android:screenOrientation="portrait" />
+        
     </application>
 
 </manifest>
