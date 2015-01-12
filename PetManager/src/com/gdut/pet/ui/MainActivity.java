@@ -156,7 +156,7 @@ public class MainActivity extends Activity
 		// 实例化推送管理器
 		PushManager.getInstance().initialize(this.getApplicationContext());
 
-		// AD
+		// AD 广告
 		addAd();
 	}
 

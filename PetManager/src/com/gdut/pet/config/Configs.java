@@ -4,8 +4,8 @@ public class Configs
 {
 	public static final String CHARSET = "utf-8";
 
-	public static final String LOGIN_PATH = "http://10.21.63.145:8080/PetMgr/servlet/MobileLoginControler";
-	public static final String REGISTE_PATH = "http://10.21.63.145:8080/PetMgr/servlet/MobileLoginControler";
+	public static final String LOGIN_PATH = "http://10.21.63.183:8080/PetWebsiteMgr/servlet/MobileLoginControler";
+	public static final String REGISTE_PATH = "http://10.21.63.183:8080/PetWebsiteMgr/servlet/MobileLoginControler";
 	// public static final String GET_USET_DATA_PATH =
 	// "http://10.21.63.145:8080/PetMgr/servlet/MobileGetData";
 	// // ?poststype=1&firstid=1&lastid=2

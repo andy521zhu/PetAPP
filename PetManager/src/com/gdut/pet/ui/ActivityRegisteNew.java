@@ -242,7 +242,7 @@ public class ActivityRegisteNew extends Activity implements
 				},
 				// ?action=pet_register&name=@qq.com&protocol=on&password=123
 				// 别名 将这些信息传递过去
-				Configs.ACTION, "pet_register",
+				Configs.ACTION, "user_register",
 				// 别名
 				// Configs.USERNAME, LogInfo.NAME,// 昵称
 				// 登录名 手机号码

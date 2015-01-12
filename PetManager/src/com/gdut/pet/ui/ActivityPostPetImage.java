@@ -1,12 +1,19 @@
 package com.gdut.pet.ui;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -94,9 +101,6 @@ public class ActivityPostPetImage extends Activity implements
 			public void onClick(View v)
 			{
 				// TODO Auto-generated method stub
-				// 确认评论 的一些逻辑
-				L.i(TAG, "confirmButton click");
-				toastMgr.builder.display("确认发图", 0);
 				/**
 				 * 判断是否选择了宠物
 				 */
@@ -107,21 +111,74 @@ public class ActivityPostPetImage extends Activity implements
 					toastMgr.builder.displayCenter("丢失和找到不能同时选择, 请重新选择", 0);
 					return;
 				}
-				// 这里联网操作
-				UploadUtil uploadUtil = UploadUtil.getInstance();
-				uploadUtil
-						.setOnUploadProcessListener(ActivityPostPetImage.this);
-				File file = new File(mGetPicPath);
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("orderId", "11111");
-				uploadUtil
-						.uploadFileMy(
-								mContext,
-								file,
-								"pic",
-								// "http://10.21.63.113:8080/TestForPet/servlet/getAction?action=testUploadImage",
-								"http://10.21.63.145:8080/PetMgr/servlet/MobileUploadImage?action=1",
-								params);
+				// 确认评论 的一些逻辑
+
+				SharedPreferences petPreferences = getSharedPreferences(
+						"petdata", MODE_PRIVATE);
+				Set<String> petNameSet = petPreferences.getStringSet("petName",
+						null);
+				if (petNameSet == null || petNameSet.equals("")
+						|| petNameSet.isEmpty())
+				{
+					toastMgr.builder.display("还没有添加宠物，不能发图，请添加宠物", 0);
+					return;
+				}
+				String[] petnameStrings;
+				Iterator<String> it = petNameSet.iterator();
+				List<String> list1 = new ArrayList<String>();
+				while (it.hasNext())// 判断是否有下一个
+				{
+					list1.add(it.next());
+				}
+				petnameStrings = (String[]) list1.toArray(new String[0]);
+
+				new AlertDialog.Builder(mContext)
+						.setTitle("选择宠物")
+						.setMultiChoiceItems(petnameStrings, null, null)
+						.setPositiveButton("选取",
+								new DialogInterface.OnClickListener()
+								{
+
+									@Override
+									public void onClick(DialogInterface arg0,
+											int arg1)
+									{
+										// TODO Auto-generated method stub
+										toastMgr.builder.display("OK", 0);
+										L.i(TAG, "confirmButton click");
+										toastMgr.builder.display("确认发图", 0);
+
+										// 这里联网操作
+										UploadUtil uploadUtil = UploadUtil
+												.getInstance();
+										uploadUtil
+												.setOnUploadProcessListener(ActivityPostPetImage.this);
+										File file = new File(mGetPicPath);
+										Map<String, String> params = new HashMap<String, String>();
+										params.put("orderId", "11111");
+										uploadUtil
+												.uploadFileMy(
+														mContext,
+														file,
+														"pic",
+														// "http://10.21.63.113:8080/TestForPet/servlet/getAction?action=testUploadImage",
+														"http://10.21.63.145:8080/PetMgr/servlet/MobileUploadImage?action=1",
+														params);
+									}
+								})
+						.setNegativeButton("取消",
+								new DialogInterface.OnClickListener()
+								{
+
+									@Override
+									public void onClick(DialogInterface arg0,
+											int arg1)
+									{
+										// TODO Auto-generated method stub
+										toastMgr.builder.display("取消", 0);
+										return;
+									}
+								}).show();
 
 			}
 		});

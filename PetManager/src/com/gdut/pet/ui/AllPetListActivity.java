@@ -43,6 +43,10 @@ public class AllPetListActivity extends Activity
 	private BBSGridListAdapter gridListAdapter;
 	private List<Map<String, String>> mGridList;
 	private LinearLayout layoutPostPetImage;
+	private int refreshID = 0;// 下拉刷新时候传进去的id
+	private int loadingID = 0;// 上拉加载时候的id
+	private int firstLoadID = 0;// 刚开始进来界面的id
+	int _refreshid = 0;
 
 	private Handler handleGridViewDisplay = new Handler()
 	{
@@ -57,7 +61,8 @@ public class AllPetListActivity extends Activity
 				gridListAdapter.notifyDataSetChanged();
 				mPullToRefreshGridView.onRefreshComplete();
 				break;
-
+			case 2:
+				gridListAdapter.notifyDataSetChanged();
 			default:
 				break;
 			}
@@ -94,7 +99,8 @@ public class AllPetListActivity extends Activity
 						L.i(TAG, "onPullDownToRefresh");
 						// ShowToast.ShowToastCenter(mContext, "下拉");
 						toastMgr.builder.display("下拉", 1);
-						mPullToRefreshGridView.onRefreshComplete();
+						getBBSFromRefresh(false, "0");
+
 					}
 
 					@Override
@@ -130,9 +136,16 @@ public class AllPetListActivity extends Activity
 
 	}
 
+	/**
+	 * 首次进入这个界面 调用这个
+	 * 
+	 * @param isRefresh
+	 * @param id
+	 */
 	private void getBBSList(boolean isRefresh, String id)
 	{
 		// TODO Auto-generated method stub
+
 		// 进度Dialog
 		final ProgressDialog pd = ProgressDialog.show(mContext, getResources()
 				.getString(R.string.connecting),
@@ -157,6 +170,9 @@ public class AllPetListActivity extends Activity
 									Map<String, String> map = new HashMap<String, String>();
 									// id
 									map.put("id", (String) jsonObject.get("id"));
+									String __refreshid = (String) jsonObject
+											.get("id");
+									_refreshid = Integer.parseInt(__refreshid);
 									// 标题
 									map.put("title",
 											(String) jsonObject.get("title"));
@@ -186,6 +202,12 @@ public class AllPetListActivity extends Activity
 											(String) jsonObject.get("petImage"));
 									// 加到list里面
 									mGridList.add(0, map);
+									if (refreshID > _refreshid)
+									{
+										refreshID = refreshID;
+									}
+									else
+										refreshID = _refreshid;// 得到最大的一个id
 
 								}
 							}
@@ -221,6 +243,109 @@ public class AllPetListActivity extends Activity
 						// TODO Auto-generated method stub
 						toastMgr.builder.display("获取信息失败", 0);
 						pd.dismiss();
+					}
+				}, isRefresh, id);
+	}
+
+	/**
+	 * 下拉刷新的时候调用
+	 * 
+	 * @param isRefresh
+	 * @param id
+	 */
+	private void getBBSFromRefresh(boolean isRefresh, String id)
+	{
+		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext),
+				new GetBBS.SuccessCallback()
+				{
+
+					@Override
+					public void onSuccess(String result)
+					{
+						// TODO Auto-generated method stub
+						if (result != null)
+						{
+							try
+							{
+								JSONArray jsonArray = new JSONArray(result);
+								for (int i = 0; i < jsonArray.length(); i++)
+								{
+									JSONObject jsonObject = jsonArray
+											.getJSONObject(i);
+									Map<String, String> map = new HashMap<String, String>();
+									// id
+									map.put("id", (String) jsonObject.get("id"));
+									String __refreshid = (String) jsonObject
+											.get("id");
+									_refreshid = Integer.parseInt(__refreshid);
+									// 标题
+									map.put("title",
+											(String) jsonObject.get("title"));
+									// 内容描述
+									map.put("description",
+											(String) jsonObject.get("content"));
+									// 发表时间
+									map.put("time",
+											(String) jsonObject.get("time"));
+									// 用户名
+									map.put("username",
+											(String) jsonObject.get("username"));
+									// 回复数
+									map.put("replynum",
+											(String) jsonObject.get("replynum"));
+									// 是否关注
+									map.put("isGuanzhu", (String) jsonObject
+											.get("isGuanzhu"));
+									// 点赞数目
+									map.put("likenum",
+											(String) jsonObject.get("likenum"));
+									// 用户头像URL
+									map.put("userImage", (String) jsonObject
+											.get("userImage"));
+									// 宠物图片URL
+									map.put("petImage",
+											(String) jsonObject.get("petImage"));
+									// 加到list里面
+									mGridList.add(0, map);
+									if (refreshID > _refreshid)
+									{
+										refreshID = refreshID;
+									}
+									else
+										refreshID = _refreshid;// 得到最大的一个id
+
+								}
+							}
+							catch (Exception e)
+							{
+								// TODO: handle exception
+								L.i(TAG, "解析json异常 定位到这里");
+								L.i(TAG, e.toString());
+							}
+
+							Message msg = new Message();
+							msg.what = 2;
+							handleGridViewDisplay.sendMessage(msg);
+
+						}
+						else
+						{
+							toastMgr.builder.display("获取信息失败", 0);
+						}
+						toastMgr.builder.display("获取信息成功", 0);
+						mPullToRefreshGridView.onRefreshComplete();
+					}
+				},
+				//
+				new GetBBS.FailCallback()
+				{
+
+					@Override
+					public void onFail()
+					{
+						// TODO Auto-generated method stub
+						toastMgr.builder.display("获取信息失败", 0);
+						mPullToRefreshGridView.onRefreshComplete();
 					}
 				}, isRefresh, id);
 	}

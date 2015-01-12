@@ -1,10 +1,15 @@
 package com.gdut.pet.ui;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -40,6 +45,8 @@ public class ActivityAddPet extends Activity implements View.OnClickListener
 	private EmojiconEditText edit_choose_food;// 填写食物
 	private EmojiconEditText edittext_description;// 宠物描述
 
+	private SharedPreferences petdataSP;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -50,6 +57,7 @@ public class ActivityAddPet extends Activity implements View.OnClickListener
 		mContext = this;
 		L.i(TAG, "oncreate");
 		findViews();
+		petdataSP = getSharedPreferences("petdata", MODE_PRIVATE);
 	}
 
 	private void findViews()
@@ -180,6 +188,20 @@ public class ActivityAddPet extends Activity implements View.OnClickListener
 		String petDescription = edittext_description.getText().toString()
 				.trim();
 		// 然后就是联网操作了
+		// 如果添加成功 就将这个宠物信息放到sp里面
+
+		Set<String> petNameSet = petdataSP.getStringSet("petName", null);
+		if (petNameSet == null)
+		{
+			petNameSet = new HashSet<String>();
+		}
+		else
+		{
+			petNameSet.add(petName);
+		}
+		Editor petdataEditor = petdataSP.edit();
+		petdataEditor.putStringSet("petName", petNameSet);
+		petdataEditor.commit();
 
 	}
 

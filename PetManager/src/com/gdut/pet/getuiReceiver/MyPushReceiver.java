@@ -11,6 +11,8 @@ import android.os.Bundle;
 import com.gdut.pet.common.utils.L;
 import com.gdut.pet.common.utils.toastMgr;
 import com.igexin.sdk.PushConsts;
+import com.igexin.sdk.PushManager;
+import com.igexin.sdk.Tag;
 
 public class MyPushReceiver extends BroadcastReceiver
 {
@@ -59,6 +61,12 @@ public class MyPushReceiver extends BroadcastReceiver
 			break;
 		case PushConsts.GET_CLIENTID:
 			L.i(TAG, "switch:PushConsts.GET_CLIENTID");
+			String cid = bundle.getString("clientid");
+			Tag[] tagaaTags = new Tag[1];
+			tagaaTags[0] = new Tag();
+			tagaaTags[0].setName("1234");
+			PushManager.getInstance().setTag(context, tagaaTags);
+			L.d("GetuiSdkDemo", "Got ClientID:" + cid);
 			break;
 		case PushConsts.THIRDPART_FEEDBACK:
 			L.i(TAG, "switch:PushConsts.THIRDPART_FEEDBACK");

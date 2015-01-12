@@ -444,7 +444,7 @@ public class LoginActivity extends Activity implements OnClickListener
 							}
 
 							// ÅÐ¶ÏÊÇ·ñµÇÂ¼³É¹¦
-							if (result1.equals("success"))
+							if (result1.equals("1"))
 							{
 								Toast.makeText(mContext,
 										R.string.login_success,
@@ -513,10 +513,9 @@ public class LoginActivity extends Activity implements OnClickListener
 					},
 					// Configs.USERNAME, username, Configs.PASSWORD, password
 					// LoginType=userlogin&login=on&username=12345&password=123
-					"LoginType", "userlogin",
+					"LoginType", "userLogin",
 					//
-					"login", "on",
-					// Configs.ACTION, "Login",
+					"login", "on", Configs.ACTION, "userLogin",
 					//
 					"username", username, "password", password);
 			connection = null;

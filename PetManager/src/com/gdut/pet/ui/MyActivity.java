@@ -75,6 +75,8 @@ public class MyActivity extends Activity implements OnClickListener
 		findViews();
 
 		userdataSP = getSharedPreferences(Configs.USERDATA_SP, 0);
+
+		petdataSP = getSharedPreferences("petdata", MODE_PRIVATE);
 		/**
 		 * 如果登陆了, text_login_or_edit就显示编辑, 否则, 就显示请先登录
 		 */
@@ -426,6 +428,7 @@ public class MyActivity extends Activity implements OnClickListener
 	private LinearLayout layout_edit;// 编辑个人信息
 	private TextView text_login_or_edit;// 这上面用来显示登录提示还是编辑个人信息
 	private SharedPreferences userdataSP;// sp信息
+	private SharedPreferences petdataSP;// 添加的宠物信息
 
 	/**
 	 * 心情 签名

@@ -70,6 +70,7 @@
 -dontwarn com.fivefeiwo.coverscreen.**
 -dontwarn com.feiwoone.banner.**
 -dontwarn android.support.**
+-dontwran com.igexin.**
 
 
 #}
