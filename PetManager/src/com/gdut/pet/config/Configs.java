@@ -4,8 +4,8 @@ public class Configs
 {
 	public static final String CHARSET = "utf-8";
 
-	public static final String LOGIN_PATH = "http://10.21.63.183:8080/PetWebsiteMgr/servlet/MobileLoginControler";
-	public static final String REGISTE_PATH = "http://10.21.63.183:8080/PetWebsiteMgr/servlet/MobileLoginControler";
+	public static final String LOGIN_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileLoginControler";
+	public static final String REGISTE_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileLoginControler";
 	// public static final String GET_USET_DATA_PATH =
 	// "http://10.21.63.145:8080/PetMgr/servlet/MobileGetData";
 	// // ?poststype=1&firstid=1&lastid=2
@@ -26,7 +26,7 @@ public class Configs
 	// "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 	// public static final String REGISTE_PATH =
 	// "http://10.21.63.113:8080/TestForPet/servlet/getAction";
-	public static final String GET_USET_DATA_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
+	public static final String GET_USET_DATA_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileGetData";
 	// ?poststype=1&firstid=1&lastid=2
 	public static final String GET_BBS_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 	// ?type=1&postId=8386ece7077849bf98e4222ee344c16d 得到帖子详情 以及里面的评论
@@ -34,9 +34,9 @@ public class Configs
 	// ?type=2&title=aaaaa&content=bbbbb&contactName=cc&contactPhone=123&contactEmail=abc@qq.com&contactQq=123&postType=1
 	public static final String POST_BBS_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 	// 上传用户数据URL
-	public static final String UPLOAD_USER_INFO_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
+	public static final String UPLOAD_USER_INFO_PATH = "http://10.21.63.184:8080/TestForPet/servlet/getAction";
 	// 得到关注的帖子列表
-	public static final String GET_GUANZHU_BBS_LIST_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
+	public static final String GET_GUANZHU_BBS_LIST_PATH = "http://10.21.63.184:8080/TestForPet/servlet/getAction";
 	//
 	public static final String GET_USER_ALL_ADDED_PET_LIST_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 	//

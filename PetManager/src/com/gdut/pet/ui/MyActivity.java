@@ -1,7 +1,9 @@
 package com.gdut.pet.ui;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Activity;
 import android.content.Context;
@@ -53,6 +55,24 @@ public class MyActivity extends Activity implements OnClickListener
 			case ADDED_PET:
 				addedPetAdapter = new AddedPetProfileItemAdapter(mContext,
 						addPetInfoList);
+				// 得到宠物信息
+				petdataSP = getSharedPreferences("petdata", MODE_PRIVATE);
+				// 看sp里面是否有
+				Set<String> petInfo = petdataSP.getStringSet("petName", null);
+				// 里面没有信息 那就写进去 不会出现sp里面的跟得到的不一致 因为每次添加宠物都会写一次
+				if (petInfo == null)
+				{
+					petInfo = new HashSet<String>();
+					for (int i = 0; i < addPetInfoList.size(); i++)
+					{
+						String _petName = addPetInfoList.get(i).getPetname();
+						petInfo.add(_petName);
+					}
+				}
+				SharedPreferences.Editor petDataEditor = petdataSP.edit();
+				petDataEditor.putStringSet("petName", petInfo);
+				// 提交数据
+				petDataEditor.commit();
 				added_pet_listView.setAdapter(addedPetAdapter);
 				break;
 

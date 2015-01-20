@@ -1,4 +1,4 @@
-//显示用户详细信息，并提供更改
+// 显示用户详细信息，并提供更改
 package com.gdut.pet.ui;
 
 import java.io.File;
@@ -201,7 +201,7 @@ public class ActivityAllMessageActivity extends Activity
 				.getString(R.string.connecting),
 				getResources().getString(R.string.connecting_to_server));
 		PersistentCookieStore cookieStore = new PersistentCookieStore(mContext);
-		new GetUserData(Configs.GET_USET_DATA_PATH, "testGetUserData",
+		new GetUserData(Configs.GET_USET_DATA_PATH, "user",
 				cookieStore,
 				//
 				new GetUserData.SuccessCallback()
@@ -215,21 +215,16 @@ public class ActivityAllMessageActivity extends Activity
 						{
 							JSONObject jsonObject = new JSONObject(result);
 							String status = jsonObject.getString("status");
-							if (status.equals("success"))
+							if (status.equals("1"))
 							{
-								String username = jsonObject
-										.getString("userName");
-								String signature = jsonObject
-										.getString("signature");
+								String username = jsonObject.getString("userNickName");// userName
+								String signature = " ";// jsonObject.getString("signature");
 								String sex = jsonObject.getString("userSex");
-								String qq = jsonObject.getString("QQ");
-								String email = jsonObject.getString("email");
-								String guhua = jsonObject
-										.getString("tel_guding");
-								String cellphone = jsonObject
-										.getString("cellphone");
-								String address = jsonObject
-										.getString("address");
+								String qq = " ";// jsonObject.getString("QQ");
+								String email = " ";// jsonObject.getString("email");
+								String guhua = " ";// jsonObject.getString("tel_guding");
+								String cellphone = " ";// jsonObject.getString("cellphone");//
+								String address = " ";// jsonObject.getString("address");//
 								editName.setText(username);
 								editSay.setText(signature);
 								editQQ.setText(qq);
@@ -514,25 +509,25 @@ public class ActivityAllMessageActivity extends Activity
 						tempFile = new File(Environment
 								.getExternalStorageDirectory(),
 								getPhotoFileName());
-						L.i(TAG, which + "被点击");
-						// 拍照
+				L.i(TAG, which + "被点击");
+				// 拍照
 						if (which == 0)
 						{
 							dialog.dismiss();
 							Intent intent = new Intent(
 									MediaStore.ACTION_IMAGE_CAPTURE);
 
-							intent.putExtra("camerasensortype", 2);// 调用前置摄像头
-							intent.putExtra("autofocus", true);// 自动对焦
-							intent.putExtra("fullScreen", false);// 全屏
+					intent.putExtra("camerasensortype", 2);// 调用前置摄像头
+					intent.putExtra("autofocus", true);// 自动对焦
+					intent.putExtra("fullScreen", false);// 全屏
 							intent.putExtra("showActionIcons", false);
-							// 指定调用相机拍照后照片的储存路径
+					// 指定调用相机拍照后照片的储存路径
 							intent.putExtra(MediaStore.EXTRA_OUTPUT,
 									Uri.fromFile(tempFile));
 							startActivityForResult(intent,
 									PHOTO_REQUEST_TAKEPHOTO);
 						}
-						// 从相册选取
+				// 从相册选取
 						else if (which == 1)
 						{
 							dialog.dismiss();

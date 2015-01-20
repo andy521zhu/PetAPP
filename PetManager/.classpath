@@ -7,8 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry exported="true" kind="lib" path="libs/GetuiExt-2.0.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/GetuiSdk2.3.0.0.jar"/>
@@ -25,5 +23,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/ShareSDK-Wechat-Core-2.5.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/ShareSDK-Wechat-Favorite-2.5.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/ShareSDK-Wechat-Moments-2.5.1.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
