@@ -8,14 +8,14 @@ package com.rockerhieu.emojicon;
 
 public final class R {
 	public static final class attr {
-		public static final int emojiconSize = 0x7f010000;
-		public static final int emojiconTextLength = 0x7f010002;
-		public static final int emojiconTextStart = 0x7f010001;
-		public static final int emojiconUseSystemDefault = 0x7f010003;
+		public static final int emojiconSize = 0x7f010013;
+		public static final int emojiconTextLength = 0x7f010015;
+		public static final int emojiconTextStart = 0x7f010014;
+		public static final int emojiconUseSystemDefault = 0x7f010016;
 	}
 	public static final class color {
-		public static final int horizontal_divider = 0x7f060000;
-		public static final int horizontal_vertical = 0x7f060001;
+		public static final int horizontal_divider = 0x7f090000;
+		public static final int horizontal_vertical = 0x7f090001;
 	}
 	public static final class drawable {
 		public static final int emoji_0023 = 0x7f02002b;
@@ -915,17 +915,17 @@ public final class R {
 		public static final int sym_keyboard_delete_holo_dark = 0x7f02044a;
 	}
 	public static final class id {
-		public static final int Emoji_GridView = 0x7f080133;
-		public static final int emojicon_icon = 0x7f080134;
-		public static final int emojis_backspace = 0x7f08013c;
-		public static final int emojis_pager = 0x7f08013d;
-		public static final int emojis_tab = 0x7f080135;
-		public static final int emojis_tab_0_recents = 0x7f080136;
-		public static final int emojis_tab_1_people = 0x7f080137;
-		public static final int emojis_tab_2_nature = 0x7f080138;
-		public static final int emojis_tab_3_objects = 0x7f080139;
-		public static final int emojis_tab_4_cars = 0x7f08013a;
-		public static final int emojis_tab_5_punctuation = 0x7f08013b;
+		public static final int Emoji_GridView = 0x7f060133;
+		public static final int emojicon_icon = 0x7f060134;
+		public static final int emojis_backspace = 0x7f06013c;
+		public static final int emojis_pager = 0x7f06013d;
+		public static final int emojis_tab = 0x7f060135;
+		public static final int emojis_tab_0_recents = 0x7f060136;
+		public static final int emojis_tab_1_people = 0x7f060137;
+		public static final int emojis_tab_2_nature = 0x7f060138;
+		public static final int emojis_tab_3_objects = 0x7f060139;
+		public static final int emojis_tab_4_cars = 0x7f06013a;
+		public static final int emojis_tab_5_punctuation = 0x7f06013b;
 	}
 	public static final class layout {
 		public static final int emojicon_grid = 0x7f030027;
@@ -933,10 +933,10 @@ public final class R {
 		public static final int emojicons = 0x7f030029;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f070000;
+		public static final int app_name = 0x7f080006;
 	}
 	public static final class styleable {
-		public static final int[] Emojicon = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003 };
+		public static final int[] Emojicon = { 0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016 };
 		public static final int Emojicon_emojiconSize = 0;
 		public static final int Emojicon_emojiconTextLength = 2;
 		public static final int Emojicon_emojiconTextStart = 1;

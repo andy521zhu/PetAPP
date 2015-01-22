@@ -153,6 +153,8 @@ public class MainActivity extends Activity
 			// TODO: handle exception
 		}
 
+
+
 		// 实例化推送管理器
 		PushManager.getInstance().initialize(this.getApplicationContext());
 

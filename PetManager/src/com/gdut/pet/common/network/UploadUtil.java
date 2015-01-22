@@ -482,13 +482,13 @@ public class UploadUtil
 				}
 				result = sb1.toString();
 				Log.e(TAG, "result : " + result);
-				sendMessage(UPLOAD_SUCCESS_CODE, "上传结果：" + result);
+				sendMessage(UPLOAD_SUCCESS_CODE, result);
 				return;
 			}
 			else
 			{
 				Log.e(TAG, "request error");
-				sendMessage(UPLOAD_SERVER_ERROR_CODE, "上传失败：code=" + res);
+				sendMessage(UPLOAD_SERVER_ERROR_CODE, res + "");
 				return;
 			}
 		}

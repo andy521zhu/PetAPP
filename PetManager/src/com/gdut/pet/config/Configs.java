@@ -32,7 +32,7 @@ public class Configs
 	// ?type=1&postId=8386ece7077849bf98e4222ee344c16d 得到帖子详情 以及里面的评论
 	public static final String GET_BBS_DETAIL_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 	// ?type=2&title=aaaaa&content=bbbbb&contactName=cc&contactPhone=123&contactEmail=abc@qq.com&contactQq=123&postType=1
-	public static final String POST_BBS_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
+	public static final String POST_BBS_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobilePostMgr";
 	// 上传用户数据URL
 	public static final String UPLOAD_USER_INFO_PATH = "http://10.21.63.184:8080/TestForPet/servlet/getAction";
 	// 得到关注的帖子列表
@@ -42,6 +42,7 @@ public class Configs
 	//
 	public static final String GET_LOST_FOUND_BBS_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 
+	public static final String UPLOAD_BBS_IMAGE_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileUploadImage?action=1";
 	// 超时
 	public static int timeout = 5000;
 	public static int SO_TIMEOUT = 10 * 1000; // 设置等待数据超时时间10秒钟

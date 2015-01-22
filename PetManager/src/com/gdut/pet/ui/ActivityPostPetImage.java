@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -31,11 +34,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gdut.pet.common.info.LocatedInfo;
+import com.gdut.pet.common.network.PostBBSNetWork;
+import com.gdut.pet.common.network.PostBBSNetWork.FailCallback;
 import com.gdut.pet.common.network.UploadUtil;
 import com.gdut.pet.common.network.UploadUtil.OnUploadProcessListener;
+import com.gdut.pet.common.tools.PersistentCookieStore;
+import com.gdut.pet.common.utils.BaiduLocate;
 import com.gdut.pet.common.utils.CompressPictureTool;
 import com.gdut.pet.common.utils.L;
 import com.gdut.pet.common.utils.toastMgr;
+import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
 import com.umeng.analytics.MobclickAgent;
 
@@ -49,6 +58,9 @@ public class ActivityPostPetImage extends Activity implements
 	private Button backButton;
 	private TextView confirmButton;
 	private EditText replyEditText;
+	private String bbs_content;// 发帖内容
+	
+	private String bbs_type;// 发帖的类型, 1 丢失, 2 流浪 3. 普通
 	private ImageView imagePostPet;
 	private CheckBox checkBoxPetLost;
 	private CheckBox checkBoxPetFound;
@@ -57,7 +69,7 @@ public class ActivityPostPetImage extends Activity implements
 	private boolean isPicSelected = false;
 	private String mGetPicPath;// 从相册里面得到的图片的路径
 	private String compressedPicPath;// 压缩后的图片的位置路径
-
+	private BaiduLocate locate;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -67,32 +79,10 @@ public class ActivityPostPetImage extends Activity implements
 		setContentView(R.layout.activity_post_pet_image);
 		mContext = this;
 		L.i(TAG, "onCreate");
-		mProgressDialog = new ProgressDialog(mContext);
-		uploadProgressHandler = new Handler(mContext.getMainLooper())
-		{
-			public void handleMessage(android.os.Message msg)
-			{
-				super.handleMessage(msg);
-				if (msg.what == 1)
-				{
-					// mProgressDialog.setProgress(msg.arg1);
-					toastMgr.builder.display("上传进度是 " + msg.arg1 + "%", 0);
-				}
-				else if (msg.what == 2)
-				{
+		// 定位 测试
+		locate = new BaiduLocate(mContext);
+		locate.registerLocationListener();
 
-					// mProgressDialog.setTitle("正在上传中...");
-					toastMgr.builder.display("正在上传中...", 0);
-					// mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-					// mProgressDialog.setProgress(0);
-					// mProgressDialog.show();
-				}
-				else if (msg.what == 3)
-				{
-					toastMgr.builder.display("show no problem", 0);
-				}
-			}
-		};
 		findViews();
 	}
 
@@ -151,6 +141,26 @@ public class ActivityPostPetImage extends Activity implements
 					toastMgr.builder.displayCenter("请选择上传图片", 0);
 					return;
 				}
+				// 给发帖类型赋值
+				if (isPetFoundChecked && isPetLostChecked != true)
+				{
+					bbs_type = "2";// 流浪
+				}
+				else if (isPetFoundChecked != true && isPetLostChecked)
+				{
+					bbs_type = "1";// 丢失
+				}
+				else if (isPetFoundChecked != true && isPetLostChecked != true)
+				{
+					bbs_type = "3";// 普通
+				}
+
+				LocatedInfo info = locate.getLocation();
+				locate.stopLocation();
+
+				// 得到用户写的内容
+				bbs_content = replyEditText.getText().toString();
+
 				// 确认评论 的一些逻辑
 
 				SharedPreferences petPreferences = getSharedPreferences(
@@ -203,7 +213,7 @@ public class ActivityPostPetImage extends Activity implements
 											super.run();
 											uploadUtil.uploadFileMy(mContext, file, "pic",
 											// "http://10.21.63.113:8080/TestForPet/servlet/getAction?action=testUploadImage",
-													"http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileUploadImage?action=1", params);
+													Configs.UPLOAD_BBS_IMAGE_PATH, params);
 										};
 									}.start();
 
@@ -232,6 +242,8 @@ public class ActivityPostPetImage extends Activity implements
 		checkBoxPetLost = (CheckBox) findViewById(R.id.checkBox_pet_lost);
 		checkBoxPetFound = (CheckBox) findViewById(R.id.checkBox_pet_found);
 
+		// 帖子内容
+		replyEditText = (EditText) findViewById(R.id.bbs_reply_content);
 	}
 
 	/**
@@ -332,14 +344,83 @@ public class ActivityPostPetImage extends Activity implements
 	public void onUploadDone(int responseCode, String message)
 	{
 		// TODO Auto-generated method stub
-
-				Message msg = new Message();
-				msg.what = 3;
-		// uploadProgressHandler.handleMessage(msg);
-
+		String imagePaht = "";
+		// 上传成功的Code
+		if (responseCode == UPLOAD_SUCCESS_CODE)
+		{
+			// 解析message这个json
+			try
+			{
+				JSONObject jsonObject = new JSONObject(message);
+				imagePaht = (String) jsonObject.get("path");
+				String temp = imagePaht.replace("\\", "/");
+				imagePaht = temp;
+				temp = "<img src=" + imagePaht + ">";
+				imagePaht = temp;
+				bbs_content = bbs_content + imagePaht;
+			}
+			catch (Exception e)
+			{
+				// TODO: handle exception
+			}
+			
+		}
+		// 上传失败的Code 服务器error
+		else if (responseCode == UPLOAD_SERVER_ERROR_CODE) {
+			
+		}
+		
 		toastMgr.builder.display("上传完成", 0);
-		// mProgressDialog.dismiss();
 
+		// 图片上传成功,接下来就是上传 说说了
+		if (bbs_type.equals("") || bbs_type == null)
+		{
+			bbs_type = "3";// 默认是普通的
+		}
+		LocatedInfo info = locate.getLocation();
+		ActivityPostPetImage.this.finish();
+		new PostBBSNetWork(Configs.POST_BBS_PATH, "postBBS", new PersistentCookieStore(mContext), 
+				//
+				new PostBBSNetWork.SuccessCallback()
+				{
+					
+					@Override
+					public void onSuccess(String result)
+					{
+						// TODO Auto-generated method stub
+						try
+						{
+							JSONObject jsonObject = new JSONObject(result);
+							String status = jsonObject.getString("status");
+							if (status.equals("1"))
+							{
+								toastMgr.builder.display("发帖成功", 0);
+							}
+							else
+							{
+								toastMgr.builder.display("网络错误, 发帖失败", 0);
+							}
+						}
+						catch (JSONException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				},
+				//
+				new FailCallback()
+				{
+					
+					@Override
+					public void onFail()
+					{
+						// TODO Auto-generated method stub
+						
+					}
+				}, 
+				//
+				bbs_content, bbs_type, info.lontitute + "", info.latitute + "");
 	}
 
 	/**
@@ -363,11 +444,7 @@ public class ActivityPostPetImage extends Activity implements
 		{
 			nowPecent = 0;
 		}
-//		mProgressDialog.setProgress(nowPecent);
-		Message msg = new Message();
-		msg.what = 1;
-		msg.arg1 = nowPecent;
-		// uploadProgressHandler.handleMessage(msg);
+
 	}
 
 	@Override
@@ -392,5 +469,20 @@ public class ActivityPostPetImage extends Activity implements
 	private int nowPecent = 0;
 	// 进度Dialog
 	private ProgressDialog mProgressDialog;
+
+	/***
+	 * 上传成功
+	 */
+	public static final int UPLOAD_SUCCESS_CODE = 1;
+	/**
+	 * 文件不存在
+	 */
+	public static final int UPLOAD_FILE_NOT_EXISTS_CODE = 2;
+	/**
+	 * 服务器出错
+	 */
+	public static final int UPLOAD_SERVER_ERROR_CODE = 3;
+	protected static final int WHAT_TO_UPLOAD = 1;
+	protected static final int WHAT_UPLOAD_DONE = 2;
 
 }
