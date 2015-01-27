@@ -41,8 +41,7 @@ import com.rockerhieu.emojicon.emoji.Emojicon;
 import com.ui.mypet.R;
 import com.umeng.analytics.MobclickAgent;
 
-public class BBSDetailActivityNew extends Activity implements
-		EmojiconsFragment.OnEmojiconBackspaceClickedListener,
+public class BBSDetailActivityNew extends Activity implements EmojiconsFragment.OnEmojiconBackspaceClickedListener,
 		EmojiconGridFragment.OnEmojiconClickedListener
 {
 
@@ -59,7 +58,8 @@ public class BBSDetailActivityNew extends Activity implements
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		String id = bundle.getString("id");
-		getBBSDetail(id);
+		String postType = bundle.getString("postType");
+		getBBSDetail(id, postType);
 		// setEmojiconFragment(false);
 
 	}
@@ -93,8 +93,7 @@ public class BBSDetailActivityNew extends Activity implements
 			public void onClick(View v)
 			{
 				// TODO Auto-generated method stub
-				imageFollow.setImageDrawable(mContext.getResources()
-						.getDrawable(R.drawable.followed));
+				imageFollow.setImageDrawable(mContext.getResources().getDrawable(R.drawable.followed));
 				times++;
 				// 下面进行联网操作
 				// 通知服务器已经关注
@@ -137,6 +136,7 @@ public class BBSDetailActivityNew extends Activity implements
 		});
 		//
 		editTextComment = (EmojiconEditText) findViewById(R.id.edittext_bbs_detail_comment);
+		// 发送评论
 		commentSent = (Button) findViewById(R.id.send_bbs_detail_comment);
 		commentSent.setOnClickListener(new View.OnClickListener()
 		{
@@ -156,20 +156,19 @@ public class BBSDetailActivityNew extends Activity implements
 		emoji_background = (FrameLayout) findViewById(R.id.emoji_background);
 		// 点击得到表情
 		image_emoji_key_board_only = (ImageView) findViewById(R.id.image_emoji);
-		image_emoji_key_board_only
-				.setOnClickListener(new View.OnClickListener()
-				{
+		image_emoji_key_board_only.setOnClickListener(new View.OnClickListener()
+		{
 
-					@Override
-					public void onClick(View v)
-					{
-						// TODO Auto-generated method stub
-						image_emoji_key_board_only.setVisibility(View.GONE);
-						image_emoji_keyboard.setVisibility(View.VISIBLE);
-						emoji_background.setVisibility(View.VISIBLE);
-						// setEmojiconFragment(false);
-					}
-				});
+			@Override
+			public void onClick(View v)
+			{
+				// TODO Auto-generated method stub
+				image_emoji_key_board_only.setVisibility(View.GONE);
+				image_emoji_keyboard.setVisibility(View.VISIBLE);
+				emoji_background.setVisibility(View.VISIBLE);
+				// setEmojiconFragment(false);
+			}
+		});
 		image_emoji_keyboard = (ImageView) findViewById(R.id.image_emoji_keyboard);
 		image_emoji_keyboard.setOnClickListener(new View.OnClickListener()
 		{
@@ -199,36 +198,39 @@ public class BBSDetailActivityNew extends Activity implements
 	 * @param id
 	 *            通过这个id 去得到这个id的帖子的所有信息
 	 */
-	private void getBBSDetail(String id)
+	private void getBBSDetail(String id, String postType)
 	{
 
-		new GetBBSDetail(Configs.GET_BBS_DETAIL_PATH,
-				new PersistentCookieStore(mContext),
-				new GetBBSDetail.SuccessCallback()
+		new GetBBSDetail(Configs.GET_BBS_DETAIL_PATH, new PersistentCookieStore(mContext), new GetBBSDetail.SuccessCallback()
+		{
+
+			@Override
+			public void onSuccess(String result)
+			{
+				// TODO Auto-generated method stub
+				if (result == null)
 				{
-
-					@Override
-					public void onSuccess(String result)
+					toastMgr.builder.display("获取信息失败", 0);
+				}
+				else
+				{
+					// 解析json
+					MyJson decode = new MyJson(mContext, result);
+					commentList = decode.getBBSDetailAndComment();
+					if (commentList.equals("") || commentList == null)
 					{
-						// TODO Auto-generated method stub
-						if (result == null)
-						{
-							toastMgr.builder.display("获取信息失败", 0);
-						}
-						else
-						{
-							// 解析json
-							MyJson decode = new MyJson(mContext, result);
-							commentList = decode.getBBSDetailAndComment();
-							Message msg = new Message();
-							msg.obj = commentList;
-							msg.what = 1;
-							handler.sendMessage(msg);
-
-						}
+						toastMgr.builder.display("获取数据失败,服务器数据有误" + "", 0);
+						return;
 					}
-				},
-				// 失败
+					Message msg = new Message();
+					msg.obj = commentList;
+					msg.what = 1;
+					handler.sendMessage(msg);
+
+				}
+			}
+		},
+		// 失败
 				new GetBBSDetail.FailCallback()
 				{
 
@@ -240,7 +242,7 @@ public class BBSDetailActivityNew extends Activity implements
 					}
 				},
 				// 帖子id
-				id);
+				id, postType);
 	}
 
 	private Handler handler = new Handler()
@@ -279,25 +281,23 @@ public class BBSDetailActivityNew extends Activity implements
 					textIsPetLost.setVisibility(View.VISIBLE);
 					textIsPetLost.setText("宠物\n丢失");
 					imageIsPetLost.setVisibility(View.VISIBLE);
-					imageIsPetLost.setImageDrawable(mContext.getResources()
-							.getDrawable(R.drawable.pet_lost_emoji));
+					imageIsPetLost.setImageDrawable(mContext.getResources().getDrawable(R.drawable.pet_lost_emoji));
 				}
 				else if (isLost.equals("3"))// 找到
 				{
 					textIsPetLost.setVisibility(View.VISIBLE);
 					textIsPetLost.setText("宠物\n找到");
 					imageIsPetLost.setVisibility(View.VISIBLE);
-					imageIsPetLost.setImageDrawable(mContext.getResources()
-							.getDrawable(R.drawable.pet_found_emoji));
+					imageIsPetLost.setImageDrawable(mContext.getResources().getDrawable(R.drawable.pet_found_emoji));
 				}
 
-				String commentNumString = comlist.size() + "";
+				String commentNumString = comlist.get(0).getCommentNum() + "";
 				textCommentNum.setText(commentNumString);
 				String likeNumString = comlist.get(0).getLikeNum();
 				textLikeNum.setText(likeNumString);
 
 				//
-				mAdapter = new BBSCommentListAdapter(mContext, comlist);
+				mAdapter = new BBSCommentListAdapter(mContext, comlist.get(0).getCommentsInfos());
 
 				bbsCommentList.setVisibility(View.VISIBLE);
 				bbsCommentList.setAdapter(mAdapter);
@@ -324,16 +324,14 @@ public class BBSDetailActivityNew extends Activity implements
 			}
 
 			@Override
-			public void onLoadingFailed(String imageUri, View view,
-					FailReason failReason)
+			public void onLoadingFailed(String imageUri, View view, FailReason failReason)
 			{
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onLoadingComplete(String imageUri, View view,
-					Bitmap loadedImage)
+			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage)
 			{
 				// TODO Auto-generated method stub
 				userHead.setImageBitmap(loadedImage);
@@ -357,16 +355,14 @@ public class BBSDetailActivityNew extends Activity implements
 			}
 
 			@Override
-			public void onLoadingFailed(String imageUri, View view,
-					FailReason failReason)
+			public void onLoadingFailed(String imageUri, View view, FailReason failReason)
 			{
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onLoadingComplete(String imageUri, View view,
-					Bitmap loadedImage)
+			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage)
 			{
 				// TODO Auto-generated method stub
 				petImage.setImageBitmap(loadedImage);
@@ -481,8 +477,7 @@ public class BBSDetailActivityNew extends Activity implements
 		oks.disableSSOWhenAuthorize();
 
 		// 分享时Notification的图标和文字
-		oks.setNotification(R.drawable.ic_launcher,
-				getString(R.string.app_name));
+		oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用

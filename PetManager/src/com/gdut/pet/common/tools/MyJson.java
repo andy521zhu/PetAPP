@@ -15,6 +15,7 @@ import com.gdut.pet.common.info.AddedPetInfo;
 import com.gdut.pet.common.info.BBSCommentsInfo;
 import com.gdut.pet.common.utils.L;
 import com.gdut.pet.common.utils.toastMgr;
+import com.gdut.pet.config.Configs;
 
 public class MyJson
 {
@@ -45,44 +46,50 @@ public class MyJson
 		List<BBSCommentsInfo> list = new ArrayList<BBSCommentsInfo>();
 		try
 		{
-			JSONObject object = new JSONObject(json);
-			JSONObject bbsObject = object.getJSONObject("bbs");
-
-			JSONArray commentArray = object.getJSONArray("comment");
-			for (int i = 0; i < commentArray.length(); i++)
+			BBSCommentsInfo info = new BBSCommentsInfo();
+			JSONArray jsonArray1 = new JSONArray(json);
+			// 第一个是状态
+			JSONObject statusJsonObject = jsonArray1.getJSONObject(0);
+			// 第二个是帖子详细内容
+			JSONObject bbsDetailJsonObject = (JSONObject) jsonArray1.getJSONObject(1);
+			// 评论数目
+			String _commentnum = bbsDetailJsonObject.getString("commentNum");
+			info.setCommentNum(_commentnum);
+			// 帖子内容
+			String _content = bbsDetailJsonObject.getString("content");
+			info.setTitle(_content);
+			// 宠物图片
+			String _petImage = bbsDetailJsonObject.getString("petImage");
+			info.setPetImageUrl(Configs.SERVER_IP_ADDRESS + _petImage);
+			// UserId
+			String _userID = bbsDetailJsonObject.getString("Userid");
+			info.setId(_userID);
+			// userImage
+			String _userImage = bbsDetailJsonObject.getString("userImage");
+			info.setUserImageUrl(Configs.SERVER_IP_ADDRESS + _userImage);
+			// postTime
+			String _postTime = bbsDetailJsonObject.getString("postTime");
+			info.setTime(_postTime);
+			// 后台返回给我的数据里面没有 是否丢失 这个字段 所以我只能自己给一个
+			info.setIsLost("1");
+			info.setLikeNum("0");
+			int commentNum = Integer.parseInt(_commentnum);
+			if (commentNum != 0)
 			{
-				BBSCommentsInfo info = new BBSCommentsInfo();
-				info.setId(bbsObject.getString("id"));
-				info.setItemContent(bbsObject.getString("content"));
-				info.setTitle(bbsObject.getString("title"));
-				info.setImgNum(bbsObject.getString("imgNum"));
-				// 上传时间
-				info.setTime(bbsObject.getString("time"));
-				// 用户名
-				info.setUsername(bbsObject.getString("username"));
-				// 用户头像
-				info.setUserImageUrl(bbsObject.getString("userImage"));
-				info.setIsGuanzhu(bbsObject.getString("isGuanzhu"));
-				// 没有petname
-				// info.setPetName()
-				// 宠物图片地址
-				info.setPetImageUrl(bbsObject.getString("petImage"));
-				// 评论个数
-				info.setCommentNum(bbsObject.getString("replynum"));
-				// 点赞个数
-				info.setLikeNum(bbsObject.getString("likenum"));
-				/**
-				 * 宠物是否丢失 是不是丢失帖子
-				 */
-				info.setIsLost(bbsObject.getString("isLost"));
-
-				JSONObject commentObject = commentArray.getJSONObject(i);
-				info.setText(commentObject.getString("text"));
-				info.setUsernameComment(commentObject
-						.getString("usernameComment"));
-				// 这里以后再优化吧,如果以后有时间的话,因为每次添加comment都会将上面的帖子内容也添加进来 变得冗余了
-				list.add(info);
+				List<BBSCommentsInfo> bbsCommentsInfos = new ArrayList<BBSCommentsInfo>();
+				info.setCommentsInfos(bbsCommentsInfos);
+				// 评论数目不等于0 就是有评论
+				for (int i = 0; i < commentNum; i++)
+				{
+					// 从第三个开始是评论
+					JSONObject commentJsonObject = jsonArray1.getJSONObject(i + 2);
+					BBSCommentsInfo infoComment = new BBSCommentsInfo();
+					infoComment.setUsernameComment(commentJsonObject.getString("userName"));
+					infoComment.setText(commentJsonObject.getString("replyContent"));
+					info.addCommentInfos(infoComment);
+				}
 			}
+			list.add(info);
 			return list;
 
 		}
@@ -262,16 +269,11 @@ public class MyJson
 				L.i(TAG, i + "");
 				L.i(TAG, addedPetArray.getJSONObject(i).getString("petImage"));
 				info.setPetid(addedPetArray.getJSONObject(i).getString("petid"));
-				info.setPetname(addedPetArray.getJSONObject(i).getString(
-						"petname"));
-				info.setPetsex(addedPetArray.getJSONObject(i).getString(
-						"petsex"));
-				info.setPetspeciese(addedPetArray.getJSONObject(i).getString(
-						"petspeciese"));
-				info.setPetage(addedPetArray.getJSONObject(i).getString(
-						"petage"));
-				info.setPetImage(addedPetArray.getJSONObject(i).getString(
-						"petImage"));
+				info.setPetname(addedPetArray.getJSONObject(i).getString("petname"));
+				info.setPetsex(addedPetArray.getJSONObject(i).getString("petsex"));
+				info.setPetspeciese(addedPetArray.getJSONObject(i).getString("petspeciese"));
+				info.setPetage(addedPetArray.getJSONObject(i).getString("petage"));
+				info.setPetImage(addedPetArray.getJSONObject(i).getString("petImage"));
 				list.add(info);
 			}
 

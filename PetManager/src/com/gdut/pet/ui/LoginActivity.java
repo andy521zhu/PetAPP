@@ -1,5 +1,5 @@
 /**
- * 登录页面， 
+ * 登录页面，
  */
 package com.gdut.pet.ui;
 
@@ -297,15 +297,15 @@ public class LoginActivity extends Activity implements OnClickListener
 						if (isChecked == true)
 						{
 							editor.putBoolean(Configs.REMEMBER_PASSWORD, true);
-							Log.i(TAG + "记住密码",
+					Log.i(TAG + "记住密码",
 									getString(R.string.remember_pwd));
-							toastMgr.builder.display("记住密码", 0);
+					toastMgr.builder.display("记住密码", 0);
 						}
 						else
 						{
 							editor.putBoolean(Configs.REMEMBER_PASSWORD, false);
 							Log.i(TAG, getString(R.string.cancle_remember_pwd));
-							toastMgr.builder.display("不记住密码", 0);
+					toastMgr.builder.display("不记住密码", 0);
 						}
 						editor.commit();
 
@@ -326,12 +326,12 @@ public class LoginActivity extends Activity implements OnClickListener
 						if (isChecked == true)
 						{
 							editor.putBoolean(Configs.AUTOLOGIN, true);
-							Log.i(TAG, "记住密码选中");
+					Log.i(TAG, "记住密码选中");
 						}
 						else
 						{
 							editor.putBoolean(Configs.AUTOLOGIN, false);
-							Log.i(TAG, "记住密码取消");
+					Log.i(TAG, "记住密码取消");
 						}
 						editor.commit();
 					}
@@ -376,7 +376,7 @@ public class LoginActivity extends Activity implements OnClickListener
 					public void onClick(DialogInterface dialog, int which)
 					{
 						// TODO Auto-generated method stub
-						// 点击确定 就是要去系统设置里面的设置网络
+				// 点击确定 就是要去系统设置里面的设置网络
 						startActivity(new Intent(
 								Settings.ACTION_WIRELESS_SETTINGS));
 					}
@@ -462,7 +462,7 @@ public class LoginActivity extends Activity implements OnClickListener
 									userdataEditor.putBoolean(Configs.IS_LOGIN,
 											true);
 									toastMgr.builder.display(
-											"点击登录, 并且保存了用户名密码", 0);
+"点击登录, 并且保存了用户名密码", 0);
 								}
 								else
 								{
@@ -483,6 +483,20 @@ public class LoginActivity extends Activity implements OnClickListener
 								userdataEditor.commit();
 								LoginActivity.this.finish();
 							}
+							else if (result1.equals("2"))
+							{
+								Toast.makeText(mContext, "用户尚未登陆!", Toast.LENGTH_LONG).show();
+								Editor userdataEditor = userdataSP.edit();
+								userdataEditor.putBoolean(Configs.IS_LOGIN, false);
+								userdataEditor.commit();
+							}
+							else if (result1.equals("3"))
+							{
+								Toast.makeText(mContext, "用户登陆失败, 请检查是否已经注册成功!", Toast.LENGTH_LONG).show();
+								Editor userdataEditor = userdataSP.edit();
+								userdataEditor.putBoolean(Configs.IS_LOGIN, false);
+								userdataEditor.commit();
+							}
 							else
 							{
 								Toast.makeText(mContext, R.string.login_fail,
@@ -490,6 +504,7 @@ public class LoginActivity extends Activity implements OnClickListener
 								Editor userdataEditor = userdataSP.edit();
 								userdataEditor.putBoolean(Configs.IS_LOGIN,
 										false);
+								userdataEditor.commit();
 							}
 
 						}
@@ -507,6 +522,7 @@ public class LoginActivity extends Activity implements OnClickListener
 									Toast.LENGTH_LONG).show();
 							Editor userdataEditor = userdataSP.edit();
 							userdataEditor.putBoolean(Configs.IS_LOGIN, false);
+							userdataEditor.commit();
 							pd.dismiss();
 						}
 

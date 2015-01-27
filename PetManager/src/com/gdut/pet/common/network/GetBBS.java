@@ -17,7 +17,7 @@ public class GetBBS
 	public GetBBS(
 			final String url, // final String action,
 			final PersistentCookieStore cookieStore,
-			final SuccessCallback successCallback,// 回调函数
+ final SuccessCallback successCallback,// 回调函数
 			final FailCallback failCallback, boolean isRefresh, String id)
 	{
 
@@ -42,7 +42,7 @@ public class GetBBS
 						// TODO Auto-generated method stub
 						if (successCallback != null)
 						{
-							// 调用回调函数[{"content":"宠物不见了，5555","id":"1","title":"宠物丢失啦！","imgNum":"0"},{"status":"success"}]
+					// 调用回调函数[{"content":"宠物不见了，5555","id":"1","title":"宠物丢失啦！","imgNum":"0"},{"status":"success"}]
 							successCallback.onSuccess(result);
 
 						}
@@ -61,13 +61,14 @@ public class GetBBS
 							failCallback.onFail();
 						}
 					}
-				}, Configs.ACTION, "testGetBBS",
+				}, Configs.ACTION, "getAllBBS"
 				//
-				"poststype", "1",
+				//"poststype", "1",
 				//
-				"firstid", "0",
+				//"firstid", "0",
 				//
-				"lastid", id);
+				//"lastid", id
+				);
 	}
 
 	// 回调函数

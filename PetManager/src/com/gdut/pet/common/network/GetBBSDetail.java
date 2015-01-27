@@ -14,30 +14,27 @@ public class GetBBSDetail
 
 	private static final String TAG = "com.gdut.pet.common.network.GetBBSDetail";
 
-	public GetBBSDetail(
-			final String url, // final String action,
-			final PersistentCookieStore cookieStore,
-			final SuccessCallback successCallback,// 回调函数
-			final FailCallback failCallback, String id)
+	public GetBBSDetail(final String url, // final String action,
+			final PersistentCookieStore cookieStore, final SuccessCallback successCallback,// 回调函数
+			final FailCallback failCallback, String id, String postType)
 	{
 
-		new NetConnection(url, HttpMethod.POST, cookieStore,
-				new NetConnection.SuccessCallback()
+		new NetConnection(url, HttpMethod.POST, cookieStore, new NetConnection.SuccessCallback()
+		{
+
+			@Override
+			public void onSuccess(String result)
+			{
+				// TODO Auto-generated method stub
+				if (successCallback != null)
 				{
+					// 调用回调函数[{"content":"宠物不见了，5555","id":"1","title":"宠物丢失啦！","imgNum":"0"},{"status":"success"}]
+					successCallback.onSuccess(result);
 
-					@Override
-					public void onSuccess(String result)
-					{
-						// TODO Auto-generated method stub
-						if (successCallback != null)
-						{
-							// 调用回调函数[{"content":"宠物不见了，5555","id":"1","title":"宠物丢失啦！","imgNum":"0"},{"status":"success"}]
-							successCallback.onSuccess(result);
-
-						}
-					}
-				},
-				//
+				}
+			}
+		},
+		//
 				new NetConnection.FailCallback()
 				{
 
@@ -50,9 +47,9 @@ public class GetBBSDetail
 							failCallback.onFail();
 						}
 					}
-				}, Configs.ACTION, "testGetBBSDetail",
+				}, Configs.ACTION, "getBBSDetail",
 				//
-				"id", id);
+				"Id", id, "postType", postType);
 	}
 
 	// 回调函数

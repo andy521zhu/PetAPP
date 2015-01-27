@@ -1,4 +1,4 @@
-//注册
+// 注册
 package com.gdut.pet.ui;
 
 import android.app.Activity;
@@ -25,7 +25,7 @@ import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
 import com.umeng.analytics.MobclickAgent;
 
-//对于多个包的class记得注册为public
+// 对于多个包的class记得注册为public
 public class ActivityRegisteNew extends Activity implements
 		View.OnClickListener
 {
@@ -62,13 +62,14 @@ public class ActivityRegisteNew extends Activity implements
 				bundle.putString(Configs.PASSWORD, password);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				finish();
+				// ActivityRegisteNew.this.finish();
 			}
 		});
 
 		Log.i(TAG, "showDialog");
 		builder.show();
-		ActivityRegisteNew.this.finish();
+
+
 	}
 
 	@Override
@@ -132,6 +133,7 @@ public class ActivityRegisteNew extends Activity implements
 		regLoginNameEmail = (EditText) findViewById(R.id.reg_loginName_email);
 		regNickname = (EditText) findViewById(R.id.reg_nickname);
 		regPassword = (EditText) findViewById(R.id.reg_password);
+		// 显示隐藏的号码
 		regShowPwd = (ImageView) findViewById(R.id.reg_showpassword);
 		// 显示隐藏密码
 		regShowPwd.setOnClickListener(new View.OnClickListener()
@@ -182,11 +184,21 @@ public class ActivityRegisteNew extends Activity implements
 		}
 		else if (v.equals(regRightNowReg))
 		{
-			toastMgr.builder.display("注册", 0);
+			// 未同意
+			if (regCheckBox.isChecked() == false)
+			{
+				toastMgr.builder.display("未同意协议,不能注册, 请同意协议!", 0);
+				return;
+			}
+			// 同意了, 允许注册 现在就注册
 			regNow();
 		}
 	}
 
+	/**
+	 * 现在就注册
+	 * 
+	 */
 	void regNow()
 	{
 		gettedUserNameEmail = regLoginNameEmail.getText().toString().trim();
@@ -217,12 +229,12 @@ public class ActivityRegisteNew extends Activity implements
 					public void onSuccess(String result)
 					{
 						// TODO Auto-generated method stub
-						// result是否成功的返回值
-						// 如果注册成功 那就调用登录的函数
-						if (result.equals("success"))
+				// result是否成功的返回值
+				// 如果注册成功 那就调用登录的函数
+				if (true)// result.equals("1"))
 						{
-							// 成功提示登录
-							showDialog(ActivityRegisteNew.this,
+					// 成功提示登录
+					showDialog(mContext,
 									gettedUserNameEmail, gettedPassword);
 						}
 						Log.i(TAG, result);
@@ -242,15 +254,16 @@ public class ActivityRegisteNew extends Activity implements
 				},
 				// ?action=pet_register&name=@qq.com&protocol=on&password=123
 				// 别名 将这些信息传递过去
-				Configs.ACTION, "user_register",
+				Configs.ACTION, "userReg",
 				// 别名
 				// Configs.USERNAME, LogInfo.NAME,// 昵称
 				// 登录名 手机号码
-				"name", gettedUserNameEmail,
+				"username", gettedUserNameEmail,
 				// 协议
-				"protocol", "on",
+				// nickname
+				"nickname", gettedNickName,
 				// 密码
-				Configs.PASSWORD, gettedPassword);
+				"password", gettedPassword);
 	}
 
 	private Context mContext;

@@ -4,6 +4,8 @@ public class Configs
 {
 	public static final String CHARSET = "utf-8";
 
+	public static final String SERVER_IP_ADDRESS = "http://10.21.63.184:8080";
+
 	public static final String LOGIN_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileLoginControler";
 	public static final String REGISTE_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileLoginControler";
 	// public static final String GET_USET_DATA_PATH =
@@ -27,10 +29,10 @@ public class Configs
 	// public static final String REGISTE_PATH =
 	// "http://10.21.63.113:8080/TestForPet/servlet/getAction";
 	public static final String GET_USET_DATA_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileGetData";
-	// ?poststype=1&firstid=1&lastid=2
-	public static final String GET_BBS_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
+	// ?poststype=1&firstid=1&lastid=2 获得多有帖子http://localhost:8080/PetWebcde/servlet/MobileGetPosts
+	public static final String GET_BBS_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobileGetPosts";
 	// ?type=1&postId=8386ece7077849bf98e4222ee344c16d 得到帖子详情 以及里面的评论
-	public static final String GET_BBS_DETAIL_PATH = "http://10.21.63.113:8080/TestForPet/servlet/getAction";
+	public static final String GET_BBS_DETAIL_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobilePostMgr";
 	// ?type=2&title=aaaaa&content=bbbbb&contactName=cc&contactPhone=123&contactEmail=abc@qq.com&contactQq=123&postType=1
 	public static final String POST_BBS_PATH = "http://10.21.63.184:8080/PetWebsiteMgr/servlet/MobilePostMgr";
 	// 上传用户数据URL

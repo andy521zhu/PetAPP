@@ -1,14 +1,21 @@
 package com.gdut.pet.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,10 +27,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gdut.pet.common.info.AddedPetInfo;
-import com.gdut.pet.common.network.GetUserAllAddedPetList;
 import com.gdut.pet.common.network.GetUserAllPetPic;
+import com.gdut.pet.common.network.GetUserData;
 import com.gdut.pet.common.tools.MyJson;
 import com.gdut.pet.common.tools.PersistentCookieStore;
 import com.gdut.pet.common.utils.L;
@@ -32,11 +40,18 @@ import com.gdut.pet.common.view.MyDetailsListView;
 import com.gdut.pet.common.view.adapter.AddedPetProfileItemAdapter;
 import com.gdut.pet.common.view.adapter.MyActivityAllPetPhotoGridViewAdapter;
 import com.gdut.pet.config.Configs;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ui.mypet.R;
 
 public class MyActivity extends Activity implements OnClickListener
 {
 
+	private static final int GET_HEAD_IMAGE = 5;
+
+	private ImageView headImageView;
+	private TextView usernameTextView;
 	/**
 	 * 
 	 */
@@ -48,13 +63,11 @@ public class MyActivity extends Activity implements OnClickListener
 			{
 			case ALL_PET_PIC:
 				L.i(TAG, "updatePicsHandler");
-				petPicAdapter = new MyActivityAllPetPhotoGridViewAdapter(
-						mContext, petPiclist);
+				petPicAdapter = new MyActivityAllPetPhotoGridViewAdapter(mContext, petPiclist);
 				gridview_all_pet_photo.setAdapter(petPicAdapter);
 				break;
 			case ADDED_PET:
-				addedPetAdapter = new AddedPetProfileItemAdapter(mContext,
-						addPetInfoList);
+				addedPetAdapter = new AddedPetProfileItemAdapter(mContext, addPetInfoList);
 				// 得到宠物信息
 				petdataSP = getSharedPreferences("petdata", MODE_PRIVATE);
 				// 看sp里面是否有
@@ -129,8 +142,7 @@ public class MyActivity extends Activity implements OnClickListener
 	{
 
 		L.i(TAG, "getUserAllPetPic");
-		new GetUserAllPetPic(Configs.GET_BBS_PATH, "testGetUserAllPetPic",
-				new PersistentCookieStore(mContext),
+		new GetUserAllPetPic(Configs.GET_BBS_PATH, "testGetUserAllPetPic", new PersistentCookieStore(mContext),
 				new GetUserAllPetPic.SuccessCallback()
 				{
 
@@ -177,50 +189,157 @@ public class MyActivity extends Activity implements OnClickListener
 	 */
 	void getAddPetList()
 	{
-		new GetUserAllAddedPetList(Configs.GET_USER_ALL_ADDED_PET_LIST_PATH,
-				"testGetUserAllAddedPetList", new PersistentCookieStore(
-						mContext), new GetUserAllAddedPetList.SuccessCallback()
+		// 得到宠物信息
+		// 进度Dialog
+		final ProgressDialog pd = ProgressDialog.show(mContext, getResources().getString(R.string.connecting),
+				getResources().getString(R.string.connecting_to_server));
+
+		PersistentCookieStore cookieStore = new PersistentCookieStore(mContext);
+		new GetUserData(Configs.GET_USET_DATA_PATH, "user", cookieStore,
+		//
+				new GetUserData.SuccessCallback()
 				{
 
 					@Override
 					public void onSuccess(String result)
 					{
 						// TODO Auto-generated method stub
-						if (result.equals("") || result == null)
+						try
 						{
-							L.i(TAG, "result == null");
-							toastMgr.builder.display("没有宠物信息", 0);
-							return;
-						}
-						else
-						{
-							MyJson myJson = new MyJson(mContext, result);
-							L.i(TAG, "myJson");
-							addPetInfoList = myJson.getUserAllAddedPetList();
-							if (addPetInfoList == null
-									|| addPetInfoList.size() == 0)
+							JSONObject jsonObject = new JSONObject(result);
+							String status = jsonObject.getString("status");
+							if (status.equals("1"))
 							{
-								toastMgr.builder.display("宠物信息获取失败", 0);
-								return;
+								String petNumString = jsonObject.getString("petNum");
+								int petNum = 0;
+								try
+								{
+									petNum = Integer.parseInt(petNumString);
+								}
+								catch (NumberFormatException e)
+								{
+									// TODO: handle exception
+									petNum = 0;
+								}
+								if (petNum == 0)
+								{
+									toastMgr.builder.display("没有添加宠物	, 请添加宠物", 0);
+									return;
+								}
+								List<AddedPetInfo> listPet = new ArrayList<AddedPetInfo>();
+
+								for (int i = 0; i < petNum; i++)
+								{
+									AddedPetInfo info = new AddedPetInfo();
+									Map<String, String> map = new HashMap<String, String>();
+									String petid = "pet" + i + "id";
+									String petname = "pet" + i + "name";
+									String petimage = "pet" + i + "pic";
+									info.setPetid(jsonObject.getString(petid));
+									info.setPetname(jsonObject.getString(petname));
+									info.setPetsex("male");
+									info.setPetImage(Configs.SERVER_IP_ADDRESS + jsonObject.getString(petimage));
+									info.setPetage("1");
+									info.setPetspeciese(" ");
+									listPet.add(info);
+								}
+
+								// 获得签名
+								String signature = jsonObject.getString("signature");
+								textSign.setText(signature);
+								String nameString = jsonObject.getString("userNickName");
+								usernameTextView.setText(nameString);
+								addPetInfoList = listPet;
+								if (addPetInfoList == null || addPetInfoList.size() == 0)
+								{
+									toastMgr.builder.display("宠物信息获取失败", 0);
+									return;
+								}
+								Message msgMessage = new Message();
+								msgMessage.what = ADDED_PET;
+								updatePicsHandler.sendMessage(msgMessage);
+								L.i(TAG, "sendMessage");
 							}
-							Message msgMessage = new Message();
-							msgMessage.what = ADDED_PET;
-							updatePicsHandler.sendMessage(msgMessage);
-							L.i(TAG, "sendMessage");
+							// 登录不成功
+							else if (status.equals("2"))
+							{
+								toastMgr.builder.display("2未登录.获取个人信息失败", Toast.LENGTH_SHORT);
+							}
+							else
+							{
+								// ShowToast.ShowToast1(mContext, "获取个人信息失败");
+								toastMgr.builder.display("获取个人信息失败", Toast.LENGTH_SHORT);
+
+							}
 
 						}
+						catch (JSONException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						pd.dismiss();
 
 					}
-				}, new GetUserAllAddedPetList.FailCallback()
+				},
+				//
+				new GetUserData.FailCallback()
 				{
 
 					@Override
 					public void onFail()
 					{
 						// TODO Auto-generated method stub
-
+						// ShowToast.ShowToast1(mContext, "失败");
+						toastMgr.builder.display("失败", Toast.LENGTH_SHORT);
+						pd.dismiss();
 					}
 				});
+
+		// 点击响应
+
+		// new GetUserAllAddedPetList(Configs.GET_USER_ALL_ADDED_PET_LIST_PATH, "testGetUserAllAddedPetList", new PersistentCookieStore(mContext),
+		// new GetUserAllAddedPetList.SuccessCallback()
+		// {
+		//
+		// @Override
+		// public void onSuccess(String result)
+		// {
+		// // TODO Auto-generated method stub
+		// if (result.equals("") || result == null)
+		// {
+		// L.i(TAG, "result == null");
+		// toastMgr.builder.display("没有宠物信息", 0);
+		// return;
+		// }
+		// else
+		// {
+		// MyJson myJson = new MyJson(mContext, result);
+		// L.i(TAG, "myJson");
+		// addPetInfoList = myJson.getUserAllAddedPetList();
+		// if (addPetInfoList == null || addPetInfoList.size() == 0)
+		// {
+		// toastMgr.builder.display("宠物信息获取失败", 0);
+		// return;
+		// }
+		// Message msgMessage = new Message();
+		// msgMessage.what = ADDED_PET;
+		// updatePicsHandler.sendMessage(msgMessage);
+		// L.i(TAG, "sendMessage");
+		//
+		// }
+		//
+		// }
+		// }, new GetUserAllAddedPetList.FailCallback()
+		// {
+		//
+		// @Override
+		// public void onFail()
+		// {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 	}
 
 	private void findViews()
@@ -236,6 +355,9 @@ public class MyActivity extends Activity implements OnClickListener
 
 		text_login_or_edit = (TextView) findViewById(R.id.text_login_or_edit);
 
+		// 用户头像
+		headImageView = (ImageView) findViewById(R.id.other_user_headPic_myInfo);
+		usernameTextView = (TextView) findViewById(R.id.other_user_name_myInfo);
 		// 宠物照片
 		layout_all_pet_photo = (LinearLayout) findViewById(R.id.layout_all_pet_photo);
 		layout_all_pet_photo.setOnClickListener(this);
@@ -267,8 +389,7 @@ public class MyActivity extends Activity implements OnClickListener
 		// 点击进入个人信息设置 和 修改
 		// 首先check有没有登录
 		case R.id.layout_edit:
-			SharedPreferences sp = getSharedPreferences(Configs.USERDATA_SP,
-					MODE_PRIVATE);
+			SharedPreferences sp = getSharedPreferences(Configs.USERDATA_SP, MODE_PRIVATE);
 			// 是否已经登录
 			boolean isLogn = sp.getBoolean(Configs.IS_LOGIN, false);
 			sp = null;
@@ -276,8 +397,8 @@ public class MyActivity extends Activity implements OnClickListener
 			{
 				// 显示用户信息
 				intent = new Intent();
-				intent.setClass(MyActivity.this,
-						ActivityAllMessageActivity.class);
+				intent.setClass(MyActivity.this, ActivityAllMessageActivity.class);
+				// startActivityForResult(intent, GET_HEAD_IMAGE);
 				startActivity(intent);
 			}
 			else
@@ -322,8 +443,7 @@ public class MyActivity extends Activity implements OnClickListener
 			toastMgr.builder.display("进入另一界面", 0);
 			intent = new Intent();
 			Bundle bundle = new Bundle();
-			bundle.putStringArrayList("petpiclist",
-					(ArrayList<String>) petPiclist);
+			bundle.putStringArrayList("petpiclist", (ArrayList<String>) petPiclist);
 			intent.setClass(MyActivity.this, ActivityAllPetPic.class);
 			intent.putExtras(bundle);
 			startActivity(intent);
@@ -359,11 +479,59 @@ public class MyActivity extends Activity implements OnClickListener
 
 				textSign.setText(data.getStringExtra("EDITSIGNCONTENT"));
 				break;
+			case GET_HEAD_IMAGE:
+				String headImageURL = data.getStringExtra("HEAD_IMAGE_URL");
+				L.i(TAG, "onresult");
+				showHeadImage(headImageURL);
+				headImageURL = null;
+				break;
 
 			default:
 				break;
 			}
 		}
+	}
+
+	// 从个人信息那里获得的头像 这里来显示
+	private void showHeadImage(String petUrl)
+	{
+		if (petUrl.equals(""))
+		{
+			toastMgr.builder.display("无法获取头像", 0);
+			return;
+		}
+		// 加载图片
+		ImageLoader.getInstance().loadImage(petUrl, new ImageLoadingListener()
+		{
+
+			@Override
+			public void onLoadingStarted(String imageUri, View view)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onLoadingFailed(String imageUri, View view, FailReason failReason)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage)
+			{
+				// TODO Auto-generated method stub
+				headImageView.setImageBitmap(loadedImage);
+			}
+
+			@Override
+			public void onLoadingCancelled(String imageUri, View view)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	@Override
@@ -388,6 +556,16 @@ public class MyActivity extends Activity implements OnClickListener
 		{
 			text_login_or_edit.setText("请先登录!");
 			text_login_or_edit.setTextColor(Color.rgb(255, 0, 0));
+		}
+		SharedPreferences headImagesp = getSharedPreferences("userHeadImageUrl", Context.MODE_PRIVATE);
+		String HeadImage = headImagesp.getString("headImage", null);
+		if (HeadImage == null || HeadImage.equals(""))
+		{
+
+		}
+		else
+		{
+			showHeadImage(HeadImage);
 		}
 		super.onResume();
 	}

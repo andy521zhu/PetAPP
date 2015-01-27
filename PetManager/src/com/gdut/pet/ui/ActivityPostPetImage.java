@@ -48,8 +48,7 @@ import com.gdut.pet.config.Configs;
 import com.ui.mypet.R;
 import com.umeng.analytics.MobclickAgent;
 
-public class ActivityPostPetImage extends Activity implements
-		OnUploadProcessListener
+public class ActivityPostPetImage extends Activity implements OnUploadProcessListener
 {
 
 	private static final String TAG = "com.gdut.pet.ui.ActivityPostPetImage";
@@ -59,7 +58,7 @@ public class ActivityPostPetImage extends Activity implements
 	private TextView confirmButton;
 	private EditText replyEditText;
 	private String bbs_content;// 发帖内容
-	
+
 	private String bbs_type;// 发帖的类型, 1 丢失, 2 流浪 3. 普通
 	private ImageView imagePostPet;
 	private CheckBox checkBoxPetLost;
@@ -70,6 +69,7 @@ public class ActivityPostPetImage extends Activity implements
 	private String mGetPicPath;// 从相册里面得到的图片的路径
 	private String compressedPicPath;// 压缩后的图片的位置路径
 	private BaiduLocate locate;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -98,8 +98,7 @@ public class ActivityPostPetImage extends Activity implements
 			{
 				// TODO Auto-generated method stub
 				Intent intent = new Intent();
-				intent.setClass(ActivityPostPetImage.this,
-						ActivitySelectPic.class);
+				intent.setClass(ActivityPostPetImage.this, ActivitySelectPic.class);
 				startActivityForResult(intent, TO_SELECT_PHOTO);
 
 			}
@@ -163,12 +162,9 @@ public class ActivityPostPetImage extends Activity implements
 
 				// 确认评论 的一些逻辑
 
-				SharedPreferences petPreferences = getSharedPreferences(
-						"petdata", MODE_PRIVATE);
-				Set<String> petNameSet = petPreferences.getStringSet("petName",
-						null);
-				if (petNameSet == null || petNameSet.equals("")
-						|| petNameSet.isEmpty())
+				SharedPreferences petPreferences = getSharedPreferences("petdata", MODE_PRIVATE);
+				Set<String> petNameSet = petPreferences.getStringSet("petName", null);
+				if (petNameSet == null || petNameSet.equals("") || petNameSet.isEmpty())
 				{
 					toastMgr.builder.display("还没有添加宠物，不能发图，请添加宠物", 0);
 					return;
@@ -185,14 +181,13 @@ public class ActivityPostPetImage extends Activity implements
 				// 提示用户选择要上传照片的宠物
 				new AlertDialog.Builder(mContext).setTitle("选择宠物").setMultiChoiceItems(petnameStrings, null, null)
 						.setPositiveButton("选取", new DialogInterface.OnClickListener()
-								{
-									@Override
-									public void onClick(DialogInterface arg0,
-											int arg1)
-									{
-										// TODO Auto-generated method stub
+						{
+							@Override
+							public void onClick(DialogInterface arg0, int arg1)
+							{
+								// TODO Auto-generated method stub
 								// toastMgr.builder.display("OK", 0);
-										L.i(TAG, "confirmButton click");
+								L.i(TAG, "confirmButton click");
 
 								// 这里联网操作
 								final UploadUtil uploadUtil = UploadUtil.getInstance();
@@ -209,7 +204,8 @@ public class ActivityPostPetImage extends Activity implements
 									params.put("orderId", "11111");
 									new Thread()
 									{
-										public void run() {
+										public void run()
+										{
 											super.run();
 											uploadUtil.uploadFileMy(mContext, file, "pic",
 											// "http://10.21.63.113:8080/TestForPet/servlet/getAction?action=testUploadImage",
@@ -219,21 +215,18 @@ public class ActivityPostPetImage extends Activity implements
 
 								}
 
+							}
+						}).setNegativeButton("取消", new DialogInterface.OnClickListener()
+						{
 
-									}
-						}).setNegativeButton("取消",
-								new DialogInterface.OnClickListener()
-								{
-
-									@Override
-									public void onClick(DialogInterface arg0,
-											int arg1)
-									{
-										// TODO Auto-generated method stub
+							@Override
+							public void onClick(DialogInterface arg0, int arg1)
+							{
+								// TODO Auto-generated method stub
 								toastMgr.builder.display("取消", 0);
-										return;
-									}
-								}).show();
+								return;
+							}
+						}).show();
 
 			}
 		});
@@ -363,13 +356,14 @@ public class ActivityPostPetImage extends Activity implements
 			{
 				// TODO: handle exception
 			}
-			
+
 		}
 		// 上传失败的Code 服务器error
-		else if (responseCode == UPLOAD_SERVER_ERROR_CODE) {
-			
+		else if (responseCode == UPLOAD_SERVER_ERROR_CODE)
+		{
+
 		}
-		
+
 		toastMgr.builder.display("上传完成", 0);
 
 		// 图片上传成功,接下来就是上传 说说了
@@ -379,11 +373,11 @@ public class ActivityPostPetImage extends Activity implements
 		}
 		LocatedInfo info = locate.getLocation();
 		ActivityPostPetImage.this.finish();
-		new PostBBSNetWork(Configs.POST_BBS_PATH, "postBBS", new PersistentCookieStore(mContext), 
-				//
+		new PostBBSNetWork(Configs.POST_BBS_PATH, "postBBS", new PersistentCookieStore(mContext),
+		//
 				new PostBBSNetWork.SuccessCallback()
 				{
-					
+
 					@Override
 					public void onSuccess(String result)
 					{
@@ -411,14 +405,14 @@ public class ActivityPostPetImage extends Activity implements
 				//
 				new FailCallback()
 				{
-					
+
 					@Override
 					public void onFail()
 					{
 						// TODO Auto-generated method stub
-						
+
 					}
-				}, 
+				},
 				//
 				bbs_content, bbs_type, info.lontitute + "", info.latitute + "");
 	}
@@ -457,13 +451,10 @@ public class ActivityPostPetImage extends Activity implements
 		msg.what = 2;
 		// uploadProgressHandler.handleMessage(msg);
 
-
 	}
 
 	private Handler uploadProgressHandler;
-	
-	
-	
+
 	private int fileTotalSize = 0;
 	private int upLoadedSize = 0;
 	private int nowPecent = 0;

@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.gdut.pet.common.info.BBSCommentsInfo;
-import com.gdut.pet.common.utils.toastMgr;
 import com.rockerhieu.emojicon.EmojiconTextView;
 import com.ui.mypet.R;
 
@@ -63,11 +62,9 @@ public class BBSCommentListAdapter extends BaseAdapter
 		{
 			hold = new Holder();
 			view = View.inflate(mContext, R.layout.bbs_comment_list_item, null);
-			hold.userName = (EmojiconTextView) view
-					.findViewById(R.id.Detail_Item_UserName);
+			hold.userName = (EmojiconTextView) view.findViewById(R.id.Detail_Item_UserName);
 			hold.ItemID = (TextView) view.findViewById(R.id.Detail_Item_Num);
-			hold.ItemContent = (EmojiconTextView) view
-					.findViewById(R.id.Detail_Item_Value);
+			hold.ItemContent = (EmojiconTextView) view.findViewById(R.id.Detail_Item_Value);
 			view.setTag(hold);
 		}
 		else
@@ -90,7 +87,7 @@ public class BBSCommentListAdapter extends BaseAdapter
 			{
 				// TODO Auto-generated method stub
 				// ShowToast.ShowToast1(mContext, "人物点击");
-				toastMgr.builder.display("人物点击", 0);
+				// toastMgr.builder.display("人物点击", 0);
 			}
 		});
 

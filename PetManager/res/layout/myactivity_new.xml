@@ -76,7 +76,8 @@
                 android:layout_marginBottom="5sp"
                 android:layout_marginLeft="15dip"
                 android:layout_marginTop="5sp"
-                android:src="@drawable/ic_launcher" />
+                android:background="@drawable/ic_launcher" 
+                />
 			<!-- 用户名和地址 -->
             <LinearLayout
                 android:id="@+id/other_user_myInfo_name_location"

@@ -97,6 +97,7 @@
          <activity 
             android:name="com.gdut.pet.ui.LoginActivity"
             android:label="@string/login" 
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             >            
         </activity>
@@ -104,6 +105,7 @@
         <activity 
             android:name="com.gdut.pet.ui.ActivityAllMessageActivity"
             android:label="@string/allmessage" 
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             >            
         </activity>
@@ -290,6 +292,7 @@
           <activity
             android:name="com.gdut.pet.ui.ActivityRegisteNew"
             android:label="@string/personal_central" 
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             >
           </activity>

@@ -12,12 +12,11 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -29,9 +28,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -43,19 +40,21 @@ import com.gdut.pet.common.tools.PersistentCookieStore;
 import com.gdut.pet.common.utils.L;
 import com.gdut.pet.common.utils.toastMgr;
 import com.gdut.pet.config.Configs;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ui.mypet.R;
 import com.umeng.analytics.MobclickAgent;
 
 public class ActivityAllMessageActivity extends Activity
 {
-
-	EditText editName, editSay, editCallPhone, editPhone, editEmail, editQQ,
-			editAddress;
+	private static final int GET_HEAD_IMAGE = 5;
+	EditText editName, editSay, editCallPhone, editPhone, editEmail, editQQ, editAddress;
 	ImageView editImg;
 	TextView myNameView, birthD, birthM, birthY, asd, dsa;// 生日
 	Button editUserInfoButton;
 	RadioGroup sex;
-	MyDateClickListener md;
+	private String headImageURL = "";
 
 	private Context mContext;
 	private static int flag = 1;
@@ -102,8 +101,6 @@ public class ActivityAllMessageActivity extends Activity
 
 		finsdIDs();
 
-		md = new MyDateClickListener();
-
 		readData();
 
 	}
@@ -119,15 +116,9 @@ public class ActivityAllMessageActivity extends Activity
 		editCallPhone = (EditText) findViewById(R.id.editCallPhone);
 		editPhone = (EditText) findViewById(R.id.editPhone);
 		editEmail = (EditText) findViewById(R.id.editEmail);
-		editQQ = (EditText) findViewById(R.id.editQQ);
 		editAddress = (EditText) findViewById(R.id.editAddress);
 		editImg = (ImageView) findViewById(R.id.myPic);
 		sex = (RadioGroup) findViewById(R.id.mySexGroup);
-		birthY = (TextView) findViewById(R.id.myBirthYView);
-		birthM = (TextView) findViewById(R.id.myBirthMView);
-		birthD = (TextView) findViewById(R.id.myBirthDView);
-		asd = (TextView) findViewById(R.id.asd);
-		dsa = (TextView) findViewById(R.id.dsa);
 
 		editUserInfoButton = (Button) findViewById(R.id.editUserInfoButton);
 		editUserInfoButton.setOnClickListener(new View.OnClickListener()
@@ -147,7 +138,6 @@ public class ActivityAllMessageActivity extends Activity
 					editCallPhone.setEnabled(true);
 					editPhone.setEnabled(true);
 					editEmail.setEnabled(true);
-					editQQ.setEnabled(true);
 					editAddress.setEnabled(true);
 					flag = 2;
 					editUserInfoButton.setText("完成");
@@ -164,6 +154,7 @@ public class ActivityAllMessageActivity extends Activity
 
 		});
 
+		// 上传头像
 		editImg.setOnClickListener(new View.OnClickListener()
 		{
 
@@ -188,22 +179,19 @@ public class ActivityAllMessageActivity extends Activity
 		editPhone.setFocusable(false);
 		editEmail.setEnabled(false);
 		editEmail.setFocusable(false);
-		editQQ.setEnabled(false);
-		editQQ.setFocusable(false);
 		editAddress.setEnabled(false);
 		editAddress.setFocusable(false);
 	}
 
+	// 读取数据
 	public void readData()
 	{
 		// 进度Dialog
-		final ProgressDialog pd = ProgressDialog.show(mContext, getResources()
-				.getString(R.string.connecting),
+		final ProgressDialog pd = ProgressDialog.show(mContext, getResources().getString(R.string.connecting),
 				getResources().getString(R.string.connecting_to_server));
 		PersistentCookieStore cookieStore = new PersistentCookieStore(mContext);
-		new GetUserData(Configs.GET_USET_DATA_PATH, "user",
-				cookieStore,
-				//
+		new GetUserData(Configs.GET_USET_DATA_PATH, "user", cookieStore,
+		//
 				new GetUserData.SuccessCallback()
 				{
 
@@ -225,20 +213,26 @@ public class ActivityAllMessageActivity extends Activity
 								String guhua = " ";// jsonObject.getString("tel_guding");
 								String cellphone = " ";// jsonObject.getString("cellphone");//
 								String address = " ";// jsonObject.getString("address");//
+								// 获取用户头像
+								String headImage = jsonObject.getString("headImage");
+								headImageURL = Configs.SERVER_IP_ADDRESS + headImage;
+								showGettedHeadImage(headImageURL);
 								editName.setText(username);
 								editSay.setText(signature);
-								editQQ.setText(qq);
 								editEmail.setText(email);
 								editCallPhone.setText(guhua);
 								editPhone.setText(cellphone);
 								editAddress.setText(address);
 							}
 							// 登录不成功
+							else if (status.equals("2"))
+							{
+								toastMgr.builder.display("2未登录.获取个人信息失败", Toast.LENGTH_SHORT);
+							}
 							else
 							{
 								// ShowToast.ShowToast1(mContext, "获取个人信息失败");
-								toastMgr.builder.display("获取个人信息失败",
-										Toast.LENGTH_SHORT);
+								toastMgr.builder.display("获取个人信息失败", Toast.LENGTH_SHORT);
 
 							}
 
@@ -267,11 +261,55 @@ public class ActivityAllMessageActivity extends Activity
 				});
 
 		// 点击响应
-		birthY.setOnClickListener(md);
-		birthM.setOnClickListener(md);
-		birthD.setOnClickListener(md);
-		asd.setOnClickListener(md);
-		dsa.setOnClickListener(md);
+
+	}
+
+	// 显示用户头像的函数
+	private void showGettedHeadImage(String petUrl)
+	{
+		if (petUrl.equals(""))
+		{
+			toastMgr.builder.display("无法获取头像", 0);
+			return;
+		}
+
+		SharedPreferences userHeadImageUrl = getSharedPreferences("userHeadImageUrl", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = userHeadImageUrl.edit();
+		editor.putString("headImage", headImageURL);
+		editor.commit();
+		// 加载图片
+		ImageLoader.getInstance().loadImage(petUrl, new ImageLoadingListener()
+		{
+
+			@Override
+			public void onLoadingStarted(String imageUri, View view)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onLoadingFailed(String imageUri, View view, FailReason failReason)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage)
+			{
+				// TODO Auto-generated method stub
+				editImg.setImageBitmap(loadedImage);
+			}
+
+			@Override
+			public void onLoadingCancelled(String imageUri, View view)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 
 	public boolean checkChanged()
@@ -287,8 +325,7 @@ public class ActivityAllMessageActivity extends Activity
 			tag = true;
 		}
 		// 性别
-		if (sex.getCheckedRadioButtonId() == R.id.manButton && LogInfo.SEX == 1
-				|| sex.getCheckedRadioButtonId() == R.id.womanButton
+		if (sex.getCheckedRadioButtonId() == R.id.manButton && LogInfo.SEX == 1 || sex.getCheckedRadioButtonId() == R.id.womanButton
 				&& LogInfo.SEX == 0)
 		{
 			LogInfo.SEX ^= 1;
@@ -314,59 +351,14 @@ public class ActivityAllMessageActivity extends Activity
 			LogInfo.E_MAIL = editEmail.getText().toString();
 			tag = true;
 		}
-		if (!editQQ.getText().toString().equals(LogInfo.QQ))
-		{
-			LogInfo.QQ = editQQ.getText().toString();
-			tag = true;
-		}
+
 		if (!editAddress.getText().toString().equals(LogInfo.ADDRESS))
 		{
 			LogInfo.ADDRESS = editAddress.getText().toString();
 			tag = true;
 		}
 
-		// 日期
-		if (Integer.parseInt(birthY.getText().toString()) != LogInfo.BIRTH_Y
-				|| Integer.parseInt(birthM.getText().toString()) != LogInfo.BIRTH_M
-				|| Integer.parseInt(birthD.getText().toString()) != LogInfo.BIRTH_D)
-		{
-			LogInfo.BIRTH_Y = (int) Integer.parseInt(birthY.getText()
-					.toString());
-			LogInfo.BIRTH_M = (int) Integer.parseInt(birthM.getText()
-					.toString());
-			LogInfo.BIRTH_D = (int) Integer.parseInt(birthD.getText()
-					.toString());
-			tag = true;
-		}
 		return tag;
-	}
-
-	public class MyDateClickListener implements OnClickListener
-	{
-
-		@Override
-		public void onClick(View v)
-		{
-			// TODO Auto-generated method stub
-			new DatePickerDialog(ActivityAllMessageActivity.this,
-					new OnDateSetListener()
-					{
-
-						@Override
-						public void onDateSet(DatePicker view, int year,
-								int monthOfYear, int dayOfMonth)
-						{
-							// TODO Auto-generated method stub
-							birthY.setText(year + "");
-							birthM.setText(monthOfYear + "");
-							birthD.setText(dayOfMonth + "");
-							System.out.println("setdate");
-						}
-
-					}, LogInfo.BIRTH_Y, LogInfo.BIRTH_M, LogInfo.BIRTH_D)
-					.show();
-		}
-
 	}
 
 	// 得到用户填写的数据 并且上传服务器
@@ -471,6 +463,12 @@ public class ActivityAllMessageActivity extends Activity
 	public void finish()
 	{
 		// TODO Auto-generated method stub
+		L.i(TAG, "finish");
+		Intent data = new Intent();
+
+		data.putExtra("HEAD_IMAGE_URL", headImageURL);
+		setResult(Activity.RESULT_OK, data);
+		// setResult(Activity.RESULT_OK, data);
 		super.finish();
 	}
 
@@ -498,48 +496,39 @@ public class ActivityAllMessageActivity extends Activity
 		final CharSequence[] charSequences =
 		{ "拍摄", "从手机相册选择" };
 		AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-		dialog.setTitle("图片").setIcon(null)
-				.setItems(charSequences, new DialogInterface.OnClickListener()
-				{
+		dialog.setTitle("图片").setIcon(null).setItems(charSequences, new DialogInterface.OnClickListener()
+		{
 
-					@Override
-					public void onClick(DialogInterface dialog, int which)
-					{
-						// TODO Auto-generated method stub
-						tempFile = new File(Environment
-								.getExternalStorageDirectory(),
-								getPhotoFileName());
+			@Override
+			public void onClick(DialogInterface dialog, int which)
+			{
+				// TODO Auto-generated method stub
+				tempFile = new File(Environment.getExternalStorageDirectory(), getPhotoFileName());
 				L.i(TAG, which + "被点击");
 				// 拍照
-						if (which == 0)
-						{
-							dialog.dismiss();
-							Intent intent = new Intent(
-									MediaStore.ACTION_IMAGE_CAPTURE);
+				if (which == 0)
+				{
+					dialog.dismiss();
+					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 					intent.putExtra("camerasensortype", 2);// 调用前置摄像头
 					intent.putExtra("autofocus", true);// 自动对焦
 					intent.putExtra("fullScreen", false);// 全屏
-							intent.putExtra("showActionIcons", false);
+					intent.putExtra("showActionIcons", false);
 					// 指定调用相机拍照后照片的储存路径
-							intent.putExtra(MediaStore.EXTRA_OUTPUT,
-									Uri.fromFile(tempFile));
-							startActivityForResult(intent,
-									PHOTO_REQUEST_TAKEPHOTO);
-						}
+					intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+					startActivityForResult(intent, PHOTO_REQUEST_TAKEPHOTO);
+				}
 				// 从相册选取
-						else if (which == 1)
-						{
-							dialog.dismiss();
-							Intent intent = new Intent(Intent.ACTION_PICK, null);
-							intent.setDataAndType(
-									MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-									"image/*");
-							startActivityForResult(intent,
-									PHOTO_REQUEST_GALLERY);
-						}
-					}
-				}).show();
+				else if (which == 1)
+				{
+					dialog.dismiss();
+					Intent intent = new Intent(Intent.ACTION_PICK, null);
+					intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+					startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+				}
+			}
+		}).show();
 
 	}
 
@@ -547,8 +536,7 @@ public class ActivityAllMessageActivity extends Activity
 	private String getPhotoFileName()
 	{
 		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				"'IMG'_yyyyMMdd_HHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
 		return dateFormat.format(date) + ".jpg";
 	}
 

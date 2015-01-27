@@ -104,7 +104,7 @@ public class BBSDetailActivity extends Activity
 			}
 		});
 
-		getBBSDetail(bbsid);
+		getBBSDetail(bbsid, "1");
 
 	}
 
@@ -126,38 +126,36 @@ public class BBSDetailActivity extends Activity
 	 * @param id
 	 *            通过这个id 去得到这个id的帖子的所有信息
 	 */
-	private void getBBSDetail(String id)
+	private void getBBSDetail(String id, String postType)
 	{
 
-		new GetBBSDetail(Configs.GET_BBS_DETAIL_PATH,
-				new PersistentCookieStore(mContext),
-				new GetBBSDetail.SuccessCallback()
+		new GetBBSDetail(Configs.GET_BBS_DETAIL_PATH, new PersistentCookieStore(mContext), new GetBBSDetail.SuccessCallback()
+		{
+
+			@Override
+			public void onSuccess(String result)
+			{
+				// TODO Auto-generated method stub
+				if (result == null)
 				{
+					// ShowToast.ShowToast1(mContext, "获取信息失败");
+					toastMgr.builder.display("获取信息失败", 0);
 
-					@Override
-					public void onSuccess(String result)
-					{
-						// TODO Auto-generated method stub
-						if (result == null)
-						{
-							// ShowToast.ShowToast1(mContext, "获取信息失败");
-							toastMgr.builder.display("获取信息失败", 0);
+				}
+				else
+				{
+					// 解析json
+					MyJson decode = new MyJson(mContext, result);
+					commentList = decode.getBBSDetailAndComment();
+					Message msg = new Message();
+					msg.obj = commentList;
+					msg.what = 1;
+					handler.sendMessage(msg);
 
-						}
-						else
-						{
-							// 解析json
-							MyJson decode = new MyJson(mContext, result);
-							commentList = decode.getBBSDetailAndComment();
-							Message msg = new Message();
-							msg.obj = commentList;
-							msg.what = 1;
-							handler.sendMessage(msg);
-
-						}
-					}
-				},
-				// 失败
+				}
+			}
+		},
+		// 失败
 				new GetBBSDetail.FailCallback()
 				{
 
@@ -169,7 +167,7 @@ public class BBSDetailActivity extends Activity
 					}
 				},
 				// 帖子id
-				id);
+				id, postType);
 	}
 
 	private Handler handler = new Handler()

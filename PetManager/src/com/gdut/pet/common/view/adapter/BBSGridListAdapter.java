@@ -27,10 +27,8 @@ public class BBSGridListAdapter extends BaseAdapter
 	private List<Map<String, String>> gridList;
 
 	/**
-	 * list 里面放的是 每一个girdItem的内容 也就是map map对应着每一个item map里面又存放着一些东西,
-	 * image_pet的图片地址http://www.baidu.com image_person的图片地址http://www.baidu.com
-	 * 还应该存放, 用户名字, 用户id, 注册时间 发表时间等等 获取不获得这些也行, 点进去的时候再获得这些东西 对应着每一个item
-	 * 点进去就是一个帖子的详细内容
+	 * list 里面放的是 每一个girdItem的内容 也就是map map对应着每一个item map里面又存放着一些东西, image_pet的图片地址http://www.baidu.com image_person的图片地址http://www.baidu.com 还应该存放,
+	 * 用户名字, 用户id, 注册时间 发表时间等等 获取不获得这些也行, 点进去的时候再获得这些东西 对应着每一个item 点进去就是一个帖子的详细内容
 	 */
 
 	public BBSGridListAdapter()
@@ -78,14 +76,11 @@ public class BBSGridListAdapter extends BaseAdapter
 		if (view == null)
 		{
 			holder = new Holder();
-			view = View.inflate(mContext, R.layout.list_pet_all_pic_item_grid,
-					null);
+			view = View.inflate(mContext, R.layout.list_pet_all_pic_item_grid, null);
 			// 帖子里面图片获得id
-			holder.image_pet = (ImageView) view
-					.findViewById(R.id.image_pet_bbs_detail);
+			holder.image_pet = (ImageView) view.findViewById(R.id.image_pet_bbs_detail);
 			// 用户头像图片获得id
-			holder.image_person = (ImageView) view
-					.findViewById(R.id.image_person_bbs_detail);
+			holder.image_person = (ImageView) view.findViewById(R.id.image_person_bbs_detail);
 			view.setTag(holder);
 		}
 		else
@@ -108,8 +103,9 @@ public class BBSGridListAdapter extends BaseAdapter
 				Bundle bundle = new Bundle();
 
 				bundle.putString("id", gridList.get(position).get("id"));
-				bundle.putString("bbsTitle", "hello");
-				bundle.putString("username", "andy");
+				bundle.putString("postType", gridList.get(position).get("postType"));
+				// bundle.putString("bbsTitle", "hello");
+				// bundle.putString("username", "andy");
 				Intent intent = new Intent();
 				intent.setClass(mContext, BBSDetailActivityNew.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -130,16 +126,14 @@ public class BBSGridListAdapter extends BaseAdapter
 			}
 
 			@Override
-			public void onLoadingFailed(String imageUri, View view,
-					FailReason failReason)
+			public void onLoadingFailed(String imageUri, View view, FailReason failReason)
 			{
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onLoadingComplete(String imageUri, View view,
-					Bitmap loadedImage)
+			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage)
 			{
 				// TODO Auto-generated method stub
 				holder.image_pet.setImageBitmap(loadedImage);
@@ -164,16 +158,14 @@ public class BBSGridListAdapter extends BaseAdapter
 			}
 
 			@Override
-			public void onLoadingFailed(String imageUri, View view,
-					FailReason failReason)
+			public void onLoadingFailed(String imageUri, View view, FailReason failReason)
 			{
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onLoadingComplete(String imageUri, View view,
-					Bitmap loadedImage)
+			public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage)
 			{
 				// TODO Auto-generated method stub
 				holder.image_person.setImageBitmap(loadedImage);

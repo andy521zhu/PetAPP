@@ -32,6 +32,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="24dp"
                 android:text="用户名"
+                android:visibility="gone"
                 android:textSize="20dp" />
 
             <Button
@@ -122,66 +123,12 @@
                 android:text="女" />
         </RadioGroup>
     </LinearLayout>
-
-     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" >
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="生    日：" />
-
-        <TextView
-            android:id="@+id/myBirthYView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-
-        <TextView
-             android:id="@+id/dsa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-" />
-        
-        <TextView
-            android:id="@+id/myBirthMView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-        
-        <TextView
-             android:id="@+id/asd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-" />
-        
-        <TextView
-            android:id="@+id/myBirthDView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </LinearLayout>
     
     <LinearLayout
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="  Q  Q：" />
-
-        <EditText
-            android:id="@+id/editQQ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10" />
 
     </LinearLayout>
     
@@ -266,15 +213,5 @@
             android:inputType="textPostalAddress" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/quit_login"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btnthinround_bg_qianse"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="注销登录" />
 
     </LinearLayout>

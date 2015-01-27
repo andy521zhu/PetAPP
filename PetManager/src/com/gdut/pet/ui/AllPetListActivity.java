@@ -87,47 +87,40 @@ public class AllPetListActivity extends Activity
 		mPullToRefreshGridView.setMode(Mode.BOTH);
 
 		// 下拉监听设置
-		mPullToRefreshGridView
-				.setOnRefreshListener(new OnRefreshListener2<GridView>()
-				{
+		mPullToRefreshGridView.setOnRefreshListener(new OnRefreshListener2<GridView>()
+		{
 
-					@Override
-					public void onPullDownToRefresh(
-							PullToRefreshBase<GridView> refreshView)
-					{
-						// TODO Auto-generated method stub
-						L.i(TAG, "onPullDownToRefresh");
-						// ShowToast.ShowToastCenter(mContext, "下拉");
-						toastMgr.builder.display("下拉", 1);
-						getBBSFromRefresh(false, "0");
+			@Override
+			public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView)
+			{
+				// TODO Auto-generated method stub
+				L.i(TAG, "onPullDownToRefresh");
+				// ShowToast.ShowToastCenter(mContext, "下拉");
+				toastMgr.builder.display("下拉", 1);
+				getBBSFromRefresh(false, "0");
 
-					}
+			}
 
-					@Override
-					public void onPullUpToRefresh(
-							PullToRefreshBase<GridView> refreshView)
-					{
-						// TODO Auto-generated method stub
-						L.i(TAG, "onPullUpToRefresh");
-						// ShowToast.ShowToastCenter(mContext, "上拉");
-						toastMgr.builder.display("上拉", 1);
-						mPullToRefreshGridView.onRefreshComplete();
-					}
-				});
+			@Override
+			public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView)
+			{
+				// TODO Auto-generated method stub
+				L.i(TAG, "onPullUpToRefresh");
+				// ShowToast.ShowToastCenter(mContext, "上拉");
+				toastMgr.builder.display("上拉", 1);
+				mPullToRefreshGridView.onRefreshComplete();
+			}
+		});
 		// item 点击
 		/*
-		 * mPullToRefreshGridView .setOnItemClickListener(new
-		 * AdapterView.OnItemClickListener() {
+		 * mPullToRefreshGridView .setOnItemClickListener(new AdapterView.OnItemClickListener() {
 		 * 
-		 * @Override public void onItemClick(AdapterView<?> parent, View view,
-		 * int position, long id) { // TODO Auto-generated method stub
+		 * @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) { // TODO Auto-generated method stub
 		 * toastMgr.builder.display("the " + position + "clicked", 1);
 		 * 
-		 * Bundle bundle = new Bundle(); bundle.putString("id", "1");
-		 * bundle.putString("bbsTitle", "hello"); bundle.putString("username",
-		 * "andy"); Intent intent = new Intent();
-		 * intent.setClass(AllPetListActivity.this, BBSDetailActivityNew.class);
-		 * intent.putExtras(bundle); startActivity(intent); } });
+		 * Bundle bundle = new Bundle(); bundle.putString("id", "1"); bundle.putString("bbsTitle", "hello"); bundle.putString("username", "andy");
+		 * Intent intent = new Intent(); intent.setClass(AllPetListActivity.this, BBSDetailActivityNew.class); intent.putExtras(bundle);
+		 * startActivity(intent); } });
 		 */
 
 		// 得到宠物所有图片(帖子列表)
@@ -147,93 +140,102 @@ public class AllPetListActivity extends Activity
 		// TODO Auto-generated method stub
 
 		// 进度Dialog
-		final ProgressDialog pd = ProgressDialog.show(mContext, getResources()
-				.getString(R.string.connecting),
+		final ProgressDialog pd = ProgressDialog.show(mContext, getResources().getString(R.string.connecting),
 				getResources().getString(R.string.connecting_to_server));
-		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext),
-				new GetBBS.SuccessCallback()
+		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext), new GetBBS.SuccessCallback()
+		{
+
+			@Override
+			public void onSuccess(String result)
+			{
+				// TODO Auto-generated method stub
+				if (result != null)
 				{
-
-					@Override
-					public void onSuccess(String result)
+					try
 					{
-						// TODO Auto-generated method stub
-						if (result != null)
+						JSONArray jsonArray = new JSONArray(result);
+						JSONObject statusObject = jsonArray.getJSONObject(0);
+						String status = statusObject.getString("status");
+						if (status.equals("1"))
 						{
-							try
-							{
-								JSONArray jsonArray = new JSONArray(result);
-								for (int i = 0; i < jsonArray.length(); i++)
-								{
-									JSONObject jsonObject = jsonArray
-											.getJSONObject(i);
-									Map<String, String> map = new HashMap<String, String>();
-									// id
-									map.put("id", (String) jsonObject.get("id"));
-									String __refreshid = (String) jsonObject
-											.get("id");
-									_refreshid = Integer.parseInt(__refreshid);
-									// 标题
-									map.put("title",
-											(String) jsonObject.get("title"));
-									// 内容描述
-									map.put("description",
-											(String) jsonObject.get("content"));
-									// 发表时间
-									map.put("time",
-											(String) jsonObject.get("time"));
-									// 用户名
-									map.put("username",
-											(String) jsonObject.get("username"));
-									// 回复数
-									map.put("replynum",
-											(String) jsonObject.get("replynum"));
-									// 是否关注
-									map.put("isGuanzhu", (String) jsonObject
-											.get("isGuanzhu"));
-									// 点赞数目
-									map.put("likenum",
-											(String) jsonObject.get("likenum"));
-									// 用户头像URL
-									map.put("userImage", (String) jsonObject
-											.get("userImage"));
-									// 宠物图片URL
-									map.put("petImage",
-											(String) jsonObject.get("petImage"));
-									// 加到list里面
-									mGridList.add(0, map);
-									if (refreshID > _refreshid)
-									{
-										refreshID = refreshID;
-									}
-									else
-										refreshID = _refreshid;// 得到最大的一个id
 
-								}
-							}
-							catch (Exception e)
-							{
-								// TODO: handle exception
-								L.i(TAG, "解析json异常 定位到这里");
-								L.i(TAG, e.toString());
-								pd.dismiss();
-							}
-
-							Message msg = new Message();
-							msg.what = 1;
-							handleGridViewDisplay.sendMessage(msg);
-							pd.dismiss();
-
+						}
+						else if (status.equals("2"))
+						{
+							toastMgr.builder.display("获取帖子失败", 0);
+							return;
 						}
 						else
 						{
-							toastMgr.builder.display("获取信息失败", 0);
-							pd.dismiss();
+							toastMgr.builder.display("获取帖子失败", 0);
+							return;
 						}
-						toastMgr.builder.display("获取信息成功", 0);
+						for (int i = 1; i < jsonArray.length(); i++)
+						{
+							JSONObject jsonObject = jsonArray.getJSONObject(i);
+							Map<String, String> map = new HashMap<String, String>();
+							// id
+							map.put("id", (String) jsonObject.get("bbsID"));
+							String __refreshid = (String) jsonObject.get("bbsID");
+							// _refreshid = Integer.parseInt(__refreshid);
+							// 标题
+							// map.put("title", "");
+							// (String) jsonObject.get("title"));
+							// 内容描述
+							// map.put("description", (String) jsonObject.get("content"));
+							// 发表时间
+							// map.put("time", (String) jsonObject.get("time"));
+							// 用户名
+							// map.put("username", (String) jsonObject.get("username"));
+							// 回复数
+							// map.put("replynum", (String) jsonObject.get("replynum"));
+							// 是否关注
+							// map.put("isGuanzhu", (String) jsonObject.get("isGuanzhu"));
+							// 点赞数目
+							// map.put("likenum", (String) jsonObject.get("likenum"));
+							// 用户头像URL
+							String userImage = Configs.SERVER_IP_ADDRESS + ((String) jsonObject.get("userImage"));
+							L.i(TAG + "userimage", userImage);
+							map.put("userImage", userImage);
+							map.put("postType", jsonObject.getString("postType"));
+							// 宠物图片URL
+							String petImage = Configs.SERVER_IP_ADDRESS + (String) jsonObject.get("petImage");
+							L.i(TAG + "petimage", petImage);
+							map.put("petImage", petImage);
+							// 加到list里面
+							mGridList.add(0, map);
+							// if (refreshID > _refreshid)
+							// {
+							// refreshID = refreshID;
+							// }
+							// else
+							// refreshID = _refreshid;// 得到最大的一个id
+
+						}
 					}
-				},
-				//
+					catch (Exception e)
+					{
+						// TODO: handle exception
+						L.i(TAG, "解析json异常 定位到这里");
+						L.i(TAG, e.toString());
+						pd.dismiss();
+					}
+
+					Message msg = new Message();
+					msg.what = 1;
+					handleGridViewDisplay.sendMessage(msg);
+					pd.dismiss();
+
+				}
+				else
+				{
+					toastMgr.builder.display("获取信息失败", 0);
+					pd.dismiss();
+				}
+				toastMgr.builder.display("获取信息成功", 0);
+			}
+		},
+		//
 				new GetBBS.FailCallback()
 				{
 
@@ -255,88 +257,76 @@ public class AllPetListActivity extends Activity
 	 */
 	private void getBBSFromRefresh(boolean isRefresh, String id)
 	{
-		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext),
-				new GetBBS.SuccessCallback()
+		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext), new GetBBS.SuccessCallback()
+		{
+
+			@Override
+			public void onSuccess(String result)
+			{
+				// TODO Auto-generated method stub
+				if (result != null)
 				{
-
-					@Override
-					public void onSuccess(String result)
+					try
 					{
-						// TODO Auto-generated method stub
-						if (result != null)
+						JSONArray jsonArray = new JSONArray(result);
+						for (int i = 0; i < jsonArray.length(); i++)
 						{
-							try
+							JSONObject jsonObject = jsonArray.getJSONObject(i);
+							Map<String, String> map = new HashMap<String, String>();
+							// id
+							map.put("id", (String) jsonObject.get("id"));
+							String __refreshid = (String) jsonObject.get("id");
+							_refreshid = Integer.parseInt(__refreshid);
+							// 标题
+							map.put("title", (String) jsonObject.get("title"));
+							// 内容描述
+							map.put("description", (String) jsonObject.get("content"));
+							// 发表时间
+							map.put("time", (String) jsonObject.get("time"));
+							// 用户名
+							map.put("username", (String) jsonObject.get("username"));
+							// 回复数
+							map.put("replynum", (String) jsonObject.get("replynum"));
+							// 是否关注
+							map.put("isGuanzhu", (String) jsonObject.get("isGuanzhu"));
+							// 点赞数目
+							map.put("likenum", (String) jsonObject.get("likenum"));
+							// 用户头像URL
+							map.put("userImage", (String) jsonObject.get("userImage"));
+							// 宠物图片URL
+							map.put("petImage", (String) jsonObject.get("petImage"));
+							// 加到list里面
+							mGridList.add(0, map);
+							if (refreshID > _refreshid)
 							{
-								JSONArray jsonArray = new JSONArray(result);
-								for (int i = 0; i < jsonArray.length(); i++)
-								{
-									JSONObject jsonObject = jsonArray
-											.getJSONObject(i);
-									Map<String, String> map = new HashMap<String, String>();
-									// id
-									map.put("id", (String) jsonObject.get("id"));
-									String __refreshid = (String) jsonObject
-											.get("id");
-									_refreshid = Integer.parseInt(__refreshid);
-									// 标题
-									map.put("title",
-											(String) jsonObject.get("title"));
-									// 内容描述
-									map.put("description",
-											(String) jsonObject.get("content"));
-									// 发表时间
-									map.put("time",
-											(String) jsonObject.get("time"));
-									// 用户名
-									map.put("username",
-											(String) jsonObject.get("username"));
-									// 回复数
-									map.put("replynum",
-											(String) jsonObject.get("replynum"));
-									// 是否关注
-									map.put("isGuanzhu", (String) jsonObject
-											.get("isGuanzhu"));
-									// 点赞数目
-									map.put("likenum",
-											(String) jsonObject.get("likenum"));
-									// 用户头像URL
-									map.put("userImage", (String) jsonObject
-											.get("userImage"));
-									// 宠物图片URL
-									map.put("petImage",
-											(String) jsonObject.get("petImage"));
-									// 加到list里面
-									mGridList.add(0, map);
-									if (refreshID > _refreshid)
-									{
-										refreshID = refreshID;
-									}
-									else
-										refreshID = _refreshid;// 得到最大的一个id
-
-								}
+								refreshID = refreshID;
 							}
-							catch (Exception e)
-							{
-								// TODO: handle exception
-								L.i(TAG, "解析json异常 定位到这里");
-								L.i(TAG, e.toString());
-							}
-
-							Message msg = new Message();
-							msg.what = 2;
-							handleGridViewDisplay.sendMessage(msg);
+							else
+								refreshID = _refreshid;// 得到最大的一个id
 
 						}
-						else
-						{
-							toastMgr.builder.display("获取信息失败", 0);
-						}
-						toastMgr.builder.display("获取信息成功", 0);
-						mPullToRefreshGridView.onRefreshComplete();
 					}
-				},
-				//
+					catch (Exception e)
+					{
+						// TODO: handle exception
+						L.i(TAG, "解析json异常 定位到这里");
+						L.i(TAG, e.toString());
+					}
+
+					Message msg = new Message();
+					msg.what = 2;
+					handleGridViewDisplay.sendMessage(msg);
+
+				}
+				else
+				{
+					toastMgr.builder.display("获取信息失败", 0);
+				}
+				toastMgr.builder.display("获取信息成功", 0);
+				mPullToRefreshGridView.onRefreshComplete();
+			}
+		},
+		//
 				new GetBBS.FailCallback()
 				{
 
@@ -368,8 +358,7 @@ public class AllPetListActivity extends Activity
 			{
 				// TODO Auto-generated method stub
 				Intent intent = new Intent();
-				intent.setClass(AllPetListActivity.this,
-						ActivityPostPetImage.class);
+				intent.setClass(AllPetListActivity.this, ActivityPostPetImage.class);
 				startActivity(intent);
 			}
 		});

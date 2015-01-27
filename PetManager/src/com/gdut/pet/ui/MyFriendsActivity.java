@@ -64,56 +64,46 @@ public class MyFriendsActivity extends Activity
 		setContentView(R.layout.myfriends);
 
 		mContext = this;
-		userdataSP = getSharedPreferences(Configs.USERDATA_SP,
-				Context.MODE_PRIVATE);
+		userdataSP = getSharedPreferences(Configs.USERDATA_SP, Context.MODE_PRIVATE);
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_listView);
 
 		// 列表拉到最后一个的时候 提示用户已经到底了
-		mPullToRefreshListView
-				.setOnLastItemVisibleListener(new OnLastItemVisibleListener()
-				{
+		mPullToRefreshListView.setOnLastItemVisibleListener(new OnLastItemVisibleListener()
+		{
 
-					@Override
-					public void onLastItemVisible()
-					{
-						// TODO Auto-generated method stub
-						Toast.makeText(mContext, "Last Item...",
-								Toast.LENGTH_SHORT).show();
-					}
-				});
+			@Override
+			public void onLastItemVisible()
+			{
+				// TODO Auto-generated method stub
+				Toast.makeText(mContext, "Last Item...", Toast.LENGTH_SHORT).show();
+			}
+		});
 
 		actualListView = mPullToRefreshListView.getRefreshableView();
 		// Need to use the Actual ListView when registering for Context Menu
 		// registerForContextMenu(actualListView);
 
 		// Set a listener to be invoked when the list should be refreshed.
-		mPullToRefreshListView
-				.setOnRefreshListener(new OnRefreshListener<ListView>()
+		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>()
+		{
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView)
+			{
+				// TODO Auto-generated method stub
+				String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+						| DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+				Log.i(TAG, label);
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+				// Do work to refresh the list here.
+				if (userdataSP.getBoolean(Configs.IS_LOGIN, false))
 				{
+					getBBSList(true, "0");
 
-					@Override
-					public void onRefresh(
-							PullToRefreshBase<ListView> refreshView)
-					{
-						// TODO Auto-generated method stub
-						String label = DateUtils.formatDateTime(
-								getApplicationContext(),
-								System.currentTimeMillis(),
-								DateUtils.FORMAT_SHOW_TIME
-										| DateUtils.FORMAT_SHOW_DATE
-										| DateUtils.FORMAT_ABBREV_ALL);
-						Log.i(TAG, label);
-						refreshView.getLoadingLayoutProxy()
-								.setLastUpdatedLabel(label);
-
-						// Do work to refresh the list here.
-						if (userdataSP.getBoolean(Configs.IS_LOGIN, false))
-						{
-							getBBSList(true, "0");
-
-						}
-					}
-				});
+				}
+			}
+		});
 
 		mListItems = new LinkedList<String>();
 		mListItems.addAll(Arrays.asList(mStrings));
@@ -140,39 +130,33 @@ public class MyFriendsActivity extends Activity
 		}
 
 		// item click
-		mPullToRefreshListView
-				.setOnItemClickListener(new AdapterView.OnItemClickListener()
-				{
+		mPullToRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
 
-					@SuppressWarnings("unchecked")
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id)
-					{
-						// TODO Auto-generated method stub
-						@SuppressWarnings("unused")
-						HashMap<String, String> mapItem;
+			@SuppressWarnings("unchecked")
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				// TODO Auto-generated method stub
+				@SuppressWarnings("unused")
+				HashMap<String, String> mapItem;
 
-						mapItem = (HashMap<String, String>) list
-								.get(position - 1);
-						String id1 = mapItem.get("id");
+				mapItem = (HashMap<String, String>) list.get(position - 1);
+				String id1 = mapItem.get("id");
 
-						TextView titleTextView = (TextView) view
-								.findViewById(R.id.Item_MainTitle);
-						TextView usernameTextView = (TextView) view
-								.findViewById(R.id.Item_UserName);
-						String text = titleTextView.getText().toString();
-						String username = usernameTextView.getText().toString();
-						Bundle bundle = new Bundle();
-						bundle.putString("id", id1);
-						bundle.putString("bbsTitle", text);
-						bundle.putString("username", username);
-						Intent intent = new Intent();
-						intent.setClass(MyFriendsActivity.this,
-								BBSDetailActivity.class);
-						intent.putExtras(bundle);
-						startActivity(intent);
-					}
-				});
+				TextView titleTextView = (TextView) view.findViewById(R.id.Item_MainTitle);
+				TextView usernameTextView = (TextView) view.findViewById(R.id.Item_UserName);
+				String text = titleTextView.getText().toString();
+				String username = usernameTextView.getText().toString();
+				Bundle bundle = new Bundle();
+				bundle.putString("id", id1);
+				bundle.putString("bbsTitle", text);
+				bundle.putString("username", username);
+				Intent intent = new Intent();
+				intent.setClass(MyFriendsActivity.this, BBSDetailActivityNew.class);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
 
 	}
 
@@ -181,71 +165,63 @@ public class MyFriendsActivity extends Activity
 	{
 
 		// 进度Dialog
-		final ProgressDialog pd = ProgressDialog.show(mContext, getResources()
-				.getString(R.string.connecting),
+		final ProgressDialog pd = ProgressDialog.show(mContext, getResources().getString(R.string.connecting),
 				getResources().getString(R.string.connecting_to_server));
 
-		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext),
-				new GetBBS.SuccessCallback()
+		new GetBBS(Configs.GET_BBS_PATH, new PersistentCookieStore(mContext), new GetBBS.SuccessCallback()
+		{
+
+			@Override
+			public void onSuccess(String result)
+			{
+				// TODO Auto-generated method stub
+				// 得到返回的数据,进行json解析
+				if (result != null)
 				{
-
-					@Override
-					public void onSuccess(String result)
+					try
 					{
-						// TODO Auto-generated method stub
-						// 得到返回的数据,进行json解析
-						if (result != null)
+						JSONArray jsonArray = new JSONArray(result);
+						for (int i = 0; i < jsonArray.length(); i++)
 						{
-							try
-							{
-								JSONArray jsonArray = new JSONArray(result);
-								for (int i = 0; i < jsonArray.length(); i++)
-								{
-									JSONObject jsonObject = jsonArray
-											.getJSONObject(i);
-									Map<String, String> map = new HashMap<String, String>();
+							JSONObject jsonObject = jsonArray.getJSONObject(i);
+							Map<String, String> map = new HashMap<String, String>();
 
-									map.put("id", (String) jsonObject.get("id"));
+							map.put("id", (String) jsonObject.get("id"));
 
-									map.put("title",
-											(String) jsonObject.get("title"));
-									map.put("description",
-											(String) jsonObject.get("content"));
-									map.put("time",
-											(String) jsonObject.get("time"));
-									map.put("username",
-											(String) jsonObject.get("username"));
-									map.put("replynum",
-											(String) jsonObject.get("replynum"));
-									list.add(0, map);
+							map.put("title", (String) jsonObject.get("title"));
+							map.put("description", (String) jsonObject.get("content"));
+							map.put("time", (String) jsonObject.get("time"));
+							map.put("username", (String) jsonObject.get("username"));
+							map.put("replynum", (String) jsonObject.get("replynum"));
+							list.add(0, map);
 
-								}
-
-							}
-							catch (JSONException e)
-							{
-								// TODO Auto-generated catch block
-								System.out.println(e.toString());
-								e.printStackTrace();
-							}
-							Message msg = new Message();
-							msg.what = 1;
-							handler.sendMessage(msg);
-							pd.dismiss();
 						}
 
 					}
-				}, new GetBBS.FailCallback()
-				{
-
-					@Override
-					public void onFail()
+					catch (JSONException e)
 					{
-						// TODO Auto-generated method stub
-						pd.dismiss();
+						// TODO Auto-generated catch block
+						System.out.println(e.toString());
+						e.printStackTrace();
 					}
-				},
-				// 是否是从刷新过去的
+					Message msg = new Message();
+					msg.what = 1;
+					handler.sendMessage(msg);
+					pd.dismiss();
+				}
+
+			}
+		}, new GetBBS.FailCallback()
+		{
+
+			@Override
+			public void onFail()
+			{
+				// TODO Auto-generated method stub
+				pd.dismiss();
+			}
+		},
+		// 是否是从刷新过去的
 				isRefresh,
 				//
 				id);
@@ -290,13 +266,9 @@ public class MyFriendsActivity extends Activity
 	}
 
 	private String[] mStrings =
-	{ "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance",
-			"Ackawi", "Acorn", "Adelost", "Affidelice au Chablis",
-			"Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre",
-			"Allgauer Emmentaler", "Abbaye de Belloc",
-			"Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
-			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler" };
+	{ "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi", "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
+			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler", "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance",
+			"Ackawi", "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler" };
 
 	@Override
 	protected void onResume()
@@ -320,13 +292,10 @@ public class MyFriendsActivity extends Activity
 				/**
 				 * Add Sound Event Listener
 				 */
-				SoundPullEventListener<ListView> soundListener = new SoundPullEventListener<ListView>(
-						mContext);
-				soundListener.addSoundEvent(State.PULL_TO_REFRESH,
-						R.raw.pull_event);
+				SoundPullEventListener<ListView> soundListener = new SoundPullEventListener<ListView>(mContext);
+				soundListener.addSoundEvent(State.PULL_TO_REFRESH, R.raw.pull_event);
 				soundListener.addSoundEvent(State.RESET, R.raw.reset_sound);
-				soundListener.addSoundEvent(State.REFRESHING,
-						R.raw.refreshing_sound);
+				soundListener.addSoundEvent(State.REFRESHING, R.raw.refreshing_sound);
 				mPullToRefreshListView.setOnPullEventListener(soundListener);
 
 				actualListView.setAdapter(mAdapter);

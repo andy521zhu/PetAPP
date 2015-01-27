@@ -1,5 +1,7 @@
 package com.gdut.pet.common.info;
 
+import java.util.List;
+
 public class BBSCommentsInfo
 {
 	// id
@@ -36,6 +38,7 @@ public class BBSCommentsInfo
 	private String likeNum;
 	// 帖子状态 正常丢失还是找到
 	private String isLost;
+	private List<BBSCommentsInfo> commentsInfos;
 
 	/**
 	 * @return the id
@@ -302,6 +305,21 @@ public class BBSCommentsInfo
 	public void setIsLost(String isLost)
 	{
 		this.isLost = isLost;
+	}
+
+	public List<BBSCommentsInfo> getCommentsInfos()
+	{
+		return commentsInfos;
+	}
+
+	public void setCommentsInfos(List<BBSCommentsInfo> commentsInfos)
+	{
+		this.commentsInfos = commentsInfos;
+	}
+
+	public void addCommentInfos(BBSCommentsInfo commentsInfo)
+	{
+		this.commentsInfos.add(commentsInfo);
 	}
 
 }
